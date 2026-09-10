@@ -326,21 +326,21 @@
     {
       "type": "mc",
       "category": "Multiple Choice",
-      "question": "An EMPLOYEE/PROJECT design shows that you CANNOT represent M:N by putting a foreign key in the two main tables. Why not?",
+      "question": "A firm needs to record which EMPLOYEEs work on which PROJECTs. An employee may be assigned many projects, and a project may have many employees.\n\nSomeone tries to do it with only the two main tables, each carrying a foreign key to the other:\n\n• EMPLOYEE (emp_id, proj_id) — employee 1 works on projects 1, 2 and 3, so their proj_id has to read \"1,2,3\"\n• PROJECT (proj_id, emp_id) — project 2 has employees 1, 2 and 3, so its emp_id has to read \"1,2,3\"\n\nWhy does this design not work?",
       "options": [
         "Because foreign keys are not allowed in more than one table",
-        "Because you would have to stuff more than one key value into a single foreign key field, violating the atomic attribute rule",
-        "Because the tables would then have the same primary key",
-        "Because the DBMS forbids more than two foreign keys per table"
+        "Because a single foreign key field would have to hold several key values at once, violating the atomic attribute rule",
+        "Because the two tables would then have the same primary key",
+        "Because a table may not have more than two foreign keys"
       ],
       "correct": 1,
-      "explanation": "Assigning one employee to projects 1, 2 and 3 would mean writing \"1,2,3\" into proj_id. That breaks atomicity, so a third table is required.",
+      "explanation": "One column holds one value. Writing \"1,2,3\" into proj_id breaks atomicity, and the same problem appears from the other direction in PROJECT — which is why an M:N needs a third table instead.",
       "core": true
     },
     {
       "type": "mc",
       "category": "Multiple Choice",
-      "question": "In an ASSIGNMENT bridge table holding emp_id and proj_id, those two columns are:",
+      "question": "The M:N between EMPLOYEE and PROJECT is resolved with a bridge table, ASSIGNMENT, holding one row per pairing — (1,1), (1,2), (2,1), (3,3) and so on.\n\nIn ASSIGNMENT, the columns emp_id and proj_id are:",
       "options": [
         "Two independent primary keys",
         "Foreign keys that together form a composite primary key",
@@ -423,7 +423,7 @@
     {
       "type": "mc",
       "category": "Multiple Choice",
-      "question": "In that same SEAT_BOOKING table, patron_id refers to the primary key of a PATRON table. patron_id is therefore:",
+      "question": "A SEAT_BOOKING table has (performance_id, seat_code, patron_id, price_paid), where performance_id + seat_code together identify a booking.\n\npatron_id refers to the primary key of a PATRON table. patron_id is therefore:",
       "options": [
         "Part of the composite primary key",
         "A foreign key",

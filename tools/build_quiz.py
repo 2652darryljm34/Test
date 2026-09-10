@@ -66,7 +66,13 @@ DANGLING = re.compile(
     r"|\bpreceding\b"
     r"|\bas noted earlier\b"
     r"|\bsame (?:business )?rules as\b"
-    r"|\bin the (?:example|scenario|question) above\b)",
+    r"|\bin the (?:example|scenario|question) above\b"
+    # Wording that reads as a continuation of the question before it.
+    r"|\bthat same\b"
+    r"|\bcontinuing (?:with|from)\b"
+    r"|\bfinish the job\b"
+    r"|\bin the [A-Za-z_/]+ example\b"
+    r"|\bearlier (?:example|question|table)\b)",
     re.I,
 )
 

@@ -112,7 +112,7 @@
     {
       "type": "mc",
       "category": "ERD Notation",
-      "question": "In that same entity-box layout — P1 | **P2** on row 1, P3 | *P4* on row 2, P5 on row 3 — what belongs in slot P3?",
+      "question": "An ERD shows an entity box laid out like this:\n\n    row 1:  P1 | **P2**   (bold, underlined)\n    row 2:  P3 | *P4*     (italic)\n    row 3:  P5 (one or more fields)\n\nWhat belongs in slot P3?",
       "options": [
         "The marker FK",
         "Another primary key",
@@ -126,7 +126,7 @@
     {
       "type": "mc",
       "category": "ERD Notation",
-      "question": "In that same entity-box layout, slot P5 is annotated \"one or more fields\". What goes there?",
+      "question": "An ERD shows an entity box laid out like this:\n\n    row 1:  P1 | **P2**   (bold, underlined)\n    row 2:  P3 | *P4*     (italic)\n    row 3:  P5 (one or more fields)\n\nSlot P5 is annotated \"one or more fields\". What goes there?",
       "options": [
         "The remaining descriptive (non-key) attributes",
         "Additional primary keys",
@@ -265,7 +265,7 @@
     {
       "type": "fill_blank",
       "category": "ERD",
-      "question": "In the VOLUNTEER/SHIFT example, the bridge entity (say, SIGNUP) would most likely use a ______ primary key made up of volunteer_id and shift_id together.",
+      "question": "Business rule: \"A VOLUNTEER can sign up for many SHIFTs, and each SHIFT can be covered by many VOLUNTEERs.\"\n\nThis M:N is resolved with a bridge entity, SIGNUP. It would most likely use a ______ primary key made up of volunteer_id and shift_id together.",
       "answers": [
         "composite"
       ],

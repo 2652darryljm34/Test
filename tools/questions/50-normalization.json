@@ -411,7 +411,7 @@
     {
       "type": "short_answer",
       "category": "Dependency Analysis",
-      "question": "Continuing with CATERING_ORDER (booking_ref, booking_date, client_no, client_name, client_city, dish_code, dish_name, dish_style, dish_price, portions), primary key booking_ref + dish_code.\n\nWrite the 2NF relational schemas — the tables you get after removing the partial dependencies. Underline or otherwise mark the primary key of each.",
+      "question": "CATERING_ORDER is in 1NF with the following columns:\n\n  booking_ref, booking_date, client_no, client_name, client_city,\n  dish_code, dish_name, dish_style, dish_price, portions\n\nThe primary key is booking_ref + dish_code.\n\nWrite the 2NF relational schemas — the tables you get after removing the partial dependencies. Underline or otherwise mark the primary key of each.",
       "modelAnswer": "BOOKING (booking_ref [PK], booking_date, client_no, client_name, client_city)\n\nDISH (dish_code [PK], dish_name, dish_style, dish_price)\n\nBOOKING_LINE (booking_ref [PK, FK], dish_code [PK, FK], portions)\n\nEach partial dependency became its own table, keyed on its determinant. What remains in BOOKING_LINE is the original composite key plus the one attribute that genuinely needed both halves of it — portions. The two key columns are now foreign keys back to BOOKING and DISH.\n\nThis is 2NF, not yet 3NF: BOOKING still carries the transitive dependency client_no → client_name, client_city.",
       "rubric": [
         "Produced three tables",
@@ -426,7 +426,7 @@
     {
       "type": "short_answer",
       "category": "Dependency Analysis",
-      "question": "Finish the job on CATERING_ORDER. Write the 3NF relational schemas, marking the primary key and any foreign keys in each table.",
+      "question": "CATERING_ORDER is in 1NF with the following columns:\n\n  booking_ref, booking_date, client_no, client_name, client_city,\n  dish_code, dish_name, dish_style, dish_price, portions\n\nThe primary key is booking_ref + dish_code.\n\nTake it all the way to 3NF. Write the 3NF relational schemas, marking the primary key and any foreign keys in each table.",
       "modelAnswer": "CLIENT (client_no [PK], client_name, client_city)\n\nBOOKING (booking_ref [PK], booking_date, client_no [FK to CLIENT])\n\nDISH (dish_code [PK], dish_name, dish_style, dish_price)\n\nBOOKING_LINE (booking_ref [PK, FK to BOOKING], dish_code [PK, FK to DISH], portions)\n\nThe move from 2NF to 3NF was the first two tables: the transitive dependency client_no → client_name, client_city came out of BOOKING into its own CLIENT table, and client_no stayed behind in BOOKING as the foreign key linking them.\n\nNow every non-key attribute in every table depends on the key, the whole key, and nothing but the key.",
       "rubric": [
         "Produced four tables",

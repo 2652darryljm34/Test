@@ -786,7 +786,7 @@
         {
           "type": "mc",
           "category": "Multiple Choice",
-          "question": "In that same SEAT_BOOKING table, patron_id refers to the primary key of a PATRON table. patron_id is therefore:",
+          "question": "A SEAT_BOOKING table has (performance_id, seat_code, patron_id, price_paid), where performance_id + seat_code together identify a booking.\n\npatron_id refers to the primary key of a PATRON table. patron_id is therefore:",
           "options": [
             "Part of the composite primary key",
             "A foreign key",
@@ -1529,7 +1529,7 @@
         {
           "type": "mc",
           "category": "ERD Notation",
-          "question": "In that same entity-box layout, slot P5 is annotated \"one or more fields\". What goes there?",
+          "question": "An ERD shows an entity box laid out like this:\n\n    row 1:  P1 | **P2**   (bold, underlined)\n    row 2:  P3 | *P4*     (italic)\n    row 3:  P5 (one or more fields)\n\nSlot P5 is annotated \"one or more fields\". What goes there?",
           "options": [
             "The remaining descriptive (non-key) attributes",
             "Additional primary keys",
