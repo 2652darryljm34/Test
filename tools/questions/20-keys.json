@@ -1,0 +1,451 @@
+{
+  "name": "Part 1 · The Relational Model, Keys & Integrity",
+  "questions": [
+    {
+      "type": "fill_blank",
+      "category": "Fill in the Blank",
+      "question": "A key is one or more attributes that ______ other attributes.",
+      "answers": ["determine"],
+      "explanation": "Keys determine other attributes. That single word is the bridge between the keys chapter and the whole of normalization."
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "What two jobs does the lecture say keys do?",
+      "options": [
+        "Speed up sorting, and compress storage",
+        "Ensure each row is uniquely identifiable, and establish relationships among tables",
+        "Encrypt sensitive columns, and audit access",
+        "Replace the need for a data dictionary"
+      ],
+      "correct": 1,
+      "explanation": "Unique identification plus relationships between tables (and therefore data integrity)."
+    },
+    {
+      "type": "matching",
+      "category": "Matching",
+      "question": "Match each type of key to its definition.",
+      "pairs": [
+        { "left": "Primary key", "right": "The attribute or combination that uniquely identifies a row" },
+        { "left": "Composite key", "right": "A key composed of more than one attribute" },
+        { "left": "Superkey", "right": "Any key that can uniquely identify a row" },
+        { "left": "Candidate key", "right": "A minimal superkey — nothing can be removed from it" },
+        { "left": "Foreign key", "right": "The primary key of one table placed in another to create a common attribute" },
+        { "left": "Secondary key", "right": "A key used strictly for data retrieval purposes" }
+      ],
+      "explanation": "Note the relationship: every candidate key is a superkey, but a superkey is only a candidate key if it's minimal."
+    },
+    {
+      "type": "fill_blank",
+      "category": "Fill in the Blank",
+      "question": "A candidate key is a ______ superkey — one from which no attribute can be removed and still identify a row.",
+      "answers": ["minimal"],
+      "explanation": "Minimal. Add an extra column to a candidate key and you still have a superkey, but no longer a candidate key."
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "A SHIFT_LOG table has columns (badge_no, shift_date, start_time, end_time, post_name). A worker can appear only once per date. Which is a superkey but NOT a candidate key?",
+      "options": [
+        "(badge_no, shift_date)",
+        "(badge_no, shift_date, post_name)",
+        "(badge_no)",
+        "(shift_date)"
+      ],
+      "correct": 1,
+      "explanation": "(badge_no, shift_date) already identifies a row, so adding post_name still identifies it — a superkey — but it is no longer minimal, so it is not a candidate key."
+    },
+    {
+      "type": "fill_blank",
+      "category": "Fill in the Blank",
+      "question": "An attribute that is part of a key is called a ______ attribute.",
+      "answers": ["key"],
+      "explanation": "A key attribute. Attributes that are not part of any candidate key are called nonprime (or non-key) attributes."
+    },
+    {
+      "type": "matching",
+      "category": "Matching",
+      "question": "Match each kind of primary key to its description.",
+      "pairs": [
+        { "left": "Natural key", "right": "A real-world identifier already familiar to end users" },
+        { "left": "Surrogate key", "right": "A made-up, artificial value such as an auto-number" },
+        { "left": "Composite primary key", "right": "A primary key built from more than one attribute" }
+      ],
+      "explanation": "A natural key is part of the day-to-day business vocabulary; a surrogate key exists only to be a key."
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "Which is NOT one of the lecture's reasons to use a surrogate primary key?",
+      "options": [
+        "There is no natural key suitable as a primary key",
+        "The natural primary key would be a composite key with multiple data types",
+        "The natural primary key is too long to be usable",
+        "The table has fewer than one thousand rows"
+      ],
+      "correct": 3,
+      "explanation": "Table size isn't a reason. The three listed reasons are: no suitable natural key, an awkward multi-type composite, or a key that's simply too long."
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "A tool library identifies each borrower by an auto-numbered patron_id rather than by their email address. patron_id is a:",
+      "options": ["Natural key", "Surrogate key", "Secondary key", "Foreign key"],
+      "correct": 1,
+      "explanation": "It's made up by the system rather than drawn from the real world, so it's a surrogate key."
+    },
+    {
+      "type": "tf",
+      "category": "True / False",
+      "question": "Every table row must have a primary key.",
+      "correct": true,
+      "explanation": "The relational-model summary states it flatly: each table row must have a primary key. That is entity integrity."
+    },
+    {
+      "type": "fill_blank",
+      "category": "Fill in the Blank",
+      "question": "The condition in which each row in a table has its own unique identity is called ______ integrity.",
+      "answers": ["entity"],
+      "explanation": "Entity integrity: all primary key values are unique, and no part of a primary key may be null."
+    },
+    {
+      "type": "matching",
+      "category": "Matching",
+      "question": "Match each integrity rule to its requirement (Table 3.4).",
+      "pairs": [
+        { "left": "Entity integrity", "right": "All primary key entries are unique, and no part of a primary key may be null" },
+        { "left": "Referential integrity", "right": "A foreign key is either null, or matches a primary key value in the related table" }
+      ],
+      "explanation": "Entity integrity governs the primary key of a row; referential integrity governs the foreign key pointing at another row."
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "Under referential integrity, a foreign key column may:",
+      "options": [
+        "Contain any value at all, checked only by the application",
+        "Contain either a null, or a value that matches a primary key in the related table",
+        "Never contain a null under any circumstances",
+        "Contain only values that do not appear in the related table"
+      ],
+      "correct": 1,
+      "explanation": "Null is allowed (the relationship may simply be optional); an invalid, non-matching value is not."
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "The lecture's example of referential integrity is that a customer might not yet have an assigned sales representative — but it is impossible to have an INVALID one. What does the null represent there?",
+      "options": [
+        "A data-entry error that must be corrected",
+        "An optional relationship that has not been filled in yet",
+        "A violation of entity integrity",
+        "A duplicate primary key"
+      ],
+      "correct": 1,
+      "explanation": "The null marks an optional participation — no representative assigned yet. Referential integrity blocks invalid values, not missing ones."
+    },
+    {
+      "type": "tf",
+      "category": "True / False",
+      "question": "Enforcing referential integrity makes it impossible to delete a row whose primary key has mandatory matching foreign key values in another table.",
+      "correct": true,
+      "explanation": "Exactly — that's why you delete children before parents. The practice database in the SQL playground will refuse such a delete if you try it."
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "Which of these violates ENTITY integrity rather than referential integrity?",
+      "options": [
+        "A loan row points at a patron_id that does not exist",
+        "Two rows in the patron table share patron_id 14",
+        "A branch row has a null locality_id where the relationship is optional",
+        "A foreign key column is indexed"
+      ],
+      "correct": 1,
+      "explanation": "Duplicate primary key values break entity integrity. A dangling foreign key breaks referential integrity."
+    },
+    {
+      "type": "fill_blank",
+      "category": "Fill in the Blank",
+      "question": "The absence of any data value in a column is called a ______.",
+      "answers": ["null"],
+      "explanation": "A null. It can mean an unknown value, a known but missing value, or an inapplicable condition."
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "Which is NOT one of the three things the lecture says a null can mean?",
+      "options": [
+        "An unknown attribute value",
+        "A known but missing attribute value",
+        "An inapplicable condition",
+        "A value of zero"
+      ],
+      "correct": 3,
+      "explanation": "Zero is a real value. Null is the absence of a value — which is why it needs IS NULL rather than = 0."
+    },
+    {
+      "type": "matching",
+      "category": "Matching",
+      "question": "Match each catalogue-style term to what it actually describes.",
+      "pairs": [
+        { "left": "Data dictionary", "right": "A description of all tables in the database, created by the user and designer" },
+        { "left": "System catalog", "right": "A system data dictionary describing all objects in the database" },
+        { "left": "Database schema", "right": "The complete logical view — the full description of the database" },
+        { "left": "Relational schema", "right": "The description of one individual table" }
+      ],
+      "explanation": "Note the distinction the lecture draws: the database schema covers everything; a relational schema is per-table."
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "Which relationship type does the lecture call the norm for relational databases?",
+      "options": ["One-to-one (1:1)", "One-to-many (1:M)", "Many-to-many (M:N)", "Many-to-one only"],
+      "correct": 1,
+      "explanation": "1:M is the most common type in relational databases."
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "How is a many-to-many relationship implemented in a relational database?",
+      "options": [
+        "By putting a foreign key in whichever table is larger",
+        "By creating a new connecting entity in 1:M relationships with both original entities",
+        "By merging the two tables into one",
+        "By storing a comma-separated list of key values in one column"
+      ],
+      "correct": 1,
+      "explanation": "A new connecting entity — a bridge/composite/associative entity — sits between them in two 1:M relationships."
+    },
+    {
+      "type": "matching",
+      "category": "Matching",
+      "question": "The bridge table in an M:N relationship goes by several names in the lecture. Match each term to its meaning.",
+      "pairs": [
+        { "left": "Composite entity", "right": "The connecting table created to resolve an M:N relationship" },
+        { "left": "Bridge table", "right": "Another name for that same connecting table" },
+        { "left": "Associative entity", "right": "A third name for it, emphasising that it records an association" }
+      ],
+      "explanation": "Composite, bridge and associative all name the same thing. It includes the primary keys of the tables being linked, as foreign keys."
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "What does a composite (bridge) entity contain?",
+      "options": [
+        "Only its own surrogate key",
+        "The primary keys of the tables being linked, held as foreign keys",
+        "Copies of every attribute from both linked tables",
+        "Nothing — it is a view, not a table"
+      ],
+      "correct": 1,
+      "explanation": "It includes the primary keys of the tables to be linked, as foreign keys — and together those usually form its composite primary key."
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "The lecture's Employee/Project example shows that you CANNOT represent M:N by putting a foreign key in the two main tables. Why not?",
+      "options": [
+        "Because foreign keys are not allowed in more than one table",
+        "Because you would have to stuff more than one key value into a single foreign key field, violating the atomic attribute rule",
+        "Because the tables would then have the same primary key",
+        "Because the DBMS forbids more than two foreign keys per table"
+      ],
+      "correct": 1,
+      "explanation": "Assigning one employee to projects 1, 2 and 3 would mean writing \"1,2,3\" into proj_id. That breaks atomicity, so a third table is required."
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "In the lecture's Assignment bridge table holding emp_id and proj_id, those two columns are:",
+      "options": [
+        "Two independent primary keys",
+        "Foreign keys that together form a composite primary key",
+        "Secondary keys used only for retrieval",
+        "Surrogate keys generated by the DBMS"
+      ],
+      "correct": 1,
+      "explanation": "Each is a foreign key on its own; together they form the composite primary key of the bridge table."
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "In a 1:M relationship, where does the foreign key go?",
+      "options": [
+        "In the table on the \"one\" side",
+        "In the table on the \"many\" side",
+        "In both tables",
+        "In a separate bridge table"
+      ],
+      "correct": 1,
+      "explanation": "The foreign key always goes on the many side, referencing the primary key on the one side."
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "One DIVISION operates many DEPARTMENTs; each DEPARTMENT is operated by one DIVISION. Following the rule in the lecture's worked example, the foreign key belongs:",
+      "options": [
+        "division_id in DEPARTMENT",
+        "department_id in DIVISION",
+        "In both tables, to keep them in sync",
+        "In neither — the join works without one"
+      ],
+      "correct": 0,
+      "explanation": "Many departments per division means the many side is DEPARTMENT, so division_id goes there. Putting department_id in DIVISION would only allow one department per division."
+    },
+    {
+      "type": "tf",
+      "category": "True / False",
+      "question": "Although relational tables are independent of one another, they can be linked through common attributes — that is, foreign keys.",
+      "correct": true,
+      "explanation": "Straight from the relational model summary: independent tables, linked by common attributes."
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "The relational-model summary names the basic building block of a relational database. It is:",
+      "options": ["The index", "The table", "The query", "The view"],
+      "correct": 1,
+      "explanation": "Tables are the basic building blocks, and keys are central to using them."
+    },
+    {
+      "type": "fill_blank",
+      "category": "Fill in the Blank",
+      "question": "A key that is used strictly for data retrieval purposes — not to enforce uniqueness or relationships — is called a ______ key.",
+      "answers": ["secondary"],
+      "explanation": "A secondary key exists to make retrieval convenient, e.g. looking customers up by surname."
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "A SEAT_BOOKING table has (performance_id, seat_code, patron_id, price_paid), where performance_id + seat_code together identify a booking. What kind of key is (performance_id, seat_code)?",
+      "options": [
+        "A composite primary key",
+        "A surrogate key",
+        "A secondary key",
+        "Two separate primary keys"
+      ],
+      "correct": 0,
+      "explanation": "One key made of more than one attribute is a composite key; here it's the primary key, so a composite primary key."
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "In that same SEAT_BOOKING table, patron_id refers to the primary key of a PATRON table. patron_id is therefore:",
+      "options": [
+        "Part of the composite primary key",
+        "A foreign key",
+        "A superkey",
+        "A null-only column"
+      ],
+      "correct": 1,
+      "explanation": "The primary key of one table placed in another is a foreign key — the common attribute that links them."
+    },
+    {
+      "type": "tf",
+      "category": "True / False",
+      "question": "A foreign key and the primary key it references must have the same column name.",
+      "correct": false,
+      "explanation": "They usually do — which is what makes NATURAL JOIN and JOIN USING convenient — but it isn't required. When the names differ, join with JOIN ... ON."
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "The lecture notes the most common cause of duplicate column names across two joined tables. It is:",
+      "options": [
+        "Poor naming by the designer",
+        "The existence of a foreign key",
+        "The use of surrogate keys",
+        "Case-insensitive collation"
+      ],
+      "correct": 1,
+      "explanation": "The foreign key deliberately repeats the parent's primary key name, so joining the two tables produces two columns with that name."
+    },
+    {
+      "type": "tf",
+      "category": "True / False",
+      "question": "In entity relationship modeling, an M:N relationship is valid at the conceptual level.",
+      "correct": true,
+      "explanation": "Valid conceptually — but for the logical model and the actual ERD you need a bridge table."
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "\"In ERM, an M:N relationship is valid at the conceptual level.\" What must happen before it becomes a logical/physical design?",
+      "options": [
+        "Nothing — it can be implemented directly",
+        "It must be resolved into a bridge table, giving two 1:M relationships",
+        "One of the two entities must be deleted",
+        "It must be converted into a 1:1 relationship"
+      ],
+      "correct": 1,
+      "explanation": "Conceptually M:N is fine; logically you need the bridge table."
+    },
+    {
+      "type": "fill_blank",
+      "category": "Fill in the Blank",
+      "question": "______ describes the relationship classification — 1:1, 1:M or M:N — on an ERD.",
+      "answers": ["cardinality", "connectivity"],
+      "explanation": "The lecture uses connectivity and cardinality together for this: connectivity labels the type, cardinality expresses the numbers."
+    },
+    {
+      "type": "tf",
+      "category": "True / False",
+      "question": "Database designers, however effective, are often forced to make design compromises.",
+      "correct": true,
+      "explanation": "The ERM summary says so directly — a reminder that the textbook answer and the practical answer sometimes differ."
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "A tool library wants to record that each UNIT (a physical copy) belongs to exactly one BRANCH, while a BRANCH holds many UNITs. Which design is correct?",
+      "options": [
+        "unit_id in BRANCH",
+        "branch_id in UNIT",
+        "A bridge table between UNIT and BRANCH",
+        "Merge UNIT into BRANCH"
+      ],
+      "correct": 1,
+      "explanation": "1:M with UNIT on the many side, so the foreign key branch_id lives in UNIT. No bridge table is needed unless a unit could belong to several branches at once."
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "A catalogue GADGET can belong to several GROUPs (Plumbing, Measuring…), and each GROUP contains many GADGETs. What does the design need?",
+      "options": [
+        "group_id in GADGET",
+        "gadget_id in GROUP",
+        "A bridge entity holding gadget_id and group_id as foreign keys",
+        "Nothing — store the group names in a text column"
+      ],
+      "correct": 2,
+      "explanation": "That's M:N, so it needs a bridge entity. This is exactly the gadget_group_map table in the practice database."
+    },
+    {
+      "type": "short_answer",
+      "category": "Short Answer",
+      "question": "In your own words, explain the difference between entity integrity and referential integrity, and give one example of a violation of each.",
+      "modelAnswer": "Entity integrity concerns the primary key of a row: every primary key value must be unique and no part of it may be null, so each row has its own identity. A violation would be two rows in PATRON sharing patron_id 14, or a row with a null patron_id.\n\nReferential integrity concerns a foreign key: it must either be null or match an existing primary key value in the related table. A violation would be a CHECKOUT row whose patron_id is 9999 when no such patron exists.",
+      "rubric": [
+        "Said entity integrity is about the primary key being unique and not null",
+        "Said referential integrity is about a foreign key matching an existing primary key (or being null)",
+        "Gave a concrete violation of entity integrity (duplicate or null PK)",
+        "Gave a concrete violation of referential integrity (a foreign key pointing at a row that doesn't exist)"
+      ],
+      "explanation": "The short version: entity integrity looks inward at the row's own identity; referential integrity looks outward at the row it points to."
+    },
+    {
+      "type": "short_answer",
+      "category": "Short Answer",
+      "question": "A club tracks MEMBERs and the EVENTs they attend. A member may attend many events, and an event may be attended by many members. Describe the tables you would create, and name the key in each.",
+      "modelAnswer": "Three tables.\n\nMEMBER — primary key member_id, plus member attributes (name, contact details).\nEVENT — primary key event_id, plus event attributes (title, date, venue).\nATTENDANCE (the bridge/composite entity) — member_id and event_id, each a foreign key to its parent table, and together the composite primary key. Any attribute that describes the pairing rather than the member or the event alone — for example checked_in_at — also belongs here.\n\nThe M:N is now two 1:M relationships: one MEMBER has many ATTENDANCE rows, and one EVENT has many ATTENDANCE rows.",
+      "rubric": [
+        "Created three tables, not two",
+        "Named a bridge/composite/associative table between MEMBER and EVENT",
+        "Said the bridge holds both member_id and event_id as foreign keys",
+        "Said those two together form the composite primary key of the bridge"
+      ],
+      "explanation": "Recognising \"many ... many\" in a business rule and reaching straight for a third table is the single most reliable ERD reflex to build."
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "classes": [
+    {
+      "id": "itd256",
+      "name": "ITD 256",
+      "fullName": "Advanced Database Design and Management",
+      "guides": [
+        {
+          "id": "midterm-guide",
+          "title": "Midterm Study Guide",
+          "description": "Reference notes for every topic the midterm tests: concepts and data models, the relational model and keys, SQL, ERD completion, and normalization.",
+          "file": "data/itd256-midterm-guide.json"
+        }
+      ],
+      "tools": [
+        {
+          "id": "sql-playground",
+          "title": "SQL Playground",
+          "description": "A real database running in your browser. Write queries against the Harborview Tool Library, including INSERT, UPDATE and DELETE — Reset puts it back.",
+          "href": "sql.html"
+        }
+      ],
+      "quizzes": [
+        {
+          "id": "midterm-review",
+          "title": "Midterm Review",
+          "description": "233 questions across all three exam parts, including SQL that is graded by actually running it.",
+          "file": "data/itd256-midterm-review.json"
+        }
+      ]
+    }
+  ]
+}

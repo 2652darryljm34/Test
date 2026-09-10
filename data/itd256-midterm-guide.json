@@ -1,0 +1,442 @@
+{
+  "title": "ITD 256 Midterm Study Guide",
+  "description": "Reference notes for every topic the midterm covers: concepts, the relational model and keys, SQL, ERD completion, and normalization.",
+  "quizFile": "data/itd256-midterm-review.json",
+  "sections": [
+    {
+      "name": "How the Midterm Works",
+      "blocks": [
+        { "type": "heading", "text": "Format" },
+        { "type": "list", "items": [
+          "**Three parts**, about **80 minutes** total.",
+          "**Closed everything** — no book, no notes — in Lockdown Browser.",
+          "Part 1: theory from the lectures plus SQL statements (~40 points).",
+          "Part 2: Entity Relationship Diagram (~30 points).",
+          "Part 3: Normalization (~30 points)."
+        ]},
+        { "type": "heading", "text": "What each part asks for" },
+        { "type": "table", "headers": ["Part", "Shape of the questions"], "rows": [
+          ["1 — Theory & SQL", "Roughly 15–20 multiple choice, true/false, fill-in-the-blank and matching, plus 3–5 SQL queries you either finish or write from scratch."],
+          ["2 — ERD", "You are **not** drawing. You get business rules and a partly completed ERD, then answer questions about the missing pieces: cardinality, participation, primary keys, foreign keys, and the other fields — each with its notation."],
+          ["3 — Normalization", "Structured almost exactly like the homework, but with nothing to draw. You do the dependency analysis and submit **dependency sets**, which become the tables (and so the relational schemas) for the next normal form."]
+        ]},
+        { "type": "note", "label": "Strategy:", "text": "Part 2 and Part 3 are worth 60 of the 100 points between them, and both are mechanical once you know the procedure. The connector legend and the partial-versus-transitive test are the two highest-value things to have automatic before you sit down." },
+        { "type": "heading", "text": "How to use this site" },
+        { "type": "list", "items": [
+          "Read the section of this guide you're shakiest on, then take the quiz — it is shuffled, so retaking it is not a memory test of the order.",
+          "The **SQL Playground** runs a real database in your browser. Every SQL question in the quiz is checked by actually running your query against it, so a different-but-correct answer still scores.",
+          "SQL questions are graded on the **result**, not the wording — if your query returns the right rows, it counts."
+        ]}
+      ]
+    },
+    {
+      "name": "Part 1 · Concepts, File Systems & Data Models",
+      "blocks": [
+        { "type": "heading", "text": "File & Database Terminology" },
+        { "type": "table", "headers": ["Term", "Definition", "Also known as"], "rows": [
+          ["Data", "Raw facts — a phone number, a birth date, a YTD sales figure. Little meaning until organized.", "—"],
+          ["Field", "A character or group of characters with a specific meaning. Used to define and store data.", "Attribute"],
+          ["Record", "A logically connected set of fields describing one person, place or thing.", "Entity instance"],
+          ["File", "A collection of related records — the term used in a **non-DBMS**, file-based system.", "—"],
+          ["Table", "A collection of related records. Same definition as File, but called Table inside a **DBMS**.", "Entity"]
+        ]},
+        { "type": "note", "label": "Remember:", "text": "Data → Field → Record → Table. Each level is built out of the one before it, and the right-hand column is the vocabulary you switch to once you start drawing ERDs." },
+
+        { "type": "heading", "text": "Types of Databases" },
+        { "type": "subheading", "text": "By degree of data structure" },
+        { "type": "table", "headers": ["Level", "Meaning"], "rows": [
+          ["Unstructured", "Data in its original, raw state."],
+          ["Structured", "Data that results from formatting — structure applied to suit a type of processing."],
+          ["Semistructured", "Partially processed. **XML** (Extensible Markup Language) is the lecture's example: it represents data elements in a textual format."]
+        ]},
+        { "type": "subheading", "text": "By location" },
+        { "type": "table", "headers": ["Type", "Meaning"], "rows": [
+          ["Centralized", "Data located at a **single site**."],
+          ["Distributed", "Data distributed across **different sites**."],
+          ["Cloud", "Created and maintained with cloud services providing defined performance measures."]
+        ]},
+        { "type": "subheading", "text": "By use" },
+        { "type": "table", "headers": ["Term", "Meaning"], "rows": [
+          ["Analytical database", "Stores historical data and business metrics used **exclusively** for tactical or strategic decision making."],
+          ["Data warehouse", "Stores data in a format optimized for decision support."],
+          ["OLAP", "Online analytical processing — tools to retrieve, process and model data from a data warehouse."],
+          ["Business intelligence", "Capturing and processing business data to generate information that supports decisions."]
+        ]},
+
+        { "type": "heading", "text": "Why File Systems Were Abandoned" },
+        { "type": "list", "items": [
+          "Manual file systems → computerized file systems → \"file system redux\": modern productivity tools such as Excel, which quietly bring the old problems back.",
+          "Lengthy development times, and difficulty getting quick answers to ad hoc queries.",
+          "Challenges with the kinds of information that can be created, and with its accuracy.",
+          "**Structural and data dependence** (below), and uncontrolled **data redundancy**."
+        ]},
+
+        { "type": "heading", "text": "Structural & Data (In)dependence" },
+        { "type": "table", "headers": ["Term", "Meaning"], "rows": [
+          ["Structural dependence", "Access to a file depends on its own structure, so every program must be modified when the structure changes."],
+          ["Structural independence", "The file structure can change without affecting the application's ability to access the data."],
+          ["Data dependence", "Data access changes when data **storage characteristics** change."],
+          ["Data independence", "Storage characteristics can change without affecting the program's ability to access data."]
+        ]},
+        { "type": "paragraph", "text": "The practical significance of data dependence is the difference between two formats. **Logical** = how data is represented to the application or user. **Physical** = how it is actually stored on hardware, which **should be hidden completely and of no concern** to the user." },
+        { "type": "note", "label": "Compared with file systems:", "text": "databases allow for **more data independence**, more robust organization, and better control of data access." },
+
+        { "type": "heading", "text": "Data Redundancy & Anomalies" },
+        { "type": "paragraph", "text": "**Data redundancy** is unnecessarily storing the same data in different places, creating **islands of information** and raising the probability of different versions of the same data existing at once." },
+        { "type": "list", "items": [
+          "Possible results: poor data security, data inconsistency, data-entry errors, data integrity problems, and anomalies.",
+          "**Anomalies develop when not all of the required changes in redundant data are made successfully.**"
+        ]},
+        { "type": "table", "headers": ["Anomaly", "What goes wrong"], "rows": [
+          ["Update", "Changed data ends up inconsistent or incomplete — some copies edited, others not."],
+          ["Insertion", "New data cannot be recorded completely, because an unrelated fact is missing."],
+          ["Deletion", "Removing one fact partially removes another that only lived in the same row."]
+        ]},
+        { "type": "note", "label": "Watch for:", "text": "these three names are the payoff of normalization, and they show up in both Part 1 and Part 3. If you can name which anomaly a scenario describes, you can usually also name the dependency causing it." },
+
+        { "type": "heading", "text": "The Database System Environment" },
+        { "type": "paragraph", "text": "A **database system** is the organization of components that define and regulate the collection, storage, management and use of data. Five components: **hardware, software, people, procedures, data**." },
+
+        { "type": "heading", "text": "DBMS Functions" },
+        { "type": "table", "headers": ["Function", "What it does"], "rows": [
+          ["Data dictionary management", "Stores definitions of data elements and their relationships."],
+          ["Data storage management", "Includes performance tuning, which ensures efficient performance."],
+          ["Data transformation and presentation", "Formats data to conform to logical expectations."],
+          ["Security management", "Enforces user security and data privacy."],
+          ["Multiuser access control", "Algorithms ensuring concurrent access without compromising integrity."],
+          ["Backup and recovery management", "Enables recovery of the database after a failure."],
+          ["Data integrity management", "Minimizes redundancy and maximizes consistency."],
+          ["Access languages and APIs", "The query language — plus interfaces for programs."],
+          ["Database communication interfaces", "Accept end-user requests across different network environments."]
+        ]},
+        { "type": "paragraph", "text": "In a **query language**, users specify **what** result they want and the system determines **how** to produce it. **SQL** (Structured Query Language) is the de facto standard, supported by nearly all vendors — with slight variations." },
+
+        { "type": "heading", "text": "Data Models" },
+        { "type": "paragraph", "text": "**Data modeling** is creating a specific data model for a determined problem domain. A **data model** is a simple representation of complex real-world data structures, useful for supporting that domain." },
+        { "type": "table", "headers": ["Building block", "Definition"], "rows": [
+          ["Entity", "A person, place, thing or event about which data is collected."],
+          ["Attribute", "A characteristic of an entity."],
+          ["Relationship", "An association among entities: 1:M (1..*), M:N (*..*), 1:1 (1..1)."],
+          ["Constraint", "A restriction placed on data; ensures data integrity."]
+        ]},
+        { "type": "paragraph", "text": "Business rules help identify all four. **Nouns** translate into **entities**; **verbs** translate into **relationships**. **Relationships are always bidirectional** — to fix one you must ask two questions: how many instances of B relate to one instance of A, and how many instances of A relate to one B." },
+        { "type": "note", "label": "Levels of abstraction:", "text": "Chen notation is the **most abstract**, Crow's Foot sits in the middle, and **DDL SQL** is the **least abstract** — it is the implementation itself." },
+
+        { "type": "heading", "text": "Other Data Models" },
+        { "type": "table", "headers": ["Model", "Key ideas"], "rows": [
+          ["Relational", "Based on the **relation** — a table/entity, a matrix of intersecting tuples (rows) and attributes (columns). An **RDBMS** hides its complexities and makes it easier to implement."],
+          ["Entity relationship", "Graphical. An **ERD** models database components; an **entity instance** is a row; **connectivity** labels the relationship type."],
+          ["Object-oriented", "Data and relationships in a single structure. An **object** is analogous to a record and carries its own operations; a **class** is analogous to an entity/table — a template. The class hierarchy is an upside-down tree where each class has **only one parent**, and **inheritance** passes down methods and attributes."]
+        ]},
+        { "type": "note", "label": "Logical vs physical model:", "text": "the logical model describes what data is stored and how it relates; the physical model describes how that is actually implemented and stored. Same distinction as logical vs physical format under data independence." }
+      ]
+    },
+    {
+      "name": "Part 1 · The Relational Model, Keys & Integrity",
+      "blocks": [
+        { "type": "heading", "text": "What Keys Are For" },
+        { "type": "paragraph", "text": "A key is one or more attributes that **determine** other attributes. Keys ensure each row is uniquely identifiable, and they establish relationships among tables and ensure data integrity. That word *determine* is the same one that drives the whole of normalization in Part 3." },
+        { "type": "table", "headers": ["Key type", "Definition"], "rows": [
+          ["Primary key (PK)", "The attribute or combination of attributes that uniquely identifies a row."],
+          ["Composite key", "A key composed of more than one attribute."],
+          ["Key attribute", "An attribute that is part of a key. (Attributes in no key at all are **nonprime**.)"],
+          ["Superkey", "Any key that can uniquely identify a row."],
+          ["Candidate key", "A **minimal** superkey — remove any attribute and it stops identifying rows."],
+          ["Natural key", "A real-world identifier already familiar to users and part of the day-to-day business vocabulary. Can be used as the PK."],
+          ["Surrogate key", "A made-up / artificial key, e.g. auto_number."],
+          ["Foreign key (FK)", "The primary key of one table placed in another to create a common attribute."],
+          ["Secondary key", "A key used strictly for data retrieval purposes."]
+        ]},
+        { "type": "note", "label": "Use a surrogate key when:", "text": "there is no natural key suitable as a primary key; the primary key would be a composite key with multiple data types; or the primary key would be too long to be usable." },
+
+        { "type": "heading", "text": "Integrity Rules" },
+        { "type": "table", "headers": ["Rule", "Requirement", "Example"], "rows": [
+          ["Entity integrity", "All primary key entries are **unique**, and **no part of a primary key may be null**. Every row has its own identity.", "No invoice can have a duplicate number, nor can the number be null."],
+          ["Referential integrity", "A foreign key may have **either a null entry, or one matching primary key value** in the related table.", "A customer might not yet have an assigned sales representative — but it is impossible to have an **invalid** one."]
+        ]},
+        { "type": "paragraph", "text": "Enforcing referential integrity also makes it impossible to delete a row in one table whose primary key has **mandatory** matching foreign key values in another. That is why you delete children before parents." },
+        { "type": "note", "label": "NULL", "text": "is the absence of any data value. It can mean an **unknown** value, a **known but missing** value, or an **inapplicable** condition. It is not zero and not an empty string — which is why finding it needs `IS NULL` rather than `= NULL`." },
+
+        { "type": "heading", "text": "Data Dictionary, System Catalog & Schema" },
+        { "type": "table", "headers": ["Term", "Scope"], "rows": [
+          ["Data dictionary", "A description of all tables in the database, created by the user and designer."],
+          ["System catalog", "The **system** data dictionary — describes all objects in the database."],
+          ["Database schema", "The complete **logical view**: the full description of the database."],
+          ["Relational schema", "The description of one **individual** table."]
+        ]},
+
+        { "type": "heading", "text": "Relationship Types & How They're Implemented" },
+        { "type": "table", "headers": ["Type", "How it is implemented"], "rows": [
+          ["One-to-many (1:M)", "The **norm** for relational databases. Put the foreign key on the **many** side, referencing the PK on the one side."],
+          ["One-to-one (1:1)", "One entity relates to only one other. The FK goes on either side — usually the one whose participation is optional."],
+          ["Many-to-many (M:N)", "Create a new **connecting entity** in 1:M relationships with both originals."]
+        ]},
+        { "type": "paragraph", "text": "That connecting entity is called a **composite entity**, a **bridge table**, or an **associative entity** — three names for the same thing. It **includes the primary keys of the tables to be linked, as foreign keys**, and those two columns together usually form its composite primary key." },
+        { "type": "subheading", "text": "Why M:N cannot be done with foreign keys alone" },
+        { "type": "paragraph", "text": "To assign one employee to projects 1, 2 and 3, you would have to write `1,2,3` into the single `proj_id` field — violating the atomic attribute rule. The same problem appears from the other direction when assigning many employees to one project. So a third table is required, storing one row per combination:" },
+        { "type": "code", "text": "ASSIGNMENT\nemp_id  proj_id      <- both FKs; together the composite PK\n   1        1\n   1        2\n   2        1\n   3        3" },
+        { "type": "note", "label": "In ERM,", "text": "an M:N relationship **is valid at the conceptual level**. It is for the logical model — the actual ERD you hand in — that you need the bridge table." },
+
+        { "type": "heading", "text": "Which Side Gets the Foreign Key" },
+        { "type": "paragraph", "text": "For many DEPARTMENTs in each DIVISION (1:M), the FK must be on the **many** side — so `division_id` goes in DEPARTMENT. Putting `department_id` in DIVISION would only ever allow one department per division." },
+        { "type": "code", "text": "Department                 Division\ndepartment_id  division_id     division_id\n     1              1              1\n     2              3              2\n     3              2              3\n\nSELECT * FROM division JOIN department USING (division_id);" },
+        { "type": "note", "label": "Summary:", "text": "tables are the basic building blocks of a relational database; keys are central to using them; **each table row must have a primary key**; and although tables are independent, they can be linked by common attributes — foreign keys." }
+      ]
+    },
+    {
+      "name": "Part 1 · SQL",
+      "blocks": [
+        { "type": "heading", "text": "Command Categories" },
+        { "type": "table", "headers": ["Category", "Purpose", "Examples"], "rows": [
+          ["DDL — Data Definition Language", "Defines and changes the **structures**.", "CREATE, ALTER, DROP"],
+          ["DML — Data Manipulation Language", "Reads and changes the **rows**.", "SELECT, INSERT, UPDATE, DELETE"],
+          ["TCL — Transaction Control Language", "Commits or undoes work.", "COMMIT, ROLLBACK"],
+          ["DCL — Data Control Language", "Grants and revokes access.", "GRANT, REVOKE"]
+        ]},
+        { "type": "note", "label": "The lecture's framing:", "text": "SQL has essentially **two** sets of commands — DDL and DML. It is nonprocedural, with a basic vocabulary of fewer than 100 words." },
+
+        { "type": "heading", "text": "DDL Reference" },
+        { "type": "table", "headers": ["Command / option", "Description"], "rows": [
+          ["CREATE DATABASE", "Create a database schema."],
+          ["DROP DATABASE", "Permanently delete an entire database, including all tables."],
+          ["CREATE TABLE", "Create a new table in the user's schema."],
+          ["CREATE TABLE AS", "Create a new table from the result of a query."],
+          ["ALTER TABLE", "Modify a table definition — add, modify or delete attributes or constraints."],
+          ["DROP TABLE", "Permanently delete a table **and its data**."],
+          ["CREATE INDEX / DROP INDEX", "Create or delete an index for a table."],
+          ["CREATE VIEW / DROP VIEW", "Create or delete a dynamic subset of rows and columns from one or more tables."],
+          ["NOT NULL", "Ensure a column has no null values."],
+          ["UNIQUE", "Ensure a column has no duplicate values."],
+          ["PRIMARY KEY / FOREIGN KEY", "Define the table's primary key, or a foreign key."],
+          ["DEFAULT", "Define a value used when none is given."],
+          ["CHECK", "Validate data in an attribute."]
+        ]},
+        { "type": "code", "text": "CREATE TABLE workshop (\n  workshop_id   INTEGER,\n  workshop_name VARCHAR(80) NOT NULL,\n  seat_limit    INTEGER DEFAULT 12,\n  branch_id     INTEGER,\n  PRIMARY KEY (workshop_id),\n  FOREIGN KEY (branch_id) REFERENCES branch(branch_id)\n);" },
+        { "type": "note", "label": "DROP vs DELETE:", "text": "`DROP TABLE` is DDL and removes the structure along with the data. `DELETE FROM` is DML and removes rows, leaving the table in place." },
+
+        { "type": "heading", "text": "SELECT Statement Anatomy" },
+        { "type": "code", "text": "SELECT   columnlist\nFROM     tablelist\n[WHERE    conditionlist]\n[GROUP BY columnlist]\n[HAVING   conditionlist]\n[ORDER BY columnlist [ASC | DESC]];" },
+        { "type": "table", "headers": ["Clause", "Job"], "rows": [
+          ["SELECT", "Specifies the attributes to be returned."],
+          ["FROM", "Specifies the table(s) data is retrieved from."],
+          ["WHERE", "Filters **rows** on the given criteria."],
+          ["GROUP BY", "Groups rows into collections sharing the same values in one or more attributes."],
+          ["HAVING", "Filters the **groups** formed by GROUP BY."],
+          ["ORDER BY", "Sorts the final result rows, ascending (default) or descending."]
+        ]},
+        { "type": "note", "label": "WHERE vs HAVING:", "text": "WHERE filters rows **before** grouping, so an aggregate like `count(*)` cannot appear in it — the groups do not exist yet. HAVING filters groups **after**, so that is where aggregate conditions belong." },
+        { "type": "paragraph", "text": "**DISTINCT** produces a list of only unique values. The **`*`** wildcard stands in for every column. Dates are stored as a number of days, so **date arithmetic** is possible in a query — though date comparisons are often more software-specific than other SQL." },
+        { "type": "subheading", "text": "Cascading ORDER BY" },
+        { "type": "code", "text": "SELECT gadget_title, daily_fee\nFROM gadget\nORDER BY daily_fee DESC, gadget_title;\n\n-- daily_fee sorts high to low; gadget_title breaks the ties,\n-- ascending, because DESC applies only to the column it follows." },
+
+        { "type": "heading", "text": "WHERE Clause Operators" },
+        { "type": "table", "headers": ["Symbol", "Meaning"], "rows": [
+          ["=", "Equal to"],
+          ["<  /  <=", "Less than / less than or equal to"],
+          [">  /  >=", "Greater than / greater than or equal to"],
+          ["<>  or  !=", "Not equal to"]
+        ]},
+        { "type": "table", "headers": ["Special operator", "Tests"], "rows": [
+          ["BETWEEN … AND …", "Whether a value falls in an **inclusive** range."],
+          ["IN (…)", "Whether a value appears in a list. Shorthand for a chain of ORs."],
+          ["LIKE '…%…'", "Whether text matches a pattern. `%` = any run of characters."],
+          ["IS NULL / IS NOT NULL", "Whether a value is absent. The **only** way to test for null."]
+        ]},
+        { "type": "paragraph", "text": "Logical operators **AND, OR and NOT** combine multiple conditions. Old-style joins written as `WHERE table1.pk = table2.fk` still work but are **generally not recommended**: they make complex queries harder to maintain and are susceptible to undetected errors." },
+
+        { "type": "heading", "text": "Joins" },
+        { "type": "table", "headers": ["Join", "Returns"], "rows": [
+          ["Inner join", "Only rows from both tables that match on the common value."],
+          ["Outer join", "The matched rows **plus** unmatched rows from one table or the other. ANSI defines **left**, **right** and **full**."],
+          ["Natural join", "Rows matching on identically named, type-compatible columns — with the duplicate column eliminated. If there are no common attributes it returns the relational product, which is almost never what you wanted."],
+          ["Recursive join", "A table joined to **itself**. Unary; every other join is binary."]
+        ]},
+        { "type": "code", "text": "-- USING: the key has the same name in both tables\nSELECT locality_name, region_name\nFROM locality\nINNER JOIN region USING (region_id);\n\n-- ON: spell out the condition; needed when the names differ\nSELECT b.branch_label, l.locality_name\nFROM branch b\nINNER JOIN locality l ON b.locality_id = l.locality_id;\n\n-- Chaining three tables through a bridge (an M:N relationship)\nSELECT gadget_title\nFROM gadget\nINNER JOIN gadget_group_map USING (gadget_id)\nINNER JOIN gadget_group     USING (group_id)\nWHERE gadget_group.group_label = 'Plumbing';" },
+        { "type": "subheading", "text": "Outer joins find what is missing" },
+        { "type": "code", "text": "-- Patrons who have never borrowed anything.\n-- An INNER join could never show these rows: there is nothing to match.\nSELECT p.patron_id, p.surname\nFROM patron p\nLEFT JOIN checkout c ON c.patron_id = p.patron_id\nWHERE c.checkout_id IS NULL;" },
+        { "type": "subheading", "text": "Recursive (self) join" },
+        { "type": "code", "text": "-- Both the worker and the boss are rows in the same table,\n-- so the aliases are what make two copies of it distinguishable.\nSELECT worker.surname AS steward,\n       boss.surname   AS reports_to\nFROM steward worker\nINNER JOIN steward boss ON worker.supervisor_id = boss.steward_id;" },
+        { "type": "note", "label": "Aliases:", "text": "an alias identifies the source table a column came from, improves maintainability, and is **required** for a self-join. The most common cause of duplicate column names across joined tables is the existence of a foreign key." },
+
+        { "type": "heading", "text": "Aggregates & Grouping" },
+        { "type": "table", "headers": ["Function", "Computes"], "rows": [
+          ["COUNT", "How many rows."],
+          ["SUM", "The total of a numeric column."],
+          ["AVG", "The arithmetic mean."],
+          ["MIN / MAX", "The smallest / largest value."]
+        ]},
+        { "type": "paragraph", "text": "An aggregate query **takes a collection of rows and reduces it to a single row**. Add GROUP BY and you get one row per group instead. Any column in the SELECT list that is not aggregated has to appear in the GROUP BY." },
+        { "type": "code", "text": "SELECT power_source,\n       count(*)               AS how_many,\n       round(avg(daily_fee),2) AS avg_fee\nFROM gadget\nGROUP BY power_source\nHAVING count(*) > 5\nORDER BY power_source;" },
+
+        { "type": "heading", "text": "Data Manipulation (DML)" },
+        { "type": "code", "text": "INSERT INTO tablename (col1, col2) VALUES (value1, value2);\n\n-- add many rows from another table\nINSERT INTO target_table [(target_columnlist)]\nSELECT source_columnlist FROM source_table;\n\nUPDATE tablename\nSET    columnname = expression [, columnname = expression]\n[WHERE conditionlist];\n\nDELETE FROM tablename [WHERE conditionlist];\n\nCOMMIT;     -- save the changes permanently\nROLLBACK;   -- restore the previous condition" },
+        { "type": "note", "label": "SQL does not ask for confirmation.", "text": "An UPDATE or DELETE without a WHERE clause hits **every row in the table**. The lecture's own phrasing: always use WHERE with UPDATE to specify which rows, and with DELETE to limit the damage." },
+        { "type": "paragraph", "text": "**CRUD** = Create, Read, Update, Delete → **(C) INSERT** adds new rows, **(R) SELECT** reads them, **(U) UPDATE** modifies existing rows, **(D) DELETE** gets rid of rows." },
+        { "type": "paragraph", "text": "Basic ANSI **data types**, supported by all vendors in different ways: NUMBER, NUMERIC, INTEGER, CHAR, VARCHAR, DATE." }
+      ]
+    },
+    {
+      "name": "The Practice Database",
+      "blocks": [
+        { "type": "heading", "text": "Harborview Tool Library" },
+        { "type": "paragraph", "text": "The **SQL Playground** on the home page runs a real SQLite database inside your browser — nothing is installed, nothing is uploaded, and the **Reset** button puts the data back whenever you want. Run whatever you like in it, including INSERT, UPDATE and DELETE." },
+        { "type": "paragraph", "text": "The scenario: a community tool-lending library. Members (**patrons**) borrow physical **units** of a catalog **gadget** from a **branch**; the staff are **stewards**. It deliberately has the same *shapes* as the examples used in class — a catalog, physical copies, loans, payments, a many-to-many category link, and a self-referencing staff hierarchy — under completely different names, so you have to read the schema rather than recall it." },
+        { "type": "table", "headers": ["Table", "Holds", "Key columns"], "rows": [
+          ["region", "Four broad areas", "region_id (PK)"],
+          ["locality", "18 towns, each in one region", "locality_id (PK), region_id (FK)"],
+          ["branch", "5 lending sites", "branch_id (PK), locality_id (FK)"],
+          ["steward", "12 staff; supervisor_id points at another steward", "steward_id (PK), branch_id (FK), supervisor_id (FK, self)"],
+          ["patron", "60 members", "patron_id (PK), locality_id (FK)"],
+          ["maker", "12 manufacturers", "maker_id (PK)"],
+          ["gadget", "45 catalog entries", "gadget_id (PK), maker_id (FK)"],
+          ["gadget_group", "8 categories", "group_id (PK)"],
+          ["gadget_group_map", "**Bridge** resolving the M:N between gadgets and groups", "(gadget_id, group_id) — composite PK, both FKs"],
+          ["unit", "113 physical copies of the gadgets", "unit_id (PK), gadget_id (FK), branch_id (FK)"],
+          ["checkout", "280 loans; returned_on is NULL while still out", "checkout_id (PK), unit_id / patron_id / steward_id (FKs)"],
+          ["ledger_entry", "417 charges — loan fees, late fees, dues", "entry_id (PK), patron_id / steward_id / checkout_id (FKs)"],
+          ["safety_course", "5 courses", "course_id (PK)"],
+          ["course_result", "131 scores", "result_id (PK), patron_id (FK), course_id (FK)"]
+        ]},
+        { "type": "note", "label": "Referential integrity is switched on.", "text": "Try `DELETE FROM patron WHERE patron_id = 1;` in the playground — it will be refused, because that patron has loans and ledger entries pointing at them. That refusal *is* referential integrity, and it is worth seeing once before the exam asks you about it." },
+
+        { "type": "heading", "text": "Getting to the answer" },
+        { "type": "list", "ordered": true, "items": [
+          "**Which tables hold the columns I was asked for?** If they are in two tables, you are joining.",
+          "**How do those tables connect?** Follow the foreign keys in the schema panel. Sometimes you have to hop through a third table — a steward has no locality, so you reach it via branch.",
+          "**Row filter or group filter?** A condition on a plain column is WHERE; a condition on a count or total is HAVING.",
+          "**Did the question say unique?** Then DISTINCT. Joining to the many side duplicates rows.",
+          "**Did the question say sort?** Then ORDER BY — and add a second column if the first one has ties."
+        ]},
+        { "type": "note", "label": "MySQL vs the browser engine:", "text": "the playground runs SQLite, with `MONTH()`, `YEAR()`, `DAY()`, `LEFT()`, `RIGHT()`, `DATEDIFF()`, `CURDATE()` and `NOW()` added so the MySQL forms from the lectures work. `CONCAT()` works, and so does SQLite's `||`. Everything else on the exam is standard SQL that behaves the same in both." }
+      ]
+    },
+    {
+      "name": "Part 2 · ERD Completion",
+      "blocks": [
+        { "type": "heading", "text": "The Connector Options Legend" },
+        { "type": "paragraph", "text": "Exam ERDs mark each end of a relationship line with one of six connectors, built from three symbols: a **circle** (zero), a **bar** (one) and a **crow's foot** (many). Read from the outside in: the outer symbol is the **minimum** (participation), the inner symbol is the **maximum** (cardinality)." },
+        { "type": "table", "headers": ["Letter", "Symbol", "Minimum", "Maximum", "Reads as"], "rows": [
+          ["A", "line + crow's foot", "—", "many", "Many"],
+          ["B", "line + bar + crow's foot", "one", "many", "**One or many** (mandatory many)"],
+          ["C", "line + circle + crow's foot", "zero", "many", "**Zero or many** (optional many)"],
+          ["D", "line + single bar", "one", "one", "One"],
+          ["E", "line + double bar", "one", "one", "**One and only one** (mandatory one)"],
+          ["F", "line + circle + bar", "zero", "one", "**Zero or one** (optional one)"]
+        ]},
+        { "type": "code", "text": "A   ───<        many\nB   ──|<        one or many\nC   ──o<        zero or many\nD   ───|        one\nE   ──||        one and only one\nF   ──o|        zero or one" },
+        { "type": "note", "label": "The two-question habit:", "text": "a circle always means the relationship is optional at that end. A crow's foot always means many. Everything else follows." },
+
+        { "type": "heading", "text": "Reading a Business Rule Into a Connector" },
+        { "type": "list", "ordered": true, "items": [
+          "Pick **one end** of the line and stand at the *other* entity, looking toward it.",
+          "Ask **must it, or may it?** — \"must have\" / \"must be\" means minimum one (bar). \"May or may not\" means minimum zero (circle).",
+          "Ask **one, or many?** — \"only one\" / \"exactly one\" means maximum one (bar). \"Many\" means maximum many (crow's foot).",
+          "Combine the two symbols and read off the letter.",
+          "Now walk to the other end and do it again. **Relationships are bidirectional**, and one sentence rarely settles both ends."
+        ]},
+        { "type": "subheading", "text": "Worked example" },
+        { "type": "paragraph", "text": "\"A DEPOT must store at least one CRATE, and can store many. Every CRATE must be stored at exactly one DEPOT.\"" },
+        { "type": "list", "items": [
+          "**CRATE end** (looking from DEPOT): must store at least one → minimum one, bar. Can store many → maximum many, crow's foot. Bar + crow's foot = **B**.",
+          "**DEPOT end** (looking from CRATE): must be stored at → minimum one, bar. Exactly one → maximum one, bar. Two bars = **E**.",
+          "Cardinality is therefore **1:M**, and `depot_id` goes in CRATE — the many side."
+        ]},
+        { "type": "subheading", "text": "A second example, with an optional end" },
+        { "type": "paragraph", "text": "\"Some technicians, known as 'floaters', are not assigned to any WORKSHOP. Any technician who is assigned belongs to just one.\"" },
+        { "type": "list", "items": [
+          "**WORKSHOP end**: a floater has none → minimum zero, circle. An assigned technician has one → maximum one, bar. Circle + bar = **F**.",
+          "The `workshop_id` column in TECHNICIAN must therefore **allow nulls** — which referential integrity permits."
+        ]},
+
+        { "type": "heading", "text": "Reading Entity Boxes" },
+        { "type": "paragraph", "text": "An exam entity box has a header holding the entity name, then rows. The narrow left-hand cells hold the key markers; the wide right-hand cells hold the attribute names:" },
+        { "type": "code", "text": "        ┌──────────────────────────────┐\n        │           PATRON             │  <- entity name\n        ├─────┬────────────────────────┤\n   P1 ->│ PK  │ patron_id              │<- P2  bold + underlined\n        ├─────┼────────────────────────┤\n   P3 ->│ FK  │ locality_id            │<- P4  italic\n        ├─────┴────────────────────────┤\n   P5 ->│ given_name, surname, ...     │  <- the descriptive fields\n        └──────────────────────────────┘" },
+        { "type": "table", "headers": ["Formatting", "Meaning"], "rows": [
+          ["**Bold and underlined**, at the top", "Primary key"],
+          ["*Italic*, below the dividing line", "Foreign key"],
+          ["Plain text", "An ordinary descriptive attribute"],
+          ["Left-hand marker cell", "The label **PK** or **FK** for the row beside it"]
+        ]},
+        { "type": "note", "label": "Even when the business rules describe no attributes at all,", "text": "the ERD still needs the primary and foreign key fields — those are what carry the relationships." },
+
+        { "type": "heading", "text": "Turning Relationships Into Keys" },
+        { "type": "table", "headers": ["Relationship", "What the ERD needs"], "rows": [
+          ["1:M", "The PK of the *one* side, repeated as an FK on the *many* side. Nothing changes on the one side."],
+          ["1:1", "The PK of one side as an FK in the other — normally in the table whose participation is optional."],
+          ["M:N", "A **bridge entity**. It holds both PKs as FKs, and those two columns together are its composite PK. One M:N line becomes **two 1:M lines**."],
+          ["Recursive 1:M", "An FK column in the table that references that same table's own PK. The top of the hierarchy has a null there."]
+        ]},
+        { "type": "note", "label": "Why the FK cannot go on the \"one\" side:", "text": "a single column holds a single value. To point at many children you would have to stuff several key values into one field, which is exactly the atomicity violation that forces a bridge table in the M:N case." },
+        { "type": "paragraph", "text": "Two entities can also be joined by **more than one** relationship line. STEWARD and BRANCH carry both \"works at\" (1:M) and \"manages\" (1:1) — two separate relationships between the same pair of entities, each with its own connectors." }
+      ]
+    },
+    {
+      "name": "Part 3 · Normalization & Dependency Sets",
+      "blocks": [
+        { "type": "heading", "text": "Normal Forms" },
+        { "type": "paragraph", "text": "**Normalization** is evaluating and correcting table structures to **minimize redundancies**, which reduces data anomalies. It assigns attributes to tables based on **determination**." },
+        { "type": "table", "headers": ["Normal form", "Requirement"], "rows": [
+          ["1NF", "Table format, **no repeating groups**, and the primary key is identified. All attributes depend on the PK."],
+          ["2NF", "In 1NF **and no partial dependencies**."],
+          ["3NF", "In 2NF **and no transitive dependencies**."],
+          ["BCNF", "**Every determinant is a candidate key.** A special case of 3NF."],
+          ["4NF", "In 3NF and no independent multivalued dependencies."]
+        ]},
+        { "type": "note", "label": "Shortcut:", "text": "if a 1NF table's primary key is a **single** attribute, it is automatically in 2NF — a partial dependency needs *part* of a composite key, and a one-column key has no parts. You still have to check for transitive dependencies." },
+
+        { "type": "heading", "text": "Key Vocabulary" },
+        { "type": "table", "headers": ["Term", "Definition"], "rows": [
+          ["Functional dependence", "B is functionally dependent on A if **each value of A determines one and only one value of B**. Written A → B."],
+          ["Determinant", "The attribute on the **left** of the arrow — it does the determining."],
+          ["Dependent", "The attribute on the **right** of the arrow."],
+          ["Generalized definition", "A determines B if **all rows that agree in value for A also agree in value for B**. This is the version you can test against sample data."],
+          ["Full functional dependence", "B depends on composite key A but **not on any subset** of A."],
+          ["Partial dependency", "A functional dependence whose determinant is **only part of the PK**. Requires a composite key."],
+          ["Transitive dependency", "An attribute dependent on **another non-key attribute**. Occurs only among nonprime attributes — which is what makes it harder to spot."],
+          ["Repeating group", "Several columns holding the same kind of fact (phone1, phone2, phone3), or several values crammed into one cell. Breaks 1NF."]
+        ]},
+
+        { "type": "heading", "text": "The Procedure" },
+        { "type": "list", "ordered": true, "items": [
+          "Write down the **primary key**. If it is composite, note both parts separately — you will need them.",
+          "Find the attributes that depend on the **whole** key. Those stay where they are.",
+          "Find every attribute that depends on **part** of the key. Each such determinant becomes a **new table**, keyed on that determinant, taking everything it determines with it. That is 2NF.",
+          "Inside each remaining table, look for an attribute determined by **another non-key attribute**. Split that determinant out into its own table too, and **leave the determinant behind as a foreign key**. That is 3NF.",
+          "Check: in every table, does each non-key attribute depend on **the key, the whole key, and nothing but the key**?"
+        ]},
+        { "type": "note", "label": "\"The whole key\"", "text": "catches partial dependencies. **\"Nothing but the key\"** catches transitive ones. That one sentence is most of Part 3." },
+
+        { "type": "heading", "text": "Worked Example" },
+        { "type": "paragraph", "text": "**CATERING_ORDER** in 1NF, primary key **booking_ref + dish_code**:" },
+        { "type": "code", "text": "CATERING_ORDER(booking_ref, booking_date, client_no, client_name,\n               client_city, dish_code, dish_name, dish_style,\n               dish_price, portions)" },
+        { "type": "subheading", "text": "Step 1 — the dependency set" },
+        { "type": "code", "text": "(booking_ref, dish_code) -> portions            (full — needs both halves)\n\nbooking_ref -> booking_date, client_no,\n               client_name, client_city         (partial)\ndish_code   -> dish_name, dish_style,\n               dish_price                       (partial)\n\nclient_no   -> client_name, client_city         (transitive)" },
+        { "type": "paragraph", "text": "How many portions were ordered needs both halves of the key. Everything about the booking follows from `booking_ref` alone; everything about the dish follows from `dish_code` alone. And the client's name and city follow from `client_no`, which is itself just an ordinary attribute of the booking." },
+        { "type": "subheading", "text": "Step 2 — 2NF (partial dependencies removed)" },
+        { "type": "code", "text": "BOOKING(booking_ref, booking_date, client_no, client_name, client_city)\nDISH(dish_code, dish_name, dish_style, dish_price)\nBOOKING_LINE(booking_ref, dish_code, portions)\n\n-- PK of BOOKING_LINE is (booking_ref, dish_code);\n-- both columns are also FKs, to BOOKING and DISH." },
+        { "type": "subheading", "text": "Step 3 — 3NF (transitive dependency removed)" },
+        { "type": "code", "text": "CLIENT(client_no, client_name, client_city)\nBOOKING(booking_ref, booking_date, client_no)      -- client_no is now an FK\nDISH(dish_code, dish_name, dish_style, dish_price)\nBOOKING_LINE(booking_ref, dish_code, portions)" },
+        { "type": "paragraph", "text": "Only the first two tables changed between 2NF and 3NF: `client_no → client_name, client_city` came out of BOOKING into its own CLIENT table, with `client_no` left behind as the foreign key linking them." },
+
+        { "type": "heading", "text": "Second Worked Example" },
+        { "type": "paragraph", "text": "**SEMINAR_ROSTER** in 1NF, primary key **seminar_code + attendee_id**, where each seminar meets in exactly one room:" },
+        { "type": "code", "text": "SEMINAR_ROSTER(seminar_code, seminar_title, room_code, room_capacity,\n               attendee_id, attendee_name, attendee_email, grade)\n\nDependency set:\n(seminar_code, attendee_id) -> grade                          (full)\nseminar_code -> seminar_title, room_code, room_capacity       (partial)\nattendee_id  -> attendee_name, attendee_email                 (partial)\nroom_code    -> room_capacity                                 (transitive)\n\n3NF:\nROOM(room_code, room_capacity)\nSEMINAR(seminar_code, seminar_title, room_code)               -- room_code FK\nATTENDEE(attendee_id, attendee_name, attendee_email)\nENROLLMENT(seminar_code, attendee_id, grade)                  -- both FKs, composite PK" },
+        { "type": "note", "label": "Worth noticing:", "text": "ENROLLMENT is exactly the **bridge entity** you would have drawn on an ERD for the M:N between seminars and attendees. Normalization and ER modeling arrive at the same table from opposite directions." },
+
+        { "type": "heading", "text": "Spotting the Two Dependencies" },
+        { "type": "table", "headers": ["", "Partial", "Transitive"], "rows": [
+          ["Determinant is", "Part of the composite primary key", "Another **non-key** attribute"],
+          ["Requires", "A composite primary key", "Nothing in particular — any key at all"],
+          ["How to spot it", "Cover half the key: is the attribute still determined?", "Look for a chain among ordinary attributes: PK → X → Y"],
+          ["Typical anomaly", "The dish's price repeats on every order line; a dish nobody has ordered cannot be recorded", "The client's details repeat on every booking; deleting their last booking erases the client"],
+          ["Removed at", "2NF", "3NF"]
+        ]},
+        { "type": "paragraph", "text": "Both are fixed the same way: **move the determinant and everything it determines into a new table, and leave the determinant behind as a foreign key.**" },
+
+        { "type": "heading", "text": "Denormalization" },
+        { "type": "paragraph", "text": "Denormalization deliberately produces a **lower** normal form, trading increased data redundancy for better performance." },
+        { "type": "note", "label": "The trade-off:", "text": "more tables require more I/O operations and processing logic to join them. Normalization is important — but only **part** of the design process, and designers are often forced into compromises." }
+      ]
+    }
+  ]
+}

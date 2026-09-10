@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SQL Playground</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="index.html">Quiz<span class="brand-mark">Hub</span></a>
+    <span class="topbar-sub" id="sql-subtitle">SQL playground</span>
+  </div>
+</div>
+
+<div class="wrap wide">
+  <div class="crumb"><a href="index.html">&larr; All classes</a></div>
+
+  <div class="page-head">
+    <h1>SQL Playground</h1>
+    <p>A real SQLite database running in your browser. Nothing you type here leaves
+       the page, and <em>Reset</em> puts the data back the way it started &mdash; so
+       run whatever you like, including INSERT, UPDATE and DELETE.</p>
+  </div>
+
+  <div id="loading" class="loading">Starting the database&hellip;</div>
+
+  <div id="app" hidden>
+    <div class="sql-layout">
+      <aside class="sql-side">
+        <div class="sql-side-head">Schema</div>
+        <div class="sql-side-note">
+          <span class="key-tag pk">PK</span> primary key &nbsp;
+          <span class="key-tag fk">FK</span> foreign key
+        </div>
+        <div id="schema" class="schema-body"></div>
+      </aside>
+
+      <main class="sql-main">
+        <label class="sql-label" for="editor">Query</label>
+        <textarea id="editor" class="sql-input" rows="8" spellcheck="false"
+          autocomplete="off" autocapitalize="off"></textarea>
+
+        <div class="sql-toolbar">
+          <button class="btn primary" id="run">Run</button>
+          <button class="btn ghost" id="reset">Reset data</button>
+          <span class="sql-status" id="status">Ctrl+Enter runs your query.</span>
+        </div>
+
+        <div id="out"></div>
+
+        <details class="sql-recipes" open>
+          <summary>Warm-ups</summary>
+          <p class="sql-side-note">Click one to load it, then change it and see what happens.</p>
+          <div id="recipes" class="recipe-list"></div>
+        </details>
+      </main>
+    </div>
+  </div>
+</div>
+
+<footer class="site">Built for sharing study quizzes with classmates.</footer>
+
+<script src="assets/db.js"></script>
+<script src="assets/sqlview.js"></script>
+<script src="assets/sql.js"></script>
+</body>
+</html>

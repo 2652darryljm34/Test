@@ -1,0 +1,684 @@
+{
+  "name": "Part 1 · SQL",
+  "questions": [
+    {
+      "type": "matching",
+      "category": "Matching",
+      "question": "SQL functions fall into four categories. Match each abbreviation to what it does.",
+      "pairs": [
+        { "left": "DDL", "right": "Data definition — creates and alters the structures themselves" },
+        { "left": "DML", "right": "Data manipulation — reads and changes the rows" },
+        { "left": "TCL", "right": "Transaction control — COMMIT and ROLLBACK" },
+        { "left": "DCL", "right": "Data control — grants and revokes access rights" }
+      ],
+      "explanation": "The summary slide stresses that SQL has essentially two sets of commands — DDL and DML — with TCL and DCL alongside them."
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "The lecture calls SQL a nonprocedural language with a basic command vocabulary of:",
+      "options": ["Fewer than 100 words", "About 500 words", "About 1,000 words", "It has no fixed vocabulary"],
+      "correct": 0,
+      "explanation": "Under 100 words — one reason SQL is described as relatively easy to learn."
+    },
+    {
+      "type": "matching",
+      "category": "Matching",
+      "question": "Match each SQL data definition command to its effect.",
+      "pairs": [
+        { "left": "CREATE TABLE", "right": "Creates a new table in the user's database schema" },
+        { "left": "DROP TABLE", "right": "Permanently deletes a table and its data" },
+        { "left": "ALTER TABLE", "right": "Modifies a table definition — adds, modifies or deletes attributes or constraints" },
+        { "left": "CREATE VIEW", "right": "Creates a dynamic subset of rows and columns from one or more tables" },
+        { "left": "CREATE INDEX", "right": "Creates an index for a given table" }
+      ],
+      "explanation": "All five are DDL. Note that DROP TABLE takes the data with it — it is not a way to empty a table."
+    },
+    {
+      "type": "matching",
+      "category": "Matching",
+      "question": "Match each column constraint to what it enforces.",
+      "pairs": [
+        { "left": "NOT NULL", "right": "The column may not be left empty" },
+        { "left": "UNIQUE", "right": "The column may not contain duplicate values" },
+        { "left": "PRIMARY KEY", "right": "Defines the table's unique row identifier" },
+        { "left": "FOREIGN KEY", "right": "Ties the column to a primary key in another table" },
+        { "left": "DEFAULT", "right": "Supplies a value when none is given" },
+        { "left": "CHECK", "right": "Validates the data placed in the attribute" }
+      ],
+      "explanation": "These are the constraint options listed under CREATE TABLE in Table 7.2."
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "Which command permanently deletes an entire database, including all of its tables?",
+      "options": ["DELETE DATABASE", "DROP DATABASE", "TRUNCATE DATABASE", "ALTER DATABASE"],
+      "correct": 1,
+      "explanation": "DROP DATABASE. DELETE is DML and removes rows; DROP is DDL and removes structures."
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "Which pair correctly contrasts DROP TABLE with DELETE FROM?",
+      "options": [
+        "DROP removes rows but keeps the table; DELETE removes the table",
+        "DROP removes the table and its data; DELETE removes rows and leaves the table in place",
+        "They are synonyms",
+        "DROP is DML; DELETE is DDL"
+      ],
+      "correct": 1,
+      "explanation": "DROP is DDL and takes the structure with it. DELETE is DML and only removes rows."
+    },
+    {
+      "type": "matching",
+      "category": "Matching",
+      "question": "Match each SELECT clause to the job it performs.",
+      "pairs": [
+        { "left": "SELECT", "right": "Specifies the attributes to be returned" },
+        { "left": "FROM", "right": "Specifies the table(s) the data is retrieved from" },
+        { "left": "WHERE", "right": "Filters individual rows on the given criteria" },
+        { "left": "GROUP BY", "right": "Collects rows into groups that share values in one or more attributes" },
+        { "left": "HAVING", "right": "Filters the groups formed by GROUP BY" },
+        { "left": "ORDER BY", "right": "Sorts the final result rows, ascending or descending" }
+      ],
+      "explanation": "The one that trips people up is WHERE vs HAVING: WHERE filters rows before grouping, HAVING filters groups after."
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "What is the difference between WHERE and HAVING?",
+      "options": [
+        "None — they are interchangeable",
+        "WHERE filters individual rows; HAVING filters the groups produced by GROUP BY",
+        "WHERE works only on numbers; HAVING works only on text",
+        "HAVING runs first, then WHERE"
+      ],
+      "correct": 1,
+      "explanation": "WHERE filters rows on the way in, HAVING filters groups on the way out. That is why an aggregate like count(*) can appear in HAVING but not in WHERE."
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "Which clause would you use to keep only the groups whose total exceeds 500?",
+      "options": ["WHERE sum(amount) > 500", "HAVING sum(amount) > 500", "ORDER BY sum(amount) > 500", "SELECT sum(amount) > 500"],
+      "correct": 1,
+      "explanation": "Aggregates belong in HAVING, because the groups don't exist yet when WHERE runs."
+    },
+    {
+      "type": "fill_blank",
+      "category": "Fill in the Blank",
+      "question": "SQL's ______ clause produces a list of only unique values, removing duplicates from the result.",
+      "answers": ["distinct"],
+      "explanation": "DISTINCT. It goes immediately after SELECT: SELECT DISTINCT power_source FROM gadget;"
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "In `SELECT * FROM payment;` what does the asterisk do?",
+      "options": [
+        "Repeats the query for every table",
+        "Acts as a wildcard standing in for every column",
+        "Sorts the output",
+        "Limits the result to the first row"
+      ],
+      "correct": 1,
+      "explanation": "The asterisk is a wildcard: a symbol used as a substitute for other characters or commands. Here it means every column."
+    },
+    {
+      "type": "matching",
+      "category": "Matching",
+      "question": "Match each comparison operator to its meaning (Table 7.6).",
+      "pairs": [
+        { "left": "=", "right": "Equal to" },
+        { "left": "<", "right": "Less than" },
+        { "left": ">=", "right": "Greater than or equal to" },
+        { "left": "<> or !=", "right": "Not equal to" }
+      ],
+      "explanation": "SQL accepts both <> and != for \"not equal\"."
+    },
+    {
+      "type": "matching",
+      "category": "Matching",
+      "question": "Match each special operator to what it tests.",
+      "pairs": [
+        { "left": "BETWEEN … AND …", "right": "Whether a value falls within an inclusive range" },
+        { "left": "IN", "right": "Whether a value appears in a given list" },
+        { "left": "LIKE", "right": "Whether text matches a pattern" },
+        { "left": "IS NULL", "right": "Whether a value is absent altogether" }
+      ],
+      "explanation": "These four are the special operators highlighted in the lecture. Note that a null is never found by = — it needs IS NULL."
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "Why does `WHERE returned_on = NULL` never match anything?",
+      "options": [
+        "Because NULL must be written in lowercase",
+        "Because null is the absence of a value, so equality can't be tested — you need IS NULL",
+        "Because = only works on numbers",
+        "Because the column has to be indexed first"
+      ],
+      "correct": 1,
+      "explanation": "Null means \"no value here\", so comparing it with = yields neither true nor false. IS NULL is the test."
+    },
+    {
+      "type": "fill_blank",
+      "category": "Fill in the Blank",
+      "question": "The three logical operators SQL uses to combine multiple conditions in a query are AND, OR and ______.",
+      "answers": ["not"],
+      "explanation": "AND, OR and NOT."
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "The lecture calls old-style joins — writing `WHERE table1.pk = table2.fk` instead of a JOIN clause — \"generally not recommended\" because they:",
+      "options": [
+        "Return the wrong answer",
+        "Make complex queries harder to maintain and are susceptible to undetected errors",
+        "Are not supported by any modern DBMS",
+        "Cannot be used with WHERE at all"
+      ],
+      "correct": 1,
+      "explanation": "They still work, but the join condition gets mixed in with the row filters, which is easy to get wrong without noticing."
+    },
+    {
+      "type": "matching",
+      "category": "Matching",
+      "question": "Match each join to what it returns.",
+      "pairs": [
+        { "left": "Inner join", "right": "Only the rows from both tables that match on the common value" },
+        { "left": "Outer join", "right": "The matched rows, plus unmatched rows from one table or the other" },
+        { "left": "Natural join", "right": "Rows matching on identically named columns, with duplicate columns eliminated" },
+        { "left": "Recursive join", "right": "A join of a table to itself" }
+      ],
+      "explanation": "Recursive joins are unary; every other join is binary."
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "How does a NATURAL JOIN decide which columns to join on?",
+      "options": [
+        "By the order the columns are declared",
+        "By finding attributes with identical names and compatible data types in both tables",
+        "By using the first column of each table",
+        "By reading the foreign key constraints only"
+      ],
+      "correct": 1,
+      "explanation": "It looks for identically named, type-compatible columns. If there are none, it returns the relational product of the tables — usually not what you wanted."
+    },
+    {
+      "type": "tf",
+      "category": "True / False",
+      "question": "A natural join eliminates the duplicate common column from its result.",
+      "correct": true,
+      "explanation": "It returns rows with matching values in the matching columns and eliminates the duplicate column."
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "When would you use JOIN … ON rather than JOIN … USING?",
+      "options": [
+        "When the tables have no common attribute names",
+        "When you want a faster query",
+        "When there are more than two tables",
+        "When the join column is a primary key"
+      ],
+      "correct": 0,
+      "explanation": "JOIN USING needs a column of the same name in both tables. JOIN ON lets you spell out any join condition, so it handles differing names."
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "The ANSI standard defines three types of outer join. They are:",
+      "options": ["Inner, natural and cross", "Left, right and full", "Upper, lower and middle", "Simple, composite and recursive"],
+      "correct": 1,
+      "explanation": "Left, right and full outer joins."
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "The lecture's example of a recursive join is \"Sabrina (9) reports to Sarah (1)\". What makes this recursive?",
+      "options": [
+        "It joins three tables at once",
+        "It joins a table to itself, because both people live in the same table",
+        "It repeats until no rows remain",
+        "It uses a subquery"
+      ],
+      "correct": 1,
+      "explanation": "Both the worker and the manager are rows in the same table, so the table is joined to itself — with table aliases to tell the two copies apart."
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "What is the practical benefit of giving a table an alias in a query?",
+      "options": [
+        "It permanently renames the table",
+        "It identifies the source table for each column and makes the query more maintainable",
+        "It is required by ANSI SQL for every query",
+        "It removes duplicate rows"
+      ],
+      "correct": 1,
+      "explanation": "An alias identifies which table data came from and keeps long queries readable — and it is essential for a self-join."
+    },
+    {
+      "type": "matching",
+      "category": "Matching",
+      "question": "Match each aggregate function to what it computes.",
+      "pairs": [
+        { "left": "COUNT", "right": "How many rows there are" },
+        { "left": "SUM", "right": "The total of a numeric column" },
+        { "left": "AVG", "right": "The arithmetic mean of a numeric column" },
+        { "left": "MIN", "right": "The smallest value" },
+        { "left": "MAX", "right": "The largest value" }
+      ],
+      "explanation": "An aggregate takes a collection of rows and reduces it to a single row."
+    },
+    {
+      "type": "tf",
+      "category": "True / False",
+      "question": "An aggregate query takes a collection of rows and reduces it to a single row.",
+      "correct": true,
+      "explanation": "That is the lecture's definition. Add GROUP BY and you get one row per group instead."
+    },
+    {
+      "type": "matching",
+      "category": "Matching",
+      "question": "Match each letter of CRUD to the SQL command that performs it.",
+      "pairs": [
+        { "left": "Create", "right": "INSERT — adds new rows" },
+        { "left": "Read", "right": "SELECT — reads and outputs rows" },
+        { "left": "Update", "right": "UPDATE — modifies existing rows" },
+        { "left": "Delete", "right": "DELETE — gets rid of rows" }
+      ],
+      "explanation": "The lecture's warning is worth memorizing: always use WHERE with UPDATE to specify which rows, and with DELETE to limit the damage."
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "What happens if you run `UPDATE gadget SET daily_fee = 5;` with no WHERE clause?",
+      "options": [
+        "Nothing — SQL rejects an UPDATE without WHERE",
+        "Only the first row changes",
+        "Every row in the table is changed",
+        "A new row is added"
+      ],
+      "correct": 2,
+      "explanation": "Every row. This is exactly why the lecture says to always use WHERE with UPDATE and DELETE."
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "Which command restores the database to its previous condition, undoing uncommitted changes?",
+      "options": ["RESTORE", "ROLLBACK", "UNDO", "REVERT"],
+      "correct": 1,
+      "explanation": "ROLLBACK. COMMIT is its counterpart — it saves the changes."
+    },
+    {
+      "type": "fill_blank",
+      "category": "Fill in the Blank",
+      "question": "The ______ command saves table changes permanently.",
+      "answers": ["commit"],
+      "explanation": "COMMIT [WORK]. Until you commit, ROLLBACK can still undo the work."
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "Which INSERT form adds many rows at once by drawing them from another table?",
+      "options": [
+        "INSERT INTO target VALUES (…), (…), (…)",
+        "INSERT INTO target [(columns)] SELECT columns FROM source",
+        "INSERT MANY INTO target FROM source",
+        "COPY source TO target"
+      ],
+      "correct": 1,
+      "explanation": "INSERT with a SELECT subquery uses another table as the source of the rows."
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "Which list contains only basic ANSI data types named in the lecture?",
+      "options": [
+        "NUMBER, NUMERIC, INTEGER, CHAR, VARCHAR, DATE",
+        "STRING, FLOAT64, TIMESTAMP, BLOB, ENUM",
+        "INT, TEXT, BOOL, JSON, ARRAY",
+        "SHORT, LONG, DOUBLE, MEMO, CURRENCY"
+      ],
+      "correct": 0,
+      "explanation": "NUMBER, NUMERIC, INTEGER, CHAR, VARCHAR and DATE — supported by all vendors, though in different ways."
+    },
+    {
+      "type": "tf",
+      "category": "True / False",
+      "question": "Because dates are stored as a number of days, it is possible to do date arithmetic inside a query.",
+      "correct": true,
+      "explanation": "Yes — though the lecture warns that comparison operators on dates are often more software-specific than other SQL procedures."
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "In a cascading ORDER BY — last name, then first name, then middle initial — what does the second column control?",
+      "options": [
+        "Nothing; only the first column has any effect",
+        "The order within groups of rows that tie on the first column",
+        "The order of the columns in the output",
+        "Which rows are excluded"
+      ],
+      "correct": 1,
+      "explanation": "Each subsequent column breaks ties left over from the previous one."
+    },
+    {
+      "type": "mc",
+      "category": "Multiple Choice",
+      "question": "Which keyword sorts an ORDER BY column from largest to smallest?",
+      "options": ["ASC", "DESC", "REVERSE", "DOWN"],
+      "correct": 1,
+      "explanation": "DESC. ASC is ascending, and is the default when you write neither."
+    },
+
+    {
+      "type": "sql",
+      "category": "SQL Writing",
+      "question": "Write a SELECT statement that pulls all of the rows from a single field called surname in the table steward.",
+      "tables": ["steward"],
+      "hint": "One column, no filter.",
+      "solution": "SELECT surname\nFROM steward;",
+      "expectedRows": 12,
+      "explanation": "Naming one column in the column list returns just that column, for every row."
+    },
+    {
+      "type": "sql",
+      "category": "SQL Writing",
+      "question": "Write a SELECT statement that pulls all of the rows from all of the fields in the table gadget.",
+      "tables": ["gadget"],
+      "hint": "The wildcard stands in for every column.",
+      "solution": "SELECT *\nFROM gadget;",
+      "expectedRows": 45,
+      "explanation": "SELECT * returns every column of every row."
+    },
+    {
+      "type": "sql",
+      "category": "SQL Writing",
+      "question": "List the gadget_title and replacement_cost of every gadget whose replacement_cost is greater than 500.",
+      "tables": ["gadget"],
+      "hint": "WHERE with a comparison operator.",
+      "solution": "SELECT gadget_title, replacement_cost\nFROM gadget\nWHERE replacement_cost > 500;",
+      "expectedRows": 8,
+      "explanation": "WHERE adds a conditional restriction that limits the rows returned."
+    },
+    {
+      "type": "sql",
+      "category": "SQL Writing",
+      "question": "List gadget_title and daily_fee for every gadget, most expensive first. Where two gadgets share the same daily_fee, order those by gadget_title.",
+      "tables": ["gadget"],
+      "hint": "A cascading ORDER BY: the second column breaks ties left by the first.",
+      "solution": "SELECT gadget_title, daily_fee\nFROM gadget\nORDER BY daily_fee DESC, gadget_title;",
+      "orderMatters": true,
+      "expectedRows": 45,
+      "explanation": "DESC reverses the first sort key only; gadget_title stays ascending, which is the default."
+    },
+    {
+      "type": "sql",
+      "category": "SQL Writing",
+      "question": "List every distinct power_source found in the gadget table, in alphabetical order.",
+      "tables": ["gadget"],
+      "hint": "The result should have no repeats.",
+      "solution": "SELECT DISTINCT power_source\nFROM gadget\nORDER BY power_source;",
+      "orderMatters": true,
+      "expectedRows": 4,
+      "explanation": "DISTINCT collapses the 45 rows down to the four values that actually occur."
+    },
+    {
+      "type": "sql",
+      "category": "SQL Writing",
+      "question": "List the gadget_title of every gadget with the word SAW anywhere in the title.",
+      "tables": ["gadget"],
+      "hint": "LIKE with % on both sides. The % wildcard stands for any run of characters.",
+      "solution": "SELECT gadget_title\nFROM gadget\nWHERE gadget_title LIKE '%SAW%';",
+      "expectedRows": 9,
+      "explanation": "LIKE '%SAW%' matches the word anywhere in the string. Note that it also catches Jigsaw and Chainsaw, where \"saw\" is inside a longer word."
+    },
+    {
+      "type": "sql",
+      "category": "SQL Writing",
+      "question": "List the locality_name values from the locality table that do NOT end with a vowel (a, e, i, o, u). Your result cannot contain duplicates. Sort by locality_name.",
+      "tables": ["locality"],
+      "hint": "Either test the last character with right(name, 1), or chain NOT LIKE '%a' … for each vowel. Careful: y is not a vowel here.",
+      "solution": "SELECT DISTINCT locality_name\nFROM locality\nWHERE right(locality_name, 1) NOT IN ('a', 'e', 'i', 'o', 'u')\nORDER BY locality_name;",
+      "orderMatters": true,
+      "expectedRows": 12,
+      "explanation": "Both approaches work. The trap is names ending in y — Alder Bay and Bellamy both belong in the result, because y is not on the vowel list."
+    },
+    {
+      "type": "sql",
+      "category": "SQL Writing",
+      "question": "List maker_name and home_region for every maker based in Canada or Japan. Use a list operator rather than two OR conditions.",
+      "tables": ["maker"],
+      "hint": "IN takes a parenthesised list of values.",
+      "solution": "SELECT maker_name, home_region\nFROM maker\nWHERE home_region IN ('Canada', 'Japan');",
+      "expectedRows": 3,
+      "explanation": "IN ('Canada','Japan') is shorthand for home_region='Canada' OR home_region='Japan'. Both are correct; IN is easier to read as the list grows."
+    },
+    {
+      "type": "sql",
+      "category": "SQL Writing",
+      "question": "List checkout_id, unit_id and checked_out_on for every loan taken out between '2024-06-01' and '2024-08-31'. Use the BETWEEN…AND… keywords, and the YYYY-MM-DD format shown.",
+      "tables": ["checkout"],
+      "hint": "BETWEEN is inclusive at both ends.",
+      "solution": "SELECT checkout_id, unit_id, checked_out_on\nFROM checkout\nWHERE checked_out_on BETWEEN '2024-06-01' AND '2024-08-31';",
+      "expectedRows": 45,
+      "explanation": "BETWEEN includes both endpoints, so a loan taken out on 1 June or 31 August counts."
+    },
+    {
+      "type": "sql",
+      "category": "SQL Writing",
+      "question": "The returned_on column is empty for any tool still out on loan. List checkout_id, unit_id and due_on for every loan that has not yet come back.",
+      "tables": ["checkout"],
+      "hint": "\"Empty\" here means null — and null needs its own operator.",
+      "solution": "SELECT checkout_id, unit_id, due_on\nFROM checkout\nWHERE returned_on IS NULL;",
+      "expectedRows": 15,
+      "explanation": "IS NULL is the only way to find missing values; returned_on = NULL matches nothing at all."
+    },
+    {
+      "type": "sql",
+      "category": "SQL Writing",
+      "question": "Find the total amount of every ledger_entry whose entry_kind is 'Late fee'. Return a single number.",
+      "tables": ["ledger_entry"],
+      "hint": "An aggregate reduces many rows to one.",
+      "solution": "SELECT sum(amount)\nFROM ledger_entry\nWHERE entry_kind = 'Late fee';",
+      "expectedRows": 1,
+      "explanation": "SUM over the filtered rows. WHERE runs first, so only late fees are added up."
+    },
+    {
+      "type": "sql",
+      "category": "SQL Writing",
+      "question": "How many separate loans has patron_id 34 taken out? Return a single count.",
+      "tables": ["checkout"],
+      "hint": "COUNT(*) counts rows.",
+      "solution": "SELECT count(*)\nFROM checkout\nWHERE patron_id = 34;",
+      "expectedRows": 1,
+      "explanation": "count(*) counts the rows that survive the WHERE clause."
+    },
+    {
+      "type": "sql",
+      "category": "SQL Writing",
+      "question": "How many loans were taken out in the month of July, across any year? Use the MONTH(date) function, which returns the numeric month of the date passed into it, against checked_out_on.",
+      "tables": ["checkout"],
+      "hint": "MONTH() turns a date into a number from 1 to 12.",
+      "solution": "SELECT count(*)\nFROM checkout\nWHERE month(checked_out_on) = 7;",
+      "expectedRows": 1,
+      "explanation": "Applying a function to the column lets you filter on part of a date without knowing the year."
+    },
+    {
+      "type": "sql",
+      "category": "SQL Writing",
+      "question": "For every patron, output surname and given_name, plus a derived column that joins given_name and surname with a single space between them. Use the concat(field1, field2, …) function and alias the derived column as full_name. Sort by surname, then by given_name.",
+      "tables": ["patron"],
+      "hint": "concat() takes as many arguments as you give it, so the space can be one of them. Name the derived column with AS.",
+      "solution": "SELECT surname,\n       given_name,\n       concat(given_name, ' ', surname) AS full_name\nFROM patron\nORDER BY surname, given_name;",
+      "orderMatters": true,
+      "requireColumns": ["full_name"],
+      "expectedRows": 60,
+      "explanation": "A derived column is computed rather than stored. The AS alias gives it a usable name in the result — without it the header is the whole expression."
+    },
+    {
+      "type": "sql",
+      "category": "SQL Writing",
+      "question": "Return hourly_rate, surname, branch_label and locality_name for every steward, sorted by hourly_rate from largest to smallest, with ties broken by surname. branch_label is in the branch table and locality_name is in the locality table; the common keys are branch_id and locality_id.",
+      "tables": ["steward", "branch", "locality"],
+      "hint": "Two joins in a row. Because the key names match on both sides, JOIN … USING (key) works.",
+      "solution": "SELECT s.hourly_rate, s.surname, b.branch_label, l.locality_name\nFROM steward s\nINNER JOIN branch b USING (branch_id)\nINNER JOIN locality l USING (locality_id)\nORDER BY s.hourly_rate DESC, s.surname;",
+      "orderMatters": true,
+      "expectedRows": 12,
+      "explanation": "Joins chain: steward reaches branch by branch_id, and branch reaches locality by locality_id. A steward has no locality_id of its own — you have to hop through branch."
+    },
+    {
+      "type": "sql",
+      "category": "SQL Writing",
+      "question": "List the gadget_title of every gadget in the group whose group_label is 'Plumbing'. You must filter on the actual group label, not the id. This needs three tables — gadget, gadget_group_map and gadget_group — joined on gadget_id and group_id.",
+      "tables": ["gadget", "gadget_group_map", "gadget_group"],
+      "hint": "gadget_group_map is the bridge table resolving the M:N between gadgets and groups. You have to pass through it.",
+      "solution": "SELECT gadget_title\nFROM gadget\nINNER JOIN gadget_group_map USING (gadget_id)\nINNER JOIN gadget_group USING (group_id)\nWHERE gadget_group.group_label = 'Plumbing';",
+      "expectedRows": 6,
+      "explanation": "This is the classic three-table pattern for an M:N relationship: the two entity tables plus the bridge between them. There is no direct link from gadget to gadget_group."
+    },
+    {
+      "type": "sql",
+      "category": "SQL Writing",
+      "question": "List the unique given_name and surname of every patron who took out a loan between '2024-06-01' and '2024-08-31'. Sort by surname, then given_name. Use the DISTINCT keyword to eliminate duplicates. The common key is patron_id.",
+      "tables": ["patron", "checkout"],
+      "hint": "A patron who borrowed four times would otherwise appear four times.",
+      "solution": "SELECT DISTINCT given_name, surname\nFROM checkout\nINNER JOIN patron USING (patron_id)\nWHERE checked_out_on BETWEEN '2024-06-01' AND '2024-08-31'\nORDER BY surname, given_name;",
+      "orderMatters": true,
+      "expectedRows": 30,
+      "explanation": "Joining to a table on the many side multiplies rows. DISTINCT collapses them back down to one per patron."
+    },
+    {
+      "type": "sql",
+      "category": "SQL Writing",
+      "question": "List the surname of every patron together with the score_pct of any safety course result above 75. Sort by the last three characters of the surname; where two rows tie on those three characters, sort by result_id.",
+      "tables": ["patron", "course_result"],
+      "hint": "right(text, 3) returns the last three characters. You can sort by an expression, not just a column.",
+      "solution": "SELECT p.surname, r.score_pct\nFROM course_result r\nINNER JOIN patron p USING (patron_id)\nWHERE r.score_pct > 75\nORDER BY right(p.surname, 3), r.result_id;",
+      "orderMatters": true,
+      "expectedRows": 62,
+      "explanation": "ORDER BY accepts any expression. The secondary sort on result_id is what makes the order fully determined when several surnames end the same way."
+    },
+    {
+      "type": "sql",
+      "category": "SQL Writing",
+      "question": "Show patron_id and the number of loans for every patron who has taken out 8 or more. Alias the count as loans, and sort by loans descending, then by patron_id.",
+      "tables": ["checkout"],
+      "hint": "Group the rows, then filter the groups.",
+      "solution": "SELECT patron_id, count(*) AS loans\nFROM checkout\nGROUP BY patron_id\nHAVING count(*) >= 8\nORDER BY loans DESC, patron_id;",
+      "orderMatters": true,
+      "requireColumns": ["loans"],
+      "expectedRows": 10,
+      "explanation": "GROUP BY makes one row per patron; HAVING then discards the groups that are too small. The same test in WHERE would be an error, because the groups don't exist yet."
+    },
+    {
+      "type": "sql",
+      "category": "SQL Writing",
+      "question": "Every steward except the director reports to another steward, through supervisor_id. Show each steward's surname alongside their supervisor's surname, using the column names steward and reports_to. Sort by reports_to, then steward.",
+      "tables": ["steward"],
+      "hint": "This is a recursive join — the table joined to itself. You'll need two different aliases for the same table.",
+      "solution": "SELECT worker.surname AS steward,\n       boss.surname   AS reports_to\nFROM steward worker\nINNER JOIN steward boss ON worker.supervisor_id = boss.steward_id\nORDER BY reports_to, steward;",
+      "orderMatters": true,
+      "requireColumns": ["steward", "reports_to"],
+      "expectedRows": 11,
+      "explanation": "Aliases are what make a self-join possible: they give the query two distinguishable copies of one table. The director drops out because their supervisor_id is null and an inner join discards unmatched rows."
+    },
+    {
+      "type": "sql",
+      "category": "SQL Writing",
+      "question": "Find the patrons who have never taken out a loan. Return patron_id and surname, sorted by patron_id.",
+      "tables": ["patron", "checkout"],
+      "hint": "An inner join can only show you patrons who DO appear in checkout. You need a join that keeps the unmatched rows — or a subquery.",
+      "solution": "SELECT p.patron_id, p.surname\nFROM patron p\nLEFT JOIN checkout c ON c.patron_id = p.patron_id\nWHERE c.checkout_id IS NULL\nORDER BY p.patron_id;",
+      "orderMatters": true,
+      "expectedRows": 6,
+      "explanation": "The LEFT JOIN keeps every patron; those with no matching loan get nulls in the checkout columns, and testing one of those for IS NULL isolates them. `WHERE patron_id NOT IN (SELECT patron_id FROM checkout)` returns the same rows."
+    },
+    {
+      "type": "sql",
+      "category": "SQL Writing",
+      "question": "Show power_source, how many gadgets use it (aliased as how_many), and the average daily_fee rounded to two decimal places (aliased as avg_fee). Sort by power_source.",
+      "tables": ["gadget"],
+      "hint": "Two aggregates over the same groups. round(value, 2) does the rounding.",
+      "solution": "SELECT power_source,\n       count(*) AS how_many,\n       round(avg(daily_fee), 2) AS avg_fee\nFROM gadget\nGROUP BY power_source\nORDER BY power_source;",
+      "orderMatters": true,
+      "requireColumns": ["how_many", "avg_fee"],
+      "expectedRows": 4,
+      "explanation": "Any column in the SELECT list that isn't aggregated has to appear in the GROUP BY — here that's power_source."
+    },
+    {
+      "type": "sql",
+      "category": "SQL Writing",
+      "question": "Add a new row to gadget_group with group_id 12 and group_label 'Concrete and Masonry'.",
+      "tables": ["gadget_group"],
+      "hint": "INSERT INTO tablename (columns) VALUES (…);",
+      "solution": "INSERT INTO gadget_group (group_id, group_label)\nVALUES (12, 'Concrete and Masonry');",
+      "verify": "SELECT group_id, group_label FROM gadget_group ORDER BY group_id",
+      "explanation": "Naming the columns before VALUES is the safer form — it keeps working if the table later gains a column. This question is graded on the data afterwards, on a throwaway copy of the database."
+    },
+    {
+      "type": "sql",
+      "category": "SQL Writing",
+      "question": "Every gas-powered tool is going up in price. Raise daily_fee by exactly 2.00 for every gadget whose power_source is 'Gas', and leave every other gadget alone.",
+      "tables": ["gadget"],
+      "hint": "UPDATE tablename SET column = expression WHERE …; The new value can be built from the old one.",
+      "solution": "UPDATE gadget\nSET daily_fee = daily_fee + 2.00\nWHERE power_source = 'Gas';",
+      "verify": "SELECT gadget_id, power_source, daily_fee FROM gadget ORDER BY gadget_id",
+      "explanation": "SET daily_fee = daily_fee + 2.00 reads the old value and writes the new one. Leaving off the WHERE would raise the price of all 45 gadgets — the mistake the lecture warns about."
+    },
+    {
+      "type": "sql",
+      "category": "SQL Writing",
+      "question": "Remove every course_result row whose score_pct is below 60.",
+      "tables": ["course_result"],
+      "hint": "DELETE FROM tablename WHERE …;",
+      "solution": "DELETE FROM course_result\nWHERE score_pct < 60;",
+      "verify": "SELECT count(*), min(score_pct) FROM course_result",
+      "explanation": "DELETE removes rows but leaves the table itself in place — that is the difference between DELETE (DML) and DROP TABLE (DDL)."
+    },
+    {
+      "type": "short_answer",
+      "category": "SQL Writing",
+      "question": "Write a CREATE TABLE statement for a table called workshop with: a workshop_id integer primary key; a workshop_name that is text and may not be null; a seat_limit integer that defaults to 12; and a branch_id integer that is a foreign key referencing branch(branch_id).",
+      "modelAnswer": "CREATE TABLE workshop (\n  workshop_id   INTEGER,\n  workshop_name VARCHAR(80) NOT NULL,\n  seat_limit    INTEGER DEFAULT 12,\n  branch_id     INTEGER,\n  PRIMARY KEY (workshop_id),\n  FOREIGN KEY (branch_id) REFERENCES branch(branch_id)\n);",
+      "rubric": [
+        "Used CREATE TABLE with the table name and a parenthesised column list",
+        "Gave workshop_name a NOT NULL constraint",
+        "Gave seat_limit a DEFAULT of 12",
+        "Declared workshop_id as the PRIMARY KEY",
+        "Declared branch_id as a FOREIGN KEY referencing branch(branch_id)"
+      ],
+      "explanation": "Constraints can be written inline on the column or as separate clauses at the end — both are accepted. What matters is that all four constraints are present."
+    },
+    {
+      "type": "short_answer",
+      "category": "SQL Writing",
+      "question": "In your own words: what is the difference between an INNER JOIN and a LEFT OUTER JOIN, and when would you reach for the outer one?",
+      "modelAnswer": "An inner join returns only the rows that match on the common value in both tables. Anything unmatched on either side disappears from the result.\n\nA left outer join returns all of those matched rows, plus every remaining row from the left-hand table, filling the right-hand columns with nulls where there was no match.\n\nYou reach for the outer join when the absence of a match is itself the answer — listing patrons who have never borrowed anything, or branches that hold no units. With an inner join those rows would simply vanish, and you would never see them.",
+      "rubric": [
+        "Said an inner join keeps only matching rows",
+        "Said a left outer join also keeps the unmatched rows from the left table",
+        "Mentioned that the missing side comes back as nulls",
+        "Gave a case where you need the outer join — finding rows with no match"
+      ],
+      "explanation": "The giveaway phrasing in a question is \"never\", \"no\", or \"without any\" — those all mean you need to keep unmatched rows."
+    },
+    {
+      "type": "short_answer",
+      "category": "SQL Writing",
+      "question": "A classmate writes: SELECT branch_id, count(*) FROM unit WHERE count(*) > 20 GROUP BY branch_id; It fails. Explain why, and write the corrected statement.",
+      "modelAnswer": "WHERE filters individual rows, and it runs before the rows have been collected into groups — so at that point count(*) does not exist yet and cannot be tested. Aggregates have to be filtered with HAVING, which runs after GROUP BY has formed the groups.\n\nCorrected:\n\nSELECT branch_id, count(*)\nFROM unit\nGROUP BY branch_id\nHAVING count(*) > 20;",
+      "rubric": [
+        "Explained that WHERE filters rows before grouping, so the aggregate does not exist yet",
+        "Said the aggregate condition belongs in HAVING instead",
+        "Wrote a corrected statement with GROUP BY before HAVING",
+        "Kept the clauses in the right order: SELECT, FROM, GROUP BY, HAVING"
+      ],
+      "explanation": "Clause order is fixed: SELECT, FROM, WHERE, GROUP BY, HAVING, ORDER BY — and that order is close to the order in which they take effect."
+    }
+  ]
+}

@@ -1,0 +1,420 @@
+{
+  "name": "Part 3 · Normalization & Dependency Sets",
+  "questions": [
+    {
+      "type": "fill_blank",
+      "category": "Normalization",
+      "question": "______ is the process of evaluating and correcting table structures to minimize data redundancies.",
+      "answers": ["normalization"],
+      "explanation": "Normalization. Reducing redundancy is what reduces the update, insertion and deletion anomalies."
+    },
+    {
+      "type": "mc",
+      "category": "Normalization",
+      "question": "Normalization assigns attributes to tables based on:",
+      "options": ["Alphabetical order", "Determination", "How often they are queried", "Their data type"],
+      "correct": 1,
+      "explanation": "Determination — that is, functional dependence. Attributes travel to the table whose key determines them."
+    },
+    {
+      "type": "matching",
+      "category": "Normalization",
+      "question": "Match each normal form to its defining characteristic (Table 6.2).",
+      "pairs": [
+        { "left": "First normal form (1NF)", "right": "Table format, no repeating groups, and the primary key is identified" },
+        { "left": "Second normal form (2NF)", "right": "In 1NF and no partial dependencies" },
+        { "left": "Third normal form (3NF)", "right": "In 2NF and no transitive dependencies" },
+        { "left": "Boyce-Codd normal form (BCNF)", "right": "Every determinant is a candidate key" },
+        { "left": "Fourth normal form (4NF)", "right": "In 3NF and no independent multivalued dependencies" }
+      ],
+      "explanation": "Each form builds on the one before it. Memorizing \"1NF, then kill partial, then kill transitive\" gets you through most of Part 3."
+    },
+    {
+      "type": "mc",
+      "category": "Normalization",
+      "question": "Which requirement is NOT part of 1NF?",
+      "options": [
+        "All key attributes are defined",
+        "There are no repeating groups in the table",
+        "All attributes are dependent on the primary key",
+        "There are no transitive dependencies"
+      ],
+      "correct": 3,
+      "explanation": "Eliminating transitive dependencies is 3NF. 1NF is about tabular format, no repeating groups, and a defined primary key."
+    },
+    {
+      "type": "tf",
+      "category": "True / False",
+      "question": "All valid relational tables satisfy the 1NF requirements.",
+      "correct": true,
+      "explanation": "The lecture states this outright. If it isn't in 1NF, it isn't really a relational table."
+    },
+    {
+      "type": "tf",
+      "category": "True / False",
+      "question": "A table can be in 2NF while still containing a transitive dependency.",
+      "correct": true,
+      "explanation": "2NF only removes partial dependencies. Removing transitive dependencies is what takes you to 3NF."
+    },
+    {
+      "type": "tf",
+      "category": "True / False",
+      "question": "A table in 3NF is automatically also in 2NF and 1NF.",
+      "correct": true,
+      "explanation": "The forms are cumulative — 3NF is defined as 2NF plus no transitive dependencies."
+    },
+    {
+      "type": "fill_blank",
+      "category": "Fill in the Blank",
+      "question": "Going from 1NF to 2NF removes ______ dependencies.",
+      "answers": ["partial"],
+      "explanation": "Partial dependencies — where a non-key attribute depends on only part of a composite primary key."
+    },
+    {
+      "type": "fill_blank",
+      "category": "Fill in the Blank",
+      "question": "Going from 2NF to 3NF removes ______ dependencies.",
+      "answers": ["transitive"],
+      "explanation": "Transitive dependencies — where a non-key attribute depends on another non-key attribute."
+    },
+    {
+      "type": "mc",
+      "category": "Normalization",
+      "question": "\"Attribute B is fully functionally dependent on attribute A if each value of A determines one and only one value of B.\" This defines:",
+      "options": ["Referential integrity", "Functional dependence", "Entity integrity", "A repeating group"],
+      "correct": 1,
+      "explanation": "Functional dependence. Written PROJ_NUM → PROJ_NAME and read \"PROJ_NUM functionally determines PROJ_NAME\"."
+    },
+    {
+      "type": "matching",
+      "category": "Dependency Analysis",
+      "question": "In the dependency BOOKING_REF → BOOKING_DATE, match each attribute to its role.",
+      "pairs": [
+        { "left": "BOOKING_REF", "right": "The determinant attribute" },
+        { "left": "BOOKING_DATE", "right": "The dependent attribute" }
+      ],
+      "explanation": "The determinant is on the left of the arrow and does the determining; the dependent is on the right."
+    },
+    {
+      "type": "mc",
+      "category": "Normalization",
+      "question": "The generalized definition of functional dependence says attribute A determines attribute B if:",
+      "options": [
+        "A and B are in the same table",
+        "All rows in the table that agree in value for A also agree in value for B",
+        "A is the primary key",
+        "B is never null"
+      ],
+      "correct": 1,
+      "explanation": "Rows agreeing on A must agree on B. This is the version you can actually test against sample data."
+    },
+    {
+      "type": "mc",
+      "category": "Normalization",
+      "question": "If attribute B is functionally dependent on composite key A, but NOT on any subset of A, then B is:",
+      "options": [
+        "Partially dependent on A",
+        "Fully functionally dependent on A",
+        "Transitively dependent on A",
+        "Independent of A"
+      ],
+      "correct": 1,
+      "explanation": "Full functional dependence on a composite key means you need the whole key, not a piece of it."
+    },
+    {
+      "type": "fill_blank",
+      "category": "Fill in the Blank",
+      "question": "A functional dependence in which the determinant is only PART of the primary key is called a ______ dependency.",
+      "answers": ["partial"],
+      "explanation": "A partial dependency. It can only arise when the primary key is composite — a single-column key has no proper parts."
+    },
+    {
+      "type": "tf",
+      "category": "True / False",
+      "question": "A table whose primary key is a single attribute can still contain a partial dependency.",
+      "correct": false,
+      "explanation": "A partial dependency needs a determinant that is part of the key. With a one-column key there is no part to depend on, so any 1NF table with a simple key is automatically in 2NF."
+    },
+    {
+      "type": "fill_blank",
+      "category": "Fill in the Blank",
+      "question": "A dependency in which an attribute depends on another NON-key attribute is called a ______ dependency.",
+      "answers": ["transitive"],
+      "explanation": "A transitive dependency. It occurs only when functional dependence exists among nonprime attributes."
+    },
+    {
+      "type": "mc",
+      "category": "Normalization",
+      "question": "The lecture notes that transitive dependencies are harder to spot than partial ones. Why?",
+      "options": [
+        "They involve the primary key, which is often hidden",
+        "They occur among nonprime attributes, so neither side of the dependency is part of the key",
+        "They only appear in tables with more than twenty columns",
+        "They can only be detected by running a query"
+      ],
+      "correct": 1,
+      "explanation": "With a partial dependency you can scan the parts of the key. A transitive dependency hides between two ordinary attributes, so you have to reason about the data's meaning."
+    },
+    {
+      "type": "mc",
+      "category": "Normalization",
+      "question": "Consider CATERING_ORDER (booking_ref, booking_date, client_no, client_name, client_city, dish_code, dish_name, dish_style, dish_price, portions), where the primary key is booking_ref + dish_code.\n\nWhat kind of dependency is dish_code → dish_name?",
+      "options": [
+        "A full functional dependency on the primary key",
+        "A partial dependency",
+        "A transitive dependency",
+        "No dependency at all"
+      ],
+      "correct": 1,
+      "explanation": "dish_code is only half of the composite key, so anything it determines on its own is partially dependent."
+    },
+    {
+      "type": "mc",
+      "category": "Normalization",
+      "question": "In CATERING_ORDER (PK = booking_ref + dish_code), what kind of dependency is (booking_ref, dish_code) → portions?",
+      "options": [
+        "A partial dependency",
+        "A transitive dependency",
+        "A full functional dependency on the whole primary key",
+        "A multivalued dependency"
+      ],
+      "correct": 2,
+      "explanation": "How many portions of a dish were ordered depends on which dish AND which booking — you need the whole key, so it's fully functionally dependent and stays put."
+    },
+    {
+      "type": "mc",
+      "category": "Normalization",
+      "question": "In CATERING_ORDER (PK = booking_ref + dish_code), client_no depends on booking_ref, and client_name depends on client_no. What is client_name's relationship to booking_ref?",
+      "options": [
+        "A transitive dependency",
+        "A partial dependency on dish_code",
+        "A full functional dependency on the composite key",
+        "Not a dependency"
+      ],
+      "correct": 0,
+      "explanation": "booking_ref → client_no → client_name. Because client_no is not a key attribute, that chain is a transitive dependency."
+    },
+    {
+      "type": "mc",
+      "category": "Normalization",
+      "question": "In CATERING_ORDER, which set of attributes should move into a DISH table when you convert to 2NF?",
+      "options": [
+        "dish_code, dish_name, dish_style, dish_price",
+        "dish_code, portions",
+        "booking_ref, dish_code, portions",
+        "dish_name only"
+      ],
+      "correct": 0,
+      "explanation": "Everything determined by dish_code alone travels with it, and dish_code becomes the new table's primary key. portions stays behind — it needs both halves of the key."
+    },
+    {
+      "type": "mc",
+      "category": "Normalization",
+      "question": "After splitting CATERING_ORDER into 2NF, one table is BOOKING (booking_ref, booking_date, client_no, client_name, client_city). Why is this still not in 3NF?",
+      "options": [
+        "It has a repeating group",
+        "client_name and client_city depend on client_no, which is not the primary key",
+        "booking_ref is not unique",
+        "It has too many columns"
+      ],
+      "correct": 1,
+      "explanation": "A transitive dependency. Splitting out CLIENT (client_no, client_name, client_city) and leaving client_no behind as a foreign key gets you to 3NF."
+    },
+    {
+      "type": "mc",
+      "category": "Normalization",
+      "question": "SEMINAR_ROSTER (seminar_code, seminar_title, room_code, room_capacity, attendee_id, attendee_name, grade) has primary key seminar_code + attendee_id. Which is a TRANSITIVE dependency?",
+      "options": [
+        "seminar_code → seminar_title",
+        "attendee_id → attendee_name",
+        "room_code → room_capacity",
+        "(seminar_code, attendee_id) → grade"
+      ],
+      "correct": 2,
+      "explanation": "room_code is not part of the key, and it determines room_capacity — a dependency between two nonprime attributes. The first two options are partial dependencies; the last is a proper full dependency."
+    },
+    {
+      "type": "mc",
+      "category": "Normalization",
+      "question": "In SEMINAR_ROSTER (PK = seminar_code + attendee_id), which attribute is fully functionally dependent on the whole key?",
+      "options": ["seminar_title", "attendee_name", "room_capacity", "grade"],
+      "correct": 3,
+      "explanation": "A grade belongs to one attendee in one seminar, so it needs both halves. Everything else depends on just one part, or on a nonprime attribute."
+    },
+    {
+      "type": "mc",
+      "category": "Normalization",
+      "question": "A repeating group in a table looks like:",
+      "options": [
+        "Several columns holding the same kind of fact — phone1, phone2, phone3 — or several values crammed into one cell",
+        "Two rows with the same primary key",
+        "A foreign key that appears twice",
+        "A column with the same value in every row"
+      ],
+      "correct": 0,
+      "explanation": "Either shape breaks 1NF. Both are fixed the same way: move the repeating fact into its own table, one row per value."
+    },
+    {
+      "type": "mc",
+      "category": "Normalization",
+      "question": "A TRAIL_PERMIT table stores a column trail_codes containing values like 'RID-2, LKE-7, SUM-1'. Which normal form does this violate, and how is it fixed?",
+      "options": [
+        "1NF — split the repeating group into its own table, one row per trail",
+        "2NF — remove the partial dependency",
+        "3NF — remove the transitive dependency",
+        "It violates nothing; the values are comma-separated for efficiency"
+      ],
+      "correct": 0,
+      "explanation": "Multiple values in one cell is a repeating group, which breaks 1NF and the atomic attribute rule. It is the same mistake as stuffing several key values into one foreign key field."
+    },
+    {
+      "type": "fill_blank",
+      "category": "Fill in the Blank",
+      "question": "______ deliberately produces a lower normal form, increasing performance at the cost of greater data redundancy.",
+      "answers": ["denormalization"],
+      "explanation": "Denormalization. It is a considered trade-off, not an accident."
+    },
+    {
+      "type": "mc",
+      "category": "Normalization",
+      "question": "Why might a designer choose to denormalize?",
+      "options": [
+        "To reduce data redundancy further",
+        "To increase performance, accepting greater redundancy in return",
+        "Because 3NF is not a valid design",
+        "To remove the need for primary keys"
+      ],
+      "correct": 1,
+      "explanation": "More tables mean more I/O operations and more processing logic to join them, so there is a real cost to normalizing."
+    },
+    {
+      "type": "tf",
+      "category": "True / False",
+      "question": "The lecture warns that more tables require more I/O operations and processing logic to join them.",
+      "correct": true,
+      "explanation": "Which is why it also says normalization is important, but only part of the design process."
+    },
+    {
+      "type": "mc",
+      "category": "Normalization",
+      "question": "A table is in 3NF but one of its determinants is not a candidate key. Which normal form does it fail?",
+      "options": ["1NF", "2NF", "BCNF", "It fails none"],
+      "correct": 2,
+      "explanation": "BCNF requires every determinant to be a candidate key. The lecture describes it as a special case of 3NF."
+    },
+    {
+      "type": "matching",
+      "category": "Normalization",
+      "question": "Match each problem to the normal form that fixes it.",
+      "pairs": [
+        { "left": "A cell holding several values at once", "right": "1NF" },
+        { "left": "An attribute determined by half of a composite key", "right": "2NF" },
+        { "left": "An attribute determined by another non-key attribute", "right": "3NF" },
+        { "left": "A determinant that is not a candidate key", "right": "BCNF" }
+      ],
+      "explanation": "Reading a dependency diagram left to right, these are the four faults you're hunting for, in the order you fix them."
+    },
+    {
+      "type": "tf",
+      "category": "True / False",
+      "question": "Normalization is the whole of database design.",
+      "correct": false,
+      "explanation": "The summary is careful here: normalization is important, but only part of the design process."
+    },
+    {
+      "type": "short_answer",
+      "category": "Dependency Analysis",
+      "question": "CATERING_ORDER is in 1NF with the following columns:\n\n  booking_ref, booking_date, client_no, client_name, client_city,\n  dish_code, dish_name, dish_style, dish_price, portions\n\nThe primary key is booking_ref + dish_code.\n\nWrite the complete dependency set for the table as it stands in 1NF — the full dependency on the whole key, every partial dependency, and every transitive dependency.",
+      "modelAnswer": "Full functional dependency on the whole primary key:\n  (booking_ref, dish_code) → portions\n\nPartial dependencies:\n  booking_ref → booking_date, client_no, client_name, client_city\n  dish_code   → dish_name, dish_style, dish_price\n\nTransitive dependency:\n  client_no → client_name, client_city\n\nRead it as: how many portions were ordered needs both halves of the key; everything about the booking follows from booking_ref alone; everything about the dish follows from dish_code alone; and the client's name and city follow from client_no, which is itself just an ordinary attribute of the booking.",
+      "rubric": [
+        "Identified (booking_ref, dish_code) → portions as the only full dependency on the whole key",
+        "Listed booking_ref → booking_date, client_no, client_name, client_city as a partial dependency",
+        "Listed dish_code → dish_name, dish_style, dish_price as a partial dependency",
+        "Identified client_no → client_name, client_city as the transitive dependency"
+      ],
+      "explanation": "Work in this order every time: what needs the whole key, what needs only part of it, and what hangs off a non-key attribute. That ordering is the dependency set."
+    },
+    {
+      "type": "short_answer",
+      "category": "Dependency Analysis",
+      "question": "Continuing with CATERING_ORDER (booking_ref, booking_date, client_no, client_name, client_city, dish_code, dish_name, dish_style, dish_price, portions), primary key booking_ref + dish_code.\n\nWrite the 2NF relational schemas — the tables you get after removing the partial dependencies. Underline or otherwise mark the primary key of each.",
+      "modelAnswer": "BOOKING (booking_ref [PK], booking_date, client_no, client_name, client_city)\n\nDISH (dish_code [PK], dish_name, dish_style, dish_price)\n\nBOOKING_LINE (booking_ref [PK, FK], dish_code [PK, FK], portions)\n\nEach partial dependency became its own table, keyed on its determinant. What remains in BOOKING_LINE is the original composite key plus the one attribute that genuinely needed both halves of it — portions. The two key columns are now foreign keys back to BOOKING and DISH.\n\nThis is 2NF, not yet 3NF: BOOKING still carries the transitive dependency client_no → client_name, client_city.",
+      "rubric": [
+        "Produced three tables",
+        "Keyed BOOKING on booking_ref and DISH on dish_code",
+        "Kept portions in the linking table with the composite key (booking_ref, dish_code)",
+        "Marked the composite key columns as foreign keys as well as the primary key",
+        "Noted that this is still only 2NF because a transitive dependency remains"
+      ],
+      "explanation": "The mechanical rule: each partial dependency's determinant becomes a new table's primary key, and everything it determined goes with it."
+    },
+    {
+      "type": "short_answer",
+      "category": "Dependency Analysis",
+      "question": "Finish the job on CATERING_ORDER. Write the 3NF relational schemas, marking the primary key and any foreign keys in each table.",
+      "modelAnswer": "CLIENT (client_no [PK], client_name, client_city)\n\nBOOKING (booking_ref [PK], booking_date, client_no [FK to CLIENT])\n\nDISH (dish_code [PK], dish_name, dish_style, dish_price)\n\nBOOKING_LINE (booking_ref [PK, FK to BOOKING], dish_code [PK, FK to DISH], portions)\n\nThe move from 2NF to 3NF was the first two tables: the transitive dependency client_no → client_name, client_city came out of BOOKING into its own CLIENT table, and client_no stayed behind in BOOKING as the foreign key linking them.\n\nNow every non-key attribute in every table depends on the key, the whole key, and nothing but the key.",
+      "rubric": [
+        "Produced four tables",
+        "Created CLIENT keyed on client_no, holding client_name and client_city",
+        "Left client_no in BOOKING as a foreign key",
+        "Left DISH and BOOKING_LINE unchanged from 2NF",
+        "Marked primary and foreign keys throughout"
+      ],
+      "explanation": "\"The key, the whole key, and nothing but the key\" is a compact test: nothing but the key catches transitive dependencies, and the whole key catches partial ones."
+    },
+    {
+      "type": "short_answer",
+      "category": "Dependency Analysis",
+      "question": "SEMINAR_ROSTER is in 1NF:\n\n  seminar_code, seminar_title, room_code, room_capacity,\n  attendee_id, attendee_name, attendee_email, grade\n\nThe primary key is seminar_code + attendee_id. Each seminar meets in exactly one room.\n\nWrite the complete dependency set for this table in 1NF.",
+      "modelAnswer": "Full functional dependency on the whole primary key:\n  (seminar_code, attendee_id) → grade\n\nPartial dependencies:\n  seminar_code → seminar_title, room_code, room_capacity\n  attendee_id  → attendee_name, attendee_email\n\nTransitive dependency:\n  room_code → room_capacity\n\nOnly the grade needs both halves of the key: it is one person's mark in one seminar. Room capacity is listed twice above deliberately — it follows from seminar_code by way of room_code, and the room_code → room_capacity link is what makes it transitive.",
+      "rubric": [
+        "Identified (seminar_code, attendee_id) → grade as the only full dependency",
+        "Listed seminar_code → seminar_title, room_code, room_capacity",
+        "Listed attendee_id → attendee_name, attendee_email",
+        "Identified room_code → room_capacity as the transitive dependency"
+      ],
+      "explanation": "Two partial dependencies, one from each half of the composite key, plus one transitive dependency hanging off a nonprime attribute — the same shape as the catering example."
+    },
+    {
+      "type": "short_answer",
+      "category": "Dependency Analysis",
+      "question": "Write the 3NF relational schemas for SEMINAR_ROSTER (seminar_code, seminar_title, room_code, room_capacity, attendee_id, attendee_name, attendee_email, grade), primary key seminar_code + attendee_id, where each seminar meets in exactly one room.",
+      "modelAnswer": "ROOM (room_code [PK], room_capacity)\n\nSEMINAR (seminar_code [PK], seminar_title, room_code [FK to ROOM])\n\nATTENDEE (attendee_id [PK], attendee_name, attendee_email)\n\nENROLLMENT (seminar_code [PK, FK to SEMINAR], attendee_id [PK, FK to ATTENDEE], grade)\n\nThe two partial dependencies became SEMINAR and ATTENDEE; the transitive dependency became ROOM, with room_code left behind in SEMINAR as the foreign key. ENROLLMENT keeps the composite key and the single attribute that needed all of it.\n\nENROLLMENT is a bridge table — the M:N between seminars and attendees, resolved.",
+      "rubric": [
+        "Produced four tables",
+        "Split ROOM out with room_code as its primary key",
+        "Left room_code in SEMINAR as a foreign key",
+        "Kept grade in a linking table keyed on (seminar_code, attendee_id)",
+        "Marked both linking columns as foreign keys"
+      ],
+      "explanation": "Worth noticing: normalizing an M:N-shaped table produces exactly the bridge entity you would have drawn on the ERD. The two techniques agree."
+    },
+    {
+      "type": "short_answer",
+      "category": "Dependency Analysis",
+      "question": "Explain the practical difference between a partial dependency and a transitive dependency: how you spot each one, and which anomaly each one causes.",
+      "modelAnswer": "A partial dependency is a non-key attribute determined by only PART of a composite primary key. You spot it by covering up half the key and asking whether the attribute is still determined — if dish_code alone tells you dish_price, dish_price is partially dependent. It can only exist when the key is composite. The anomaly: the dish's price is repeated on every order line for that dish, so changing it means changing many rows, and a dish nobody has ordered yet cannot be recorded at all.\n\nA transitive dependency is a non-key attribute determined by ANOTHER non-key attribute. You spot it by looking for a chain among ordinary attributes — booking_ref determines client_no, and client_no determines client_name. Neither side of client_no → client_name is part of the key. The anomaly: the client's details are repeated on every booking they make, and deleting their last booking erases the client entirely.\n\nBoth are fixed the same way: move the determinant and everything it determines into a new table, and leave the determinant behind as a foreign key.",
+      "rubric": [
+        "Defined partial dependency as determined by part of a composite key",
+        "Defined transitive dependency as determined by another non-key attribute",
+        "Noted that a partial dependency requires a composite primary key",
+        "Named a concrete anomaly caused by each",
+        "Said both are fixed by splitting the determinant into its own table with a foreign key left behind"
+      ],
+      "explanation": "If you can state the fix in one sentence — new table keyed on the determinant, foreign key left behind — you can normalize anything the exam puts in front of you."
+    },
+    {
+      "type": "short_answer",
+      "category": "Dependency Analysis",
+      "question": "A classmate says: \"My table has a single-column primary key, so I skipped 2NF and went straight to checking 3NF.\" Are they right? Explain.",
+      "modelAnswer": "Yes, they are right, and for the correct reason. A partial dependency means an attribute is determined by part of the primary key. A single-column primary key has no proper parts, so no partial dependency can exist. Any table in 1NF with a simple key is therefore already in 2NF, and going straight to hunting for transitive dependencies is legitimate.\n\nWhat they must not skip is the 3NF check itself. A single-column key gives no protection at all against a chain like booking_ref → client_no → client_name, which is exactly the kind of dependency 3NF exists to remove.",
+      "rubric": [
+        "Agreed that they are right",
+        "Explained that a partial dependency needs part of a composite key, and a one-column key has no parts",
+        "Concluded that such a table is automatically in 2NF",
+        "Warned that the 3NF check still matters, because transitive dependencies are unaffected"
+      ],
+      "explanation": "Worth internalizing before the exam: composite key means look for partial dependencies; any key at all means look for transitive ones."
+    }
+  ]
+}
