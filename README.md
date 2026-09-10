@@ -26,6 +26,7 @@ A static site for sharing self-study quizzes with classmates via GitHub Pages. N
 | `review.js` | The study guide renderer |
 | `db.js` | Loads SQLite (via [sql.js](https://sql.js.org/)) from a CDN, seeds it, and grades queries by comparing result sets |
 | `sqlview.js` | Renders result grids and the schema browser — shared by the quiz and the playground |
+| `sqlhl.js` | SQL syntax highlighting — read-only blocks, and a live overlay for the editors |
 | `sql.js` | The playground page |
 
 ## The practice database
@@ -55,7 +56,7 @@ Every question can also include `category` (a short badge, e.g. `"Multiple Choic
 | `tf` | `correct` (`true`/`false`) | rendered as True/False |
 | `fill_blank` | `answers` (array of acceptable strings) | matched case-insensitively with `.,;:'"` stripped |
 | `matching` | `pairs` (array of `{left, right}`) | learner matches via dropdown; right side is shuffled |
-| `short_answer` | `modelAnswer`, `rubric` (array) | self-graded: reveals the model answer, learner checks off which rubric criteria they met, and gets that fraction as partial credit |
+| `short_answer` | `modelAnswer`, `rubric` (array) | self-graded: reveals the model answer, learner checks off which rubric criteria they met, and gets that fraction as partial credit. Add `"answerLang": "sql"` when the whole model answer is SQL, to highlight it |
 | `sql` | `solution`, plus the options below | **auto-graded by running it** |
 
 ### The `sql` type
@@ -100,6 +101,18 @@ The learner gets an editor, a **Run** button (free, unlimited) and a **Check ans
 
 If the CDN can't be reached, a `sql` question degrades to showing the model answer with a self-grade toggle rather than stranding the learner.
 
+## Syntax highlighting
+
+`assets/sqlhl.js` is a small hand-rolled SQL tokenizer — no CDN, so the editors keep working even if the sql.js download fails. It runs in three places:
+
+- **The editors** (playground and `sql` questions) highlight live as you type. The technique is a `<pre>` sitting behind the textarea holding a highlighted copy, with the textarea's own text made transparent so only its caret and selection show through. The two elements must agree on font, size, line-height, padding, border width, wrapping and tab-size or the characters drift apart — those metrics are set together in one CSS rule, so change both or neither.
+- **Model answers**, for `sql` questions automatically and for a `short_answer` that sets `"answerLang": "sql"`.
+- **Study guide `code` blocks** that set `"lang": "sql"`.
+
+Highlighting is opt-in for guide blocks and short answers because both also carry things that are *not* SQL — ASCII entity-box diagrams, dependency sets, relational schemas, and prose explanations. `build_quiz.py` rejects an `answerLang: "sql"` whose model answer doesn't start with a SQL statement.
+
+Everything the tokenizer emits is HTML-escaped: the editor overlay renders text the learner typed straight into `innerHTML`, so `tools/test_runtime.js` checks that no raw `<` survives and that highlighting never drops or alters a character.
+
 ## Editing the ITD 256 question pool
 
 At 233 questions, one file was unmanageable, so the sections live in `tools/questions/` and are stitched together in filename order:
@@ -129,7 +142,7 @@ node tools/test_runtime.js            # exercise assets/db.js against the real s
 
 `check_sql.py` catches a solution that errors, returns nothing, disagrees with its own `expectedRows`, or — for DML — changes nothing the `verify` query can see.
 
-`test_runtime.js` downloads the same sql.js files the browser uses (cached in `tools/.cache/`) and checks the shims, the result-set grader's messages, session isolation, referential integrity, every playground warm-up, and that **every shipped `sql` question grades as correct** while a wrong answer is rejected with an explanation. Run it after touching `assets/db.js` or any SQL question.
+`test_runtime.js` downloads the same sql.js files the browser uses (cached in `tools/.cache/`) and checks the shims, the result-set grader's messages, session isolation, referential integrity, the syntax highlighter's tokenizing and escaping, every playground warm-up, and that **every shipped `sql` question grades as correct** while a wrong answer is rejected with an explanation. Run it after touching `assets/db.js`, `assets/sqlhl.js`, or any SQL question.
 
 ## Adding a quiz to an existing class
 
@@ -171,7 +184,7 @@ Long-form reference notes rather than question-and-answer. Create `data/<class>-
 | `paragraph` | `text` | plain text |
 | `list` | `items` (array), optional `ordered: true` | bullets, or numbered |
 | `table` | `headers` (array), `rows` (array of arrays) | every row must match the header count |
-| `code` | `text` | monospace block |
+| `code` | `text`, optional `lang: "sql"` | monospace block; `lang` turns on syntax highlighting |
 | `note` | `text`, optional `label` | callout box |
 
 Any `text` field supports `**bold**` and `` `code` ``. Top-level fields: `title`, `description`, and optionally `quizFile` (adds a "Take the quiz" button). The quiz can point back with `guideFile`.

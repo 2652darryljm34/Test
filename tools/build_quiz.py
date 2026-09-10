@@ -31,8 +31,8 @@ OUT = os.path.join(ROOT, "data", "itd256-midterm-review.json")
 
 META = {
     "title": "ITD 256 Midterm Review",
-    "description": "Every topic on the midterm: database concepts, the relational model and keys, "
-                   "SQL you actually run, ERD completion, and normalization.",
+    "description": "Database concepts, the relational model and keys, SQL you actually run, "
+                   "ERD and Crow's Foot notation, and normalization.",
     "guideFile": "data/itd256-midterm-guide.json",
     "dbFile": "data/harborview.sql",
 }
@@ -116,6 +116,17 @@ def check(q, where):
     elif kind == "short_answer":
         if not q.get("modelAnswer"):
             fault(where, "no model answer")
+        # answerLang only makes sense when the whole model answer is SQL --
+        # tagging a mixed prose-and-SQL answer highlights the prose too.
+        if q.get("answerLang") == "sql":
+            first = (q.get("modelAnswer") or "").strip().split(None, 1)[:1]
+            starters = {"select", "insert", "update", "delete", "create", "drop",
+                        "alter", "with", "--"}
+            if first and first[0].lower() not in starters:
+                fault(where, "answerLang is 'sql' but the model answer starts with "
+                             "%r, so it looks like prose" % first[0])
+        elif q.get("answerLang"):
+            fault(where, "unknown answerLang %r" % q["answerLang"])
         if not q.get("rubric"):
             fault(where, "no rubric, so it can only be self-graded pass/fail")
         elif len(q["rubric"]) < 2:

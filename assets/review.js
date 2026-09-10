@@ -73,6 +73,11 @@ function renderBlock(block){
       return `<div class="guide-table-wrap"><table class="guide-table"><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table></div>`;
     }
     case 'code':
+      // Only blocks that declare themselves SQL get tokenized -- the guide also
+      // uses code blocks for ASCII diagrams and dependency sets, which are not.
+      if(block.lang === 'sql' && typeof SqlHL !== 'undefined'){
+        return `<pre class="model-answer guide-code sql-hl"><code>${SqlHL.highlight(block.text)}</code></pre>`;
+      }
       return `<pre class="model-answer guide-code">${escapeHtml(block.text)}</pre>`;
     case 'note':
       return `<div class="guide-note"><strong>${escapeHtml(block.label || 'Note')}</strong> ${nl2br(block.text)}</div>`;

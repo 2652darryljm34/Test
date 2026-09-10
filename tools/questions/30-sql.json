@@ -643,6 +643,7 @@
     {
       "type": "short_answer",
       "category": "SQL Writing",
+      "answerLang": "sql",
       "question": "Write a CREATE TABLE statement for a table called workshop with: a workshop_id integer primary key; a workshop_name that is text and may not be null; a seat_limit integer that defaults to 12; and a branch_id integer that is a foreign key referencing branch(branch_id).",
       "modelAnswer": "CREATE TABLE workshop (\n  workshop_id   INTEGER,\n  workshop_name VARCHAR(80) NOT NULL,\n  seat_limit    INTEGER DEFAULT 12,\n  branch_id     INTEGER,\n  PRIMARY KEY (workshop_id),\n  FOREIGN KEY (branch_id) REFERENCES branch(branch_id)\n);",
       "rubric": [

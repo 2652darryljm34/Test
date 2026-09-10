@@ -111,6 +111,7 @@
       b.textContent = r[0];
       b.addEventListener('click', function () {
         editor.value = r[1];
+        SqlHL.refresh(editor);
         editor.focus();
         run();
         editor.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -124,9 +125,11 @@
     loadingEl.hidden = true;
     appEl.hidden = false;
 
+    SqlHL.attach(editor);
     refreshSchemaCounts();
     buildRecipes();
     editor.value = RECIPES[0][1];
+    SqlHL.refresh(editor);
     run();
 
     document.getElementById('run').addEventListener('click', run);

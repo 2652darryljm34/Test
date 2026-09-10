@@ -1,36 +1,10 @@
 {
   "title": "ITD 256 Midterm Study Guide",
-  "description": "Reference notes for every topic the midterm covers: concepts, the relational model and keys, SQL, ERD completion, and normalization.",
+  "description": "Reference notes on database concepts, the relational model and keys, SQL, ERD and Crow's Foot notation, and normalization.",
   "quizFile": "data/itd256-midterm-review.json",
   "sections": [
     {
-      "name": "How the Midterm Works",
-      "blocks": [
-        { "type": "heading", "text": "Format" },
-        { "type": "list", "items": [
-          "**Three parts**, about **80 minutes** total.",
-          "**Closed everything** — no book, no notes — in Lockdown Browser.",
-          "Part 1: theory from the lectures plus SQL statements (~40 points).",
-          "Part 2: Entity Relationship Diagram (~30 points).",
-          "Part 3: Normalization (~30 points)."
-        ]},
-        { "type": "heading", "text": "What each part asks for" },
-        { "type": "table", "headers": ["Part", "Shape of the questions"], "rows": [
-          ["1 — Theory & SQL", "Roughly 15–20 multiple choice, true/false, fill-in-the-blank and matching, plus 3–5 SQL queries you either finish or write from scratch."],
-          ["2 — ERD", "You are **not** drawing. You get business rules and a partly completed ERD, then answer questions about the missing pieces: cardinality, participation, primary keys, foreign keys, and the other fields — each with its notation."],
-          ["3 — Normalization", "Structured almost exactly like the homework, but with nothing to draw. You do the dependency analysis and submit **dependency sets**, which become the tables (and so the relational schemas) for the next normal form."]
-        ]},
-        { "type": "note", "label": "Strategy:", "text": "Part 2 and Part 3 are worth 60 of the 100 points between them, and both are mechanical once you know the procedure. The connector legend and the partial-versus-transitive test are the two highest-value things to have automatic before you sit down." },
-        { "type": "heading", "text": "How to use this site" },
-        { "type": "list", "items": [
-          "Read the section of this guide you're shakiest on, then take the quiz — it is shuffled, so retaking it is not a memory test of the order.",
-          "The **SQL Playground** runs a real database in your browser. Every SQL question in the quiz is checked by actually running your query against it, so a different-but-correct answer still scores.",
-          "SQL questions are graded on the **result**, not the wording — if your query returns the right rows, it counts."
-        ]}
-      ]
-    },
-    {
-      "name": "Part 1 · Concepts, File Systems & Data Models",
+      "name": "Database Concepts, File Systems & Data Models",
       "blocks": [
         { "type": "heading", "text": "File & Database Terminology" },
         { "type": "table", "headers": ["Term", "Definition", "Also known as"], "rows": [
@@ -47,7 +21,7 @@
         { "type": "table", "headers": ["Level", "Meaning"], "rows": [
           ["Unstructured", "Data in its original, raw state."],
           ["Structured", "Data that results from formatting — structure applied to suit a type of processing."],
-          ["Semistructured", "Partially processed. **XML** (Extensible Markup Language) is the lecture's example: it represents data elements in a textual format."]
+          ["Semistructured", "Partially processed. **XML** (Extensible Markup Language) is the standard example: it represents data elements in a textual format."]
         ]},
         { "type": "subheading", "text": "By location" },
         { "type": "table", "headers": ["Type", "Meaning"], "rows": [
@@ -92,7 +66,7 @@
           ["Insertion", "New data cannot be recorded completely, because an unrelated fact is missing."],
           ["Deletion", "Removing one fact partially removes another that only lived in the same row."]
         ]},
-        { "type": "note", "label": "Watch for:", "text": "these three names are the payoff of normalization, and they show up in both Part 1 and Part 3. If you can name which anomaly a scenario describes, you can usually also name the dependency causing it." },
+        { "type": "note", "label": "Watch for:", "text": "these three names are the payoff of normalization. If you can name which anomaly a scenario describes, you can usually also name the dependency causing it." },
 
         { "type": "heading", "text": "The Database System Environment" },
         { "type": "paragraph", "text": "A **database system** is the organization of components that define and regulate the collection, storage, management and use of data. Five components: **hardware, software, people, procedures, data**." },
@@ -132,7 +106,7 @@
       ]
     },
     {
-      "name": "Part 1 · The Relational Model, Keys & Integrity",
+      "name": "The Relational Model, Keys & Integrity",
       "blocks": [
         { "type": "heading", "text": "What Keys Are For" },
         { "type": "paragraph", "text": "A key is one or more attributes that **determine** other attributes. Keys ensure each row is uniquely identifiable, and they establish relationships among tables and ensure data integrity. That word *determine* is the same one that drives the whole of normalization in Part 3." },
@@ -175,7 +149,7 @@
         { "type": "subheading", "text": "Why M:N cannot be done with foreign keys alone" },
         { "type": "paragraph", "text": "To assign one employee to projects 1, 2 and 3, you would have to write `1,2,3` into the single `proj_id` field — violating the atomic attribute rule. The same problem appears from the other direction when assigning many employees to one project. So a third table is required, storing one row per combination:" },
         { "type": "code", "text": "ASSIGNMENT\nemp_id  proj_id      <- both FKs; together the composite PK\n   1        1\n   1        2\n   2        1\n   3        3" },
-        { "type": "note", "label": "In ERM,", "text": "an M:N relationship **is valid at the conceptual level**. It is for the logical model — the actual ERD you hand in — that you need the bridge table." },
+        { "type": "note", "label": "In ERM,", "text": "an M:N relationship **is valid at the conceptual level**. It is for the logical model — the ERD itself — that you need the bridge table." },
 
         { "type": "heading", "text": "Which Side Gets the Foreign Key" },
         { "type": "paragraph", "text": "For many DEPARTMENTs in each DIVISION (1:M), the FK must be on the **many** side — so `division_id` goes in DEPARTMENT. Putting `department_id` in DIVISION would only ever allow one department per division." },
@@ -184,7 +158,7 @@
       ]
     },
     {
-      "name": "Part 1 · SQL",
+      "name": "SQL",
       "blocks": [
         { "type": "heading", "text": "Command Categories" },
         { "type": "table", "headers": ["Category", "Purpose", "Examples"], "rows": [
@@ -193,7 +167,7 @@
           ["TCL — Transaction Control Language", "Commits or undoes work.", "COMMIT, ROLLBACK"],
           ["DCL — Data Control Language", "Grants and revokes access.", "GRANT, REVOKE"]
         ]},
-        { "type": "note", "label": "The lecture's framing:", "text": "SQL has essentially **two** sets of commands — DDL and DML. It is nonprocedural, with a basic vocabulary of fewer than 100 words." },
+        { "type": "note", "label": "In short:", "text": "SQL has essentially **two** sets of commands — DDL and DML. It is nonprocedural, with a basic vocabulary of fewer than 100 words." },
 
         { "type": "heading", "text": "DDL Reference" },
         { "type": "table", "headers": ["Command / option", "Description"], "rows": [
@@ -211,11 +185,11 @@
           ["DEFAULT", "Define a value used when none is given."],
           ["CHECK", "Validate data in an attribute."]
         ]},
-        { "type": "code", "text": "CREATE TABLE workshop (\n  workshop_id   INTEGER,\n  workshop_name VARCHAR(80) NOT NULL,\n  seat_limit    INTEGER DEFAULT 12,\n  branch_id     INTEGER,\n  PRIMARY KEY (workshop_id),\n  FOREIGN KEY (branch_id) REFERENCES branch(branch_id)\n);" },
+        { "type": "code", "lang": "sql", "text": "CREATE TABLE workshop (\n  workshop_id   INTEGER,\n  workshop_name VARCHAR(80) NOT NULL,\n  seat_limit    INTEGER DEFAULT 12,\n  branch_id     INTEGER,\n  PRIMARY KEY (workshop_id),\n  FOREIGN KEY (branch_id) REFERENCES branch(branch_id)\n);" },
         { "type": "note", "label": "DROP vs DELETE:", "text": "`DROP TABLE` is DDL and removes the structure along with the data. `DELETE FROM` is DML and removes rows, leaving the table in place." },
 
         { "type": "heading", "text": "SELECT Statement Anatomy" },
-        { "type": "code", "text": "SELECT   columnlist\nFROM     tablelist\n[WHERE    conditionlist]\n[GROUP BY columnlist]\n[HAVING   conditionlist]\n[ORDER BY columnlist [ASC | DESC]];" },
+        { "type": "code", "lang": "sql", "text": "SELECT   columnlist\nFROM     tablelist\n[WHERE    conditionlist]\n[GROUP BY columnlist]\n[HAVING   conditionlist]\n[ORDER BY columnlist [ASC | DESC]];" },
         { "type": "table", "headers": ["Clause", "Job"], "rows": [
           ["SELECT", "Specifies the attributes to be returned."],
           ["FROM", "Specifies the table(s) data is retrieved from."],
@@ -227,7 +201,7 @@
         { "type": "note", "label": "WHERE vs HAVING:", "text": "WHERE filters rows **before** grouping, so an aggregate like `count(*)` cannot appear in it — the groups do not exist yet. HAVING filters groups **after**, so that is where aggregate conditions belong." },
         { "type": "paragraph", "text": "**DISTINCT** produces a list of only unique values. The **`*`** wildcard stands in for every column. Dates are stored as a number of days, so **date arithmetic** is possible in a query — though date comparisons are often more software-specific than other SQL." },
         { "type": "subheading", "text": "Cascading ORDER BY" },
-        { "type": "code", "text": "SELECT gadget_title, daily_fee\nFROM gadget\nORDER BY daily_fee DESC, gadget_title;\n\n-- daily_fee sorts high to low; gadget_title breaks the ties,\n-- ascending, because DESC applies only to the column it follows." },
+        { "type": "code", "lang": "sql", "text": "SELECT gadget_title, daily_fee\nFROM gadget\nORDER BY daily_fee DESC, gadget_title;\n\n-- daily_fee sorts high to low; gadget_title breaks the ties,\n-- ascending, because DESC applies only to the column it follows." },
 
         { "type": "heading", "text": "WHERE Clause Operators" },
         { "type": "table", "headers": ["Symbol", "Meaning"], "rows": [
@@ -251,11 +225,11 @@
           ["Natural join", "Rows matching on identically named, type-compatible columns — with the duplicate column eliminated. If there are no common attributes it returns the relational product, which is almost never what you wanted."],
           ["Recursive join", "A table joined to **itself**. Unary; every other join is binary."]
         ]},
-        { "type": "code", "text": "-- USING: the key has the same name in both tables\nSELECT locality_name, region_name\nFROM locality\nINNER JOIN region USING (region_id);\n\n-- ON: spell out the condition; needed when the names differ\nSELECT b.branch_label, l.locality_name\nFROM branch b\nINNER JOIN locality l ON b.locality_id = l.locality_id;\n\n-- Chaining three tables through a bridge (an M:N relationship)\nSELECT gadget_title\nFROM gadget\nINNER JOIN gadget_group_map USING (gadget_id)\nINNER JOIN gadget_group     USING (group_id)\nWHERE gadget_group.group_label = 'Plumbing';" },
+        { "type": "code", "lang": "sql", "text": "-- USING: the key has the same name in both tables\nSELECT locality_name, region_name\nFROM locality\nINNER JOIN region USING (region_id);\n\n-- ON: spell out the condition; needed when the names differ\nSELECT b.branch_label, l.locality_name\nFROM branch b\nINNER JOIN locality l ON b.locality_id = l.locality_id;\n\n-- Chaining three tables through a bridge (an M:N relationship)\nSELECT gadget_title\nFROM gadget\nINNER JOIN gadget_group_map USING (gadget_id)\nINNER JOIN gadget_group     USING (group_id)\nWHERE gadget_group.group_label = 'Plumbing';" },
         { "type": "subheading", "text": "Outer joins find what is missing" },
-        { "type": "code", "text": "-- Patrons who have never borrowed anything.\n-- An INNER join could never show these rows: there is nothing to match.\nSELECT p.patron_id, p.surname\nFROM patron p\nLEFT JOIN checkout c ON c.patron_id = p.patron_id\nWHERE c.checkout_id IS NULL;" },
+        { "type": "code", "lang": "sql", "text": "-- Patrons who have never borrowed anything.\n-- An INNER join could never show these rows: there is nothing to match.\nSELECT p.patron_id, p.surname\nFROM patron p\nLEFT JOIN checkout c ON c.patron_id = p.patron_id\nWHERE c.checkout_id IS NULL;" },
         { "type": "subheading", "text": "Recursive (self) join" },
-        { "type": "code", "text": "-- Both the worker and the boss are rows in the same table,\n-- so the aliases are what make two copies of it distinguishable.\nSELECT worker.surname AS steward,\n       boss.surname   AS reports_to\nFROM steward worker\nINNER JOIN steward boss ON worker.supervisor_id = boss.steward_id;" },
+        { "type": "code", "lang": "sql", "text": "-- Both the worker and the boss are rows in the same table,\n-- so the aliases are what make two copies of it distinguishable.\nSELECT worker.surname AS steward,\n       boss.surname   AS reports_to\nFROM steward worker\nINNER JOIN steward boss ON worker.supervisor_id = boss.steward_id;" },
         { "type": "note", "label": "Aliases:", "text": "an alias identifies the source table a column came from, improves maintainability, and is **required** for a self-join. The most common cause of duplicate column names across joined tables is the existence of a foreign key." },
 
         { "type": "heading", "text": "Aggregates & Grouping" },
@@ -266,11 +240,11 @@
           ["MIN / MAX", "The smallest / largest value."]
         ]},
         { "type": "paragraph", "text": "An aggregate query **takes a collection of rows and reduces it to a single row**. Add GROUP BY and you get one row per group instead. Any column in the SELECT list that is not aggregated has to appear in the GROUP BY." },
-        { "type": "code", "text": "SELECT power_source,\n       count(*)               AS how_many,\n       round(avg(daily_fee),2) AS avg_fee\nFROM gadget\nGROUP BY power_source\nHAVING count(*) > 5\nORDER BY power_source;" },
+        { "type": "code", "lang": "sql", "text": "SELECT power_source,\n       count(*)               AS how_many,\n       round(avg(daily_fee),2) AS avg_fee\nFROM gadget\nGROUP BY power_source\nHAVING count(*) > 5\nORDER BY power_source;" },
 
         { "type": "heading", "text": "Data Manipulation (DML)" },
-        { "type": "code", "text": "INSERT INTO tablename (col1, col2) VALUES (value1, value2);\n\n-- add many rows from another table\nINSERT INTO target_table [(target_columnlist)]\nSELECT source_columnlist FROM source_table;\n\nUPDATE tablename\nSET    columnname = expression [, columnname = expression]\n[WHERE conditionlist];\n\nDELETE FROM tablename [WHERE conditionlist];\n\nCOMMIT;     -- save the changes permanently\nROLLBACK;   -- restore the previous condition" },
-        { "type": "note", "label": "SQL does not ask for confirmation.", "text": "An UPDATE or DELETE without a WHERE clause hits **every row in the table**. The lecture's own phrasing: always use WHERE with UPDATE to specify which rows, and with DELETE to limit the damage." },
+        { "type": "code", "lang": "sql", "text": "INSERT INTO tablename (col1, col2) VALUES (value1, value2);\n\n-- add many rows from another table\nINSERT INTO target_table [(target_columnlist)]\nSELECT source_columnlist FROM source_table;\n\nUPDATE tablename\nSET    columnname = expression [, columnname = expression]\n[WHERE conditionlist];\n\nDELETE FROM tablename [WHERE conditionlist];\n\nCOMMIT;     -- save the changes permanently\nROLLBACK;   -- restore the previous condition" },
+        { "type": "note", "label": "SQL does not ask for confirmation.", "text": "An UPDATE or DELETE without a WHERE clause hits **every row in the table**. Always use WHERE with UPDATE to specify which rows, and with DELETE to limit the damage." },
         { "type": "paragraph", "text": "**CRUD** = Create, Read, Update, Delete → **(C) INSERT** adds new rows, **(R) SELECT** reads them, **(U) UPDATE** modifies existing rows, **(D) DELETE** gets rid of rows." },
         { "type": "paragraph", "text": "Basic ANSI **data types**, supported by all vendors in different ways: NUMBER, NUMERIC, INTEGER, CHAR, VARCHAR, DATE." }
       ]
@@ -280,7 +254,8 @@
       "blocks": [
         { "type": "heading", "text": "Harborview Tool Library" },
         { "type": "paragraph", "text": "The **SQL Playground** on the home page runs a real SQLite database inside your browser — nothing is installed, nothing is uploaded, and the **Reset** button puts the data back whenever you want. Run whatever you like in it, including INSERT, UPDATE and DELETE." },
-        { "type": "paragraph", "text": "The scenario: a community tool-lending library. Members (**patrons**) borrow physical **units** of a catalog **gadget** from a **branch**; the staff are **stewards**. It deliberately has the same *shapes* as the examples used in class — a catalog, physical copies, loans, payments, a many-to-many category link, and a self-referencing staff hierarchy — under completely different names, so you have to read the schema rather than recall it." },
+        { "type": "paragraph", "text": "The scenario: a community tool-lending library. Members (**patrons**) borrow physical **units** of a catalog **gadget** from a **branch**; the staff are **stewards**. It deliberately has the same *shapes* as the standard textbook examples — a catalog, physical copies, loans, payments, a many-to-many category link, and a self-referencing staff hierarchy — under completely different names, so you have to read the schema rather than recall it." },
+        { "type": "paragraph", "text": "Every SQL question in the quiz is checked by actually running your query against this database and comparing the rows it returns, so a different-but-correct query still scores. Use **Run** as often as you like while you work it out." },
         { "type": "table", "headers": ["Table", "Holds", "Key columns"], "rows": [
           ["region", "Four broad areas", "region_id (PK)"],
           ["locality", "18 towns, each in one region", "locality_id (PK), region_id (FK)"],
@@ -297,7 +272,7 @@
           ["safety_course", "5 courses", "course_id (PK)"],
           ["course_result", "131 scores", "result_id (PK), patron_id (FK), course_id (FK)"]
         ]},
-        { "type": "note", "label": "Referential integrity is switched on.", "text": "Try `DELETE FROM patron WHERE patron_id = 1;` in the playground — it will be refused, because that patron has loans and ledger entries pointing at them. That refusal *is* referential integrity, and it is worth seeing once before the exam asks you about it." },
+        { "type": "note", "label": "Referential integrity is switched on.", "text": "Try `DELETE FROM patron WHERE patron_id = 1;` in the playground — it will be refused, because that patron has loans and ledger entries pointing at them. That refusal *is* referential integrity — worth seeing happen at least once." },
 
         { "type": "heading", "text": "Getting to the answer" },
         { "type": "list", "ordered": true, "items": [
@@ -307,14 +282,14 @@
           "**Did the question say unique?** Then DISTINCT. Joining to the many side duplicates rows.",
           "**Did the question say sort?** Then ORDER BY — and add a second column if the first one has ties."
         ]},
-        { "type": "note", "label": "MySQL vs the browser engine:", "text": "the playground runs SQLite, with `MONTH()`, `YEAR()`, `DAY()`, `LEFT()`, `RIGHT()`, `DATEDIFF()`, `CURDATE()` and `NOW()` added so the MySQL forms from the lectures work. `CONCAT()` works, and so does SQLite's `||`. Everything else on the exam is standard SQL that behaves the same in both." }
+        { "type": "note", "label": "MySQL vs the browser engine:", "text": "the playground runs SQLite, with `MONTH()`, `YEAR()`, `DAY()`, `LEFT()`, `RIGHT()`, `DATEDIFF()`, `CURDATE()` and `NOW()` added so the MySQL forms work. `CONCAT()` works, and so does SQLite's `||`. Everything else here is standard SQL that behaves the same in both." }
       ]
     },
     {
-      "name": "Part 2 · ERD Completion",
+      "name": "ERD & Crow's Foot Notation",
       "blocks": [
         { "type": "heading", "text": "The Connector Options Legend" },
-        { "type": "paragraph", "text": "Exam ERDs mark each end of a relationship line with one of six connectors, built from three symbols: a **circle** (zero), a **bar** (one) and a **crow's foot** (many). Read from the outside in: the outer symbol is the **minimum** (participation), the inner symbol is the **maximum** (cardinality)." },
+        { "type": "paragraph", "text": "Crow's Foot ERDs mark each end of a relationship line with one of six connectors, built from three symbols: a **circle** (zero), a **bar** (one) and a **crow's foot** (many). Read from the outside in: the outer symbol is the **minimum** (participation), the inner symbol is the **maximum** (cardinality)." },
         { "type": "table", "headers": ["Letter", "Symbol", "Minimum", "Maximum", "Reads as"], "rows": [
           ["A", "line + crow's foot", "—", "many", "Many"],
           ["B", "line + bar + crow's foot", "one", "many", "**One or many** (mandatory many)"],
@@ -349,7 +324,7 @@
         ]},
 
         { "type": "heading", "text": "Reading Entity Boxes" },
-        { "type": "paragraph", "text": "An exam entity box has a header holding the entity name, then rows. The narrow left-hand cells hold the key markers; the wide right-hand cells hold the attribute names:" },
+        { "type": "paragraph", "text": "An entity box has a header holding the entity name, then rows. The narrow left-hand cells hold the key markers; the wide right-hand cells hold the attribute names:" },
         { "type": "code", "text": "        ┌──────────────────────────────┐\n        │           PATRON             │  <- entity name\n        ├─────┬────────────────────────┤\n   P1 ->│ PK  │ patron_id              │<- P2  bold + underlined\n        ├─────┼────────────────────────┤\n   P3 ->│ FK  │ locality_id            │<- P4  italic\n        ├─────┴────────────────────────┤\n   P5 ->│ given_name, surname, ...     │  <- the descriptive fields\n        └──────────────────────────────┘" },
         { "type": "table", "headers": ["Formatting", "Meaning"], "rows": [
           ["**Bold and underlined**, at the top", "Primary key"],
@@ -371,7 +346,7 @@
       ]
     },
     {
-      "name": "Part 3 · Normalization & Dependency Sets",
+      "name": "Normalization & Dependency Sets",
       "blocks": [
         { "type": "heading", "text": "Normal Forms" },
         { "type": "paragraph", "text": "**Normalization** is evaluating and correcting table structures to **minimize redundancies**, which reduces data anomalies. It assigns attributes to tables based on **determination**." },
@@ -404,7 +379,7 @@
           "Inside each remaining table, look for an attribute determined by **another non-key attribute**. Split that determinant out into its own table too, and **leave the determinant behind as a foreign key**. That is 3NF.",
           "Check: in every table, does each non-key attribute depend on **the key, the whole key, and nothing but the key**?"
         ]},
-        { "type": "note", "label": "\"The whole key\"", "text": "catches partial dependencies. **\"Nothing but the key\"** catches transitive ones. That one sentence is most of Part 3." },
+        { "type": "note", "label": "\"The whole key\"", "text": "catches partial dependencies. **\"Nothing but the key\"** catches transitive ones. That one sentence is most of what normalization asks of you." },
 
         { "type": "heading", "text": "Worked Example" },
         { "type": "paragraph", "text": "**CATERING_ORDER** in 1NF, primary key **booking_ref + dish_code**:" },

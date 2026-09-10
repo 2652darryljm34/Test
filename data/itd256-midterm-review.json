@@ -1,16 +1,16 @@
 {
   "title": "ITD 256 Midterm Review",
-  "description": "Every topic on the midterm: database concepts, the relational model and keys, SQL you actually run, ERD completion, and normalization.",
+  "description": "Database concepts, the relational model and keys, SQL you actually run, ERD and Crow's Foot notation, and normalization.",
   "guideFile": "data/itd256-midterm-guide.json",
   "dbFile": "data/harborview.sql",
   "sections": [
     {
-      "name": "Part 1 · Concepts, File Systems & Data Models",
+      "name": "Database Concepts, File Systems & Data Models",
       "questions": [
         {
           "type": "matching",
           "category": "Terminology",
-          "question": "Match each basic file-system term to its definition (Table 1.2).",
+          "question": "Match each basic file-system term to its definition.",
           "pairs": [
             {
               "left": "Data",
@@ -38,7 +38,7 @@
         {
           "type": "matching",
           "category": "Terminology",
-          "question": "The lecture gives each file term a database equivalent (\"also known as\"). Match them.",
+          "question": "Each file-system term has a database equivalent. Match them.",
           "pairs": [
             {
               "left": "Field",
@@ -109,12 +109,12 @@
               "right": "Data that has been partially processed — XML, for instance"
             }
           ],
-          "explanation": "XML is the lecture's example of semistructured data: it represents data elements in a textual format without imposing a full relational structure."
+          "explanation": "XML is the standard example of semistructured data: it represents data elements in a textual format without imposing a full relational structure."
         },
         {
           "type": "fill_blank",
           "category": "Fill in the Blank",
-          "question": "XML — the lecture's example of semistructured data — stands for Extensible ______ Language.",
+          "question": "XML — the usual example of semistructured data — stands for Extensible ______ Language.",
           "answers": [
             "markup"
           ],
@@ -185,14 +185,14 @@
         {
           "type": "tf",
           "category": "True / False",
-          "question": "Modern end-user productivity tools such as Microsoft Excel are described in the lecture as a kind of \"file system redux\" — they reintroduce file-system problems.",
+          "question": "Modern end-user productivity tools such as Microsoft Excel are a kind of \"file system redux\" — they reintroduce file-system problems.",
           "correct": true,
-          "explanation": "The lecture calls spreadsheets a file system redux: convenient, but they bring back redundancy and inconsistency."
+          "explanation": "Spreadsheets are a file system redux: convenient, but they bring back redundancy and inconsistency."
         },
         {
           "type": "mc",
           "category": "Multiple Choice",
-          "question": "Which of these is NOT one of the problems the lecture attributes to file systems?",
+          "question": "Which of these is NOT a problem of file systems?",
           "options": [
             "Lengthy development times",
             "Difficulty getting quick answers to ad hoc queries",
@@ -244,7 +244,7 @@
           "category": "True / False",
           "question": "The physical format — how data is actually stored on hardware — should be hidden completely from the end user.",
           "correct": true,
-          "explanation": "The slide is explicit: physical storage should be hidden completely and of no concern to the user."
+          "explanation": "Physical storage should be hidden completely and of no concern to the user."
         },
         {
           "type": "mc",
@@ -257,7 +257,7 @@
             "More data redundancy by design"
           ],
           "correct": 1,
-          "explanation": "The summary slide lists exactly these three advantages: more data independence, more robust organization, better control of data access."
+          "explanation": "The three advantages are exactly these: more data independence, more robust organization, better control of data access."
         },
         {
           "type": "fill_blank",
@@ -271,7 +271,7 @@
         {
           "type": "mc",
           "category": "Multiple Choice",
-          "question": "The lecture describes scattered, duplicated data locations with the phrase:",
+          "question": "Scattered, duplicated data locations are described with the phrase:",
           "options": [
             "Data silos",
             "Islands of information",
@@ -429,7 +429,7 @@
               "right": "Part of storage management; ensures efficient performance"
             }
           ],
-          "explanation": "These are the standard DBMS functions from the lecture. Notice that integrity management is described in terms of redundancy and consistency."
+          "explanation": "These are the standard DBMS functions. Notice that integrity management is defined in terms of redundancy and consistency."
         },
         {
           "type": "mc",
@@ -524,12 +524,12 @@
           "category": "True / False",
           "question": "Relationships are always bidirectional — you have to read them from both ends.",
           "correct": true,
-          "explanation": "The lecture states this explicitly, which is why you ask two questions: how many B relate to one A, and how many A relate to one B."
+          "explanation": "Because relationships run both ways, you ask two questions: how many B relate to one A, and how many A relate to one B."
         },
         {
           "type": "mc",
           "category": "Multiple Choice",
-          "question": "To determine the type of a relationship between entities A and B, the lecture says to ask:",
+          "question": "To determine the type of a relationship between entities A and B, you ask:",
           "options": [
             "Only how many instances of B relate to one instance of A",
             "How many instances of B relate to one A, AND how many instances of A relate to one B",
@@ -542,7 +542,7 @@
         {
           "type": "matching",
           "category": "Matching",
-          "question": "Match each relationship type to both notations used in the lecture.",
+          "question": "Match each relationship type to the two notations used for it.",
           "pairs": [
             {
               "left": "One-to-many",
@@ -562,7 +562,7 @@
         {
           "type": "mc",
           "category": "Multiple Choice",
-          "question": "Which naming convention does the lecture recommend for entity names?",
+          "question": "Which naming convention is recommended for entity names?",
           "options": [
             "Short codes that only the DBA needs to understand",
             "Descriptive of the business environment, using terminology familiar to users",
@@ -575,7 +575,7 @@
         {
           "type": "mc",
           "category": "Multiple Choice",
-          "question": "The relational model is based on the relation, which the lecture equates with:",
+          "question": "The relational model is based on the relation, which is another name for:",
           "options": [
             "A foreign key",
             "A table (or entity)",
@@ -639,7 +639,7 @@
         {
           "type": "matching",
           "category": "Matching",
-          "question": "Match each object-oriented term to its relational-model analogue, as the lecture pairs them.",
+          "question": "Match each object-oriented term to its relational-model analogue.",
           "pairs": [
             {
               "left": "Object",
@@ -654,7 +654,7 @@
               "right": "A property of an object"
             }
           ],
-          "explanation": "An object is analogous to a record; a class is analogous to an entity/table — the lecture calls a class a template from which individual objects are created."
+          "explanation": "An object is analogous to a record; a class is analogous to an entity/table — a class is a template from which individual objects are created."
         },
         {
           "type": "mc",
@@ -685,9 +685,9 @@
         {
           "type": "tf",
           "category": "True / False",
-          "question": "In the object-oriented class hierarchy described in the lecture, each class may have many parent classes.",
+          "question": "In an object-oriented class hierarchy, each class may have many parent classes.",
           "correct": false,
-          "explanation": "The lecture describes it as an upside-down tree in which each class has only one parent."
+          "explanation": "The hierarchy resembles an upside-down tree in which each class has only one parent."
         },
         {
           "type": "mc",
@@ -705,7 +705,7 @@
         {
           "type": "mc",
           "category": "Multiple Choice",
-          "question": "Ordered from more abstract to less abstract, the lecture's levels of data modeling run:",
+          "question": "Ordered from more abstract to less abstract, the levels of data modeling run:",
           "options": [
             "DDL SQL → Crow's Foot → Chen",
             "Chen notation → Crow's Foot notation → DDL SQL",
@@ -725,7 +725,7 @@
         {
           "type": "mc",
           "category": "Multiple Choice",
-          "question": "Which job title does the lecture describe as designing and implementing conceptual, logical AND physical database environments?",
+          "question": "Which job title covers the design and implementation of conceptual, logical AND physical database environments?",
           "options": [
             "Database Analyst",
             "Database Architect",
@@ -738,7 +738,7 @@
       ]
     },
     {
-      "name": "Part 1 · The Relational Model, Keys & Integrity",
+      "name": "The Relational Model, Keys & Integrity",
       "questions": [
         {
           "type": "fill_blank",
@@ -747,12 +747,12 @@
           "answers": [
             "determine"
           ],
-          "explanation": "Keys determine other attributes. That single word is the bridge between the keys chapter and the whole of normalization."
+          "explanation": "Keys determine other attributes. That single word is what connects keys to normalization."
         },
         {
           "type": "mc",
           "category": "Multiple Choice",
-          "question": "What two jobs does the lecture say keys do?",
+          "question": "What two jobs do keys do?",
           "options": [
             "Speed up sorting, and compress storage",
             "Ensure each row is uniquely identifiable, and establish relationships among tables",
@@ -848,7 +848,7 @@
         {
           "type": "mc",
           "category": "Multiple Choice",
-          "question": "Which is NOT one of the lecture's reasons to use a surrogate primary key?",
+          "question": "Which is NOT a reason to use a surrogate primary key?",
           "options": [
             "There is no natural key suitable as a primary key",
             "The natural primary key would be a composite key with multiple data types",
@@ -876,7 +876,7 @@
           "category": "True / False",
           "question": "Every table row must have a primary key.",
           "correct": true,
-          "explanation": "The relational-model summary states it flatly: each table row must have a primary key. That is entity integrity."
+          "explanation": "Each table row must have a primary key. That is entity integrity."
         },
         {
           "type": "fill_blank",
@@ -890,7 +890,7 @@
         {
           "type": "matching",
           "category": "Matching",
-          "question": "Match each integrity rule to its requirement (Table 3.4).",
+          "question": "Match each integrity rule to its requirement.",
           "pairs": [
             {
               "left": "Entity integrity",
@@ -919,7 +919,7 @@
         {
           "type": "mc",
           "category": "Multiple Choice",
-          "question": "The lecture's example of referential integrity is that a customer might not yet have an assigned sales representative — but it is impossible to have an INVALID one. What does the null represent there?",
+          "question": "A standard example of referential integrity: a customer might not yet have an assigned sales representative — but it is impossible to have an INVALID one. What does the null represent there?",
           "options": [
             "A data-entry error that must be corrected",
             "An optional relationship that has not been filled in yet",
@@ -961,7 +961,7 @@
         {
           "type": "mc",
           "category": "Multiple Choice",
-          "question": "Which is NOT one of the three things the lecture says a null can mean?",
+          "question": "Which is NOT one of the three things a null can mean?",
           "options": [
             "An unknown attribute value",
             "A known but missing attribute value",
@@ -993,12 +993,12 @@
               "right": "The description of one individual table"
             }
           ],
-          "explanation": "Note the distinction the lecture draws: the database schema covers everything; a relational schema is per-table."
+          "explanation": "Note the distinction: the database schema covers everything; a relational schema is per-table."
         },
         {
           "type": "mc",
           "category": "Multiple Choice",
-          "question": "Which relationship type does the lecture call the norm for relational databases?",
+          "question": "Which relationship type is the norm for relational databases?",
           "options": [
             "One-to-one (1:1)",
             "One-to-many (1:M)",
@@ -1024,7 +1024,7 @@
         {
           "type": "matching",
           "category": "Matching",
-          "question": "The bridge table in an M:N relationship goes by several names in the lecture. Match each term to its meaning.",
+          "question": "The bridge table in an M:N relationship goes by several names. Match each term to its meaning.",
           "pairs": [
             {
               "left": "Composite entity",
@@ -1057,7 +1057,7 @@
         {
           "type": "mc",
           "category": "Multiple Choice",
-          "question": "The lecture's Employee/Project example shows that you CANNOT represent M:N by putting a foreign key in the two main tables. Why not?",
+          "question": "An EMPLOYEE/PROJECT design shows that you CANNOT represent M:N by putting a foreign key in the two main tables. Why not?",
           "options": [
             "Because foreign keys are not allowed in more than one table",
             "Because you would have to stuff more than one key value into a single foreign key field, violating the atomic attribute rule",
@@ -1070,7 +1070,7 @@
         {
           "type": "mc",
           "category": "Multiple Choice",
-          "question": "In the lecture's Assignment bridge table holding emp_id and proj_id, those two columns are:",
+          "question": "In an ASSIGNMENT bridge table holding emp_id and proj_id, those two columns are:",
           "options": [
             "Two independent primary keys",
             "Foreign keys that together form a composite primary key",
@@ -1096,7 +1096,7 @@
         {
           "type": "mc",
           "category": "Multiple Choice",
-          "question": "One DIVISION operates many DEPARTMENTs; each DEPARTMENT is operated by one DIVISION. Following the rule in the lecture's worked example, the foreign key belongs:",
+          "question": "One DIVISION operates many DEPARTMENTs; each DEPARTMENT is operated by one DIVISION. The foreign key belongs:",
           "options": [
             "division_id in DEPARTMENT",
             "department_id in DIVISION",
@@ -1111,12 +1111,12 @@
           "category": "True / False",
           "question": "Although relational tables are independent of one another, they can be linked through common attributes — that is, foreign keys.",
           "correct": true,
-          "explanation": "Straight from the relational model summary: independent tables, linked by common attributes."
+          "explanation": "Independent tables, linked by common attributes — that is the whole idea of the relational model."
         },
         {
           "type": "mc",
           "category": "Multiple Choice",
-          "question": "The relational-model summary names the basic building block of a relational database. It is:",
+          "question": "What is the basic building block of a relational database?",
           "options": [
             "The index",
             "The table",
@@ -1171,7 +1171,7 @@
         {
           "type": "mc",
           "category": "Multiple Choice",
-          "question": "The lecture notes the most common cause of duplicate column names across two joined tables. It is:",
+          "question": "What is the most common cause of duplicate column names across two joined tables?",
           "options": [
             "Poor naming by the designer",
             "The existence of a foreign key",
@@ -1209,14 +1209,14 @@
             "cardinality",
             "connectivity"
           ],
-          "explanation": "The lecture uses connectivity and cardinality together for this: connectivity labels the type, cardinality expresses the numbers."
+          "explanation": "Connectivity and cardinality are used together for this: connectivity labels the type, cardinality expresses the numbers."
         },
         {
           "type": "tf",
           "category": "True / False",
           "question": "Database designers, however effective, are often forced to make design compromises.",
           "correct": true,
-          "explanation": "The ERM summary says so directly — a reminder that the textbook answer and the practical answer sometimes differ."
+          "explanation": "The clean textbook answer and the practical answer sometimes differ; real designs involve trade-offs."
         },
         {
           "type": "mc",
@@ -1273,7 +1273,7 @@
       ]
     },
     {
-      "name": "Part 1 · SQL",
+      "name": "SQL",
       "questions": [
         {
           "type": "matching",
@@ -1297,12 +1297,12 @@
               "right": "Data control — grants and revokes access rights"
             }
           ],
-          "explanation": "The summary slide stresses that SQL has essentially two sets of commands — DDL and DML — with TCL and DCL alongside them."
+          "explanation": "SQL has essentially two sets of commands — DDL and DML — with TCL and DCL alongside them."
         },
         {
           "type": "mc",
           "category": "Multiple Choice",
-          "question": "The lecture calls SQL a nonprocedural language with a basic command vocabulary of:",
+          "question": "SQL is a nonprocedural language with a basic command vocabulary of:",
           "options": [
             "Fewer than 100 words",
             "About 500 words",
@@ -1370,7 +1370,7 @@
               "right": "Validates the data placed in the attribute"
             }
           ],
-          "explanation": "These are the constraint options listed under CREATE TABLE in Table 7.2."
+          "explanation": "These are the constraint options available on CREATE TABLE."
         },
         {
           "type": "mc",
@@ -1481,7 +1481,7 @@
         {
           "type": "matching",
           "category": "Matching",
-          "question": "Match each comparison operator to its meaning (Table 7.6).",
+          "question": "Match each comparison operator to its meaning.",
           "pairs": [
             {
               "left": "=",
@@ -1524,7 +1524,7 @@
               "right": "Whether a value is absent altogether"
             }
           ],
-          "explanation": "These four are the special operators highlighted in the lecture. Note that a null is never found by = — it needs IS NULL."
+          "explanation": "These four are the special operators. Note that a null is never found by = — it needs IS NULL."
         },
         {
           "type": "mc",
@@ -1551,7 +1551,7 @@
         {
           "type": "mc",
           "category": "Multiple Choice",
-          "question": "The lecture calls old-style joins — writing `WHERE table1.pk = table2.fk` instead of a JOIN clause — \"generally not recommended\" because they:",
+          "question": "Old-style joins — writing `WHERE table1.pk = table2.fk` instead of a JOIN clause — are generally not recommended because they:",
           "options": [
             "Return the wrong answer",
             "Make complex queries harder to maintain and are susceptible to undetected errors",
@@ -1634,7 +1634,7 @@
         {
           "type": "mc",
           "category": "Multiple Choice",
-          "question": "The lecture's example of a recursive join is \"Sabrina (9) reports to Sarah (1)\". What makes this recursive?",
+          "question": "A query reports that \"Sabrina (9) reports to Sarah (1)\", drawing both people from a single EMPLOYEE table. What makes this a recursive join?",
           "options": [
             "It joins three tables at once",
             "It joins a table to itself, because both people live in the same table",
@@ -1690,7 +1690,7 @@
           "category": "True / False",
           "question": "An aggregate query takes a collection of rows and reduces it to a single row.",
           "correct": true,
-          "explanation": "That is the lecture's definition. Add GROUP BY and you get one row per group instead."
+          "explanation": "That is the definition of an aggregate query. Add GROUP BY and you get one row per group instead."
         },
         {
           "type": "matching",
@@ -1714,7 +1714,7 @@
               "right": "DELETE — gets rid of rows"
             }
           ],
-          "explanation": "The lecture's warning is worth memorizing: always use WHERE with UPDATE to specify which rows, and with DELETE to limit the damage."
+          "explanation": "Worth memorizing: always use WHERE with UPDATE to specify which rows, and with DELETE to limit the damage."
         },
         {
           "type": "mc",
@@ -1727,7 +1727,7 @@
             "A new row is added"
           ],
           "correct": 2,
-          "explanation": "Every row. This is exactly why the lecture says to always use WHERE with UPDATE and DELETE."
+          "explanation": "Every row. This is exactly why you always use WHERE with UPDATE and DELETE."
         },
         {
           "type": "mc",
@@ -1767,7 +1767,7 @@
         {
           "type": "mc",
           "category": "Multiple Choice",
-          "question": "Which list contains only basic ANSI data types named in the lecture?",
+          "question": "Which list contains only basic ANSI data types?",
           "options": [
             "NUMBER, NUMERIC, INTEGER, CHAR, VARCHAR, DATE",
             "STRING, FLOAT64, TIMESTAMP, BLOB, ENUM",
@@ -1782,7 +1782,7 @@
           "category": "True / False",
           "question": "Because dates are stored as a number of days, it is possible to do date arithmetic inside a query.",
           "correct": true,
-          "explanation": "Yes — though the lecture warns that comparison operators on dates are often more software-specific than other SQL procedures."
+          "explanation": "Yes — though comparison operators on dates are often more software-specific than other SQL procedures."
         },
         {
           "type": "mc",
@@ -2128,7 +2128,7 @@
           "hint": "UPDATE tablename SET column = expression WHERE …; The new value can be built from the old one.",
           "solution": "UPDATE gadget\nSET daily_fee = daily_fee + 2.00\nWHERE power_source = 'Gas';",
           "verify": "SELECT gadget_id, power_source, daily_fee FROM gadget ORDER BY gadget_id",
-          "explanation": "SET daily_fee = daily_fee + 2.00 reads the old value and writes the new one. Leaving off the WHERE would raise the price of all 45 gadgets — the mistake the lecture warns about."
+          "explanation": "SET daily_fee = daily_fee + 2.00 reads the old value and writes the new one. Leaving off the WHERE would raise the price of all 45 gadgets — the classic mistake with UPDATE."
         },
         {
           "type": "sql",
@@ -2145,6 +2145,7 @@
         {
           "type": "short_answer",
           "category": "SQL Writing",
+          "answerLang": "sql",
           "question": "Write a CREATE TABLE statement for a table called workshop with: a workshop_id integer primary key; a workshop_name that is text and may not be null; a seat_limit integer that defaults to 12; and a branch_id integer that is a foreign key referencing branch(branch_id).",
           "modelAnswer": "CREATE TABLE workshop (\n  workshop_id   INTEGER,\n  workshop_name VARCHAR(80) NOT NULL,\n  seat_limit    INTEGER DEFAULT 12,\n  branch_id     INTEGER,\n  PRIMARY KEY (workshop_id),\n  FOREIGN KEY (branch_id) REFERENCES branch(branch_id)\n);",
           "rubric": [
@@ -2185,12 +2186,12 @@
       ]
     },
     {
-      "name": "Part 2 · ERD Completion",
+      "name": "ERD & Crow's Foot Notation",
       "questions": [
         {
           "type": "matching",
           "category": "ERD Notation",
-          "question": "The exam's ERDs use a Connector Options legend: six line endings built from a circle, a bar, and a crow's foot.\n\nA = crow's foot only\nB = bar + crow's foot\nC = circle + crow's foot\nD = single bar\nE = double bar\nF = circle + bar\n\nMatch each connector to what it means.",
+          "question": "Crow's Foot notation marks each end of a relationship line with one of six connectors, built from a circle, a bar, and a crow's foot.\n\nA = crow's foot only\nB = bar + crow's foot\nC = circle + crow's foot\nD = single bar\nE = double bar\nF = circle + bar\n\nMatch each connector to what it means.",
           "pairs": [
             {
               "left": "A — crow's foot only",
@@ -2222,7 +2223,7 @@
         {
           "type": "mc",
           "category": "ERD Notation",
-          "question": "In the Connector Options legend, what does a circle on a relationship line always add?",
+          "question": "In Crow's Foot notation, what does a circle on a relationship line always add?",
           "options": [
             "That the participation is optional — the minimum is zero",
             "That the relationship is many",
@@ -2235,7 +2236,7 @@
         {
           "type": "mc",
           "category": "ERD Notation",
-          "question": "In the Connector Options legend, what does the crow's foot itself indicate?",
+          "question": "In Crow's Foot notation, what does the crow's foot itself indicate?",
           "options": [
             "Optional participation",
             "Many",
@@ -2257,7 +2258,7 @@
         {
           "type": "mc",
           "category": "ERD Notation",
-          "question": "On the exam's completed ERDs, an attribute name shown in bold and underlined at the top of the entity box represents the:",
+          "question": "On a completed ERD, an attribute name shown in bold and underlined at the top of the entity box represents the:",
           "options": [
             "Foreign key",
             "Primary key",
@@ -2270,7 +2271,7 @@
         {
           "type": "fill_blank",
           "category": "ERD Notation",
-          "question": "On the exam's completed ERDs, an attribute name shown in italics below the dividing line typically represents a ______ key.",
+          "question": "On a completed ERD, an attribute name shown in italics below the dividing line typically represents a ______ key.",
           "answers": [
             "foreign"
           ],
@@ -2279,7 +2280,7 @@
         {
           "type": "mc",
           "category": "ERD Notation",
-          "question": "An exam ERD shows an entity box laid out like this:\n\n    row 1:  P1 | **P2**   (bold, underlined)\n    row 2:  P3 | *P4*     (italic)\n    row 3:  P5 (one or more fields)\n\nWhat belongs in slot P1?",
+          "question": "An ERD shows an entity box laid out like this:\n\n    row 1:  P1 | **P2**   (bold, underlined)\n    row 2:  P3 | *P4*     (italic)\n    row 3:  P5 (one or more fields)\n\nWhat belongs in slot P1?",
           "options": [
             "The entity's name",
             "The marker PK, labelling the row beside it as the primary key",
@@ -2644,7 +2645,7 @@
         {
           "type": "tf",
           "category": "ERD",
-          "question": "When a business rule mentions no attributes at all, an exam ERD still needs the primary and foreign key fields.",
+          "question": "When a business rule mentions no attributes at all, the ERD still needs the primary and foreign key fields.",
           "correct": true,
           "explanation": "The keys are what carry the relationships, so they belong on the diagram even when the rules describe no other fields."
         },
@@ -2677,7 +2678,7 @@
       ]
     },
     {
-      "name": "Part 3 · Normalization & Dependency Sets",
+      "name": "Normalization & Dependency Sets",
       "questions": [
         {
           "type": "fill_blank",
@@ -2704,7 +2705,7 @@
         {
           "type": "matching",
           "category": "Normalization",
-          "question": "Match each normal form to its defining characteristic (Table 6.2).",
+          "question": "Match each normal form to its defining characteristic.",
           "pairs": [
             {
               "left": "First normal form (1NF)",
@@ -2727,7 +2728,7 @@
               "right": "In 3NF and no independent multivalued dependencies"
             }
           ],
-          "explanation": "Each form builds on the one before it. Memorizing \"1NF, then kill partial, then kill transitive\" gets you through most of Part 3."
+          "explanation": "Each form builds on the one before it. Memorizing \"1NF, then kill partial, then kill transitive\" gets you through most of a normalization problem."
         },
         {
           "type": "mc",
@@ -2747,7 +2748,7 @@
           "category": "True / False",
           "question": "All valid relational tables satisfy the 1NF requirements.",
           "correct": true,
-          "explanation": "The lecture states this outright. If it isn't in 1NF, it isn't really a relational table."
+          "explanation": "If a table isn't in 1NF, it isn't really a relational table."
         },
         {
           "type": "tf",
@@ -2864,7 +2865,7 @@
         {
           "type": "mc",
           "category": "Normalization",
-          "question": "The lecture notes that transitive dependencies are harder to spot than partial ones. Why?",
+          "question": "Transitive dependencies are harder to spot than partial ones. Why?",
           "options": [
             "They involve the primary key, which is often hidden",
             "They occur among nonprime attributes, so neither side of the dependency is part of the key",
@@ -3016,7 +3017,7 @@
         {
           "type": "tf",
           "category": "True / False",
-          "question": "The lecture warns that more tables require more I/O operations and processing logic to join them.",
+          "question": "More tables require more I/O operations and processing logic to join them.",
           "correct": true,
           "explanation": "Which is why it also says normalization is important, but only part of the design process."
         },
@@ -3031,7 +3032,7 @@
             "It fails none"
           ],
           "correct": 2,
-          "explanation": "BCNF requires every determinant to be a candidate key. The lecture describes it as a special case of 3NF."
+          "explanation": "BCNF requires every determinant to be a candidate key. It is a special case of 3NF."
         },
         {
           "type": "matching",
@@ -3062,7 +3063,7 @@
           "category": "True / False",
           "question": "Normalization is the whole of database design.",
           "correct": false,
-          "explanation": "The summary is careful here: normalization is important, but only part of the design process."
+          "explanation": "Normalization is important, but only part of the design process."
         },
         {
           "type": "short_answer",
@@ -3144,7 +3145,7 @@
             "Named a concrete anomaly caused by each",
             "Said both are fixed by splitting the determinant into its own table with a foreign key left behind"
           ],
-          "explanation": "If you can state the fix in one sentence — new table keyed on the determinant, foreign key left behind — you can normalize anything the exam puts in front of you."
+          "explanation": "If you can state the fix in one sentence — new table keyed on the determinant, foreign key left behind — you can normalize anything you're given."
         },
         {
           "type": "short_answer",
@@ -3157,7 +3158,7 @@
             "Concluded that such a table is automatically in 2NF",
             "Warned that the 3NF check still matters, because transitive dependencies are unaffected"
           ],
-          "explanation": "Worth internalizing before the exam: composite key means look for partial dependencies; any key at all means look for transitive ones."
+          "explanation": "Worth internalizing: composite key means look for partial dependencies; any key at all means look for transitive ones."
         }
       ]
     }

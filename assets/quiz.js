@@ -146,6 +146,14 @@ function appendNextButton(card, isLast){
   document.getElementById('next-btn').addEventListener('click', () => { current += 1; render(); });
 }
 
+/* A model answer is rendered as highlighted SQL when the question says it is
+ * one: `sql` questions always, and any other question that sets answerLang. */
+function answerBlock(text, item, extraClass){
+  const isSql = item && (item.type === 'sql' || item.answerLang === 'sql');
+  if(isSql && typeof SqlHL !== 'undefined') return SqlHL.block(text, extraClass);
+  return `<pre class="model-answer${extraClass ? ' ' + extraClass : ''}">${nl2br(text)}</pre>`;
+}
+
 /* ---------- Multiple choice / True-False ---------- */
 function renderMC(card, item, badge, options, correctIndex){
   card.innerHTML = `
@@ -306,7 +314,7 @@ function renderShortAnswer(card, item, badge){
     feedbackEl.innerHTML = `
       <div class="feedback" style="background:#eef1f6; color:var(--ink);">
         <strong>Model answer</strong>
-        <pre class="model-answer">${nl2br(item.modelAnswer)}</pre>
+        ${answerBlock(item.modelAnswer, item)}
         ${item.explanation ? `<div style="margin-top:8px;">${escapeHtml(item.explanation)}</div>` : ''}
       </div>
       <div class="rubric-box">
@@ -363,7 +371,7 @@ function renderBinarySelfGrade(card, feedbackEl, item){
   feedbackEl.innerHTML = `
     <div class="feedback" style="background:#eef1f6; color:var(--ink);">
       <strong>Model answer</strong>
-      <pre class="model-answer">${nl2br(item.modelAnswer)}</pre>
+      ${answerBlock(item.modelAnswer, item)}
       ${item.explanation ? `<div style="margin-top:8px;">${escapeHtml(item.explanation)}</div>` : ''}
     </div>
     <div class="q-actions" style="justify-content:flex-start; margin-top:14px; gap:10px;">
@@ -419,6 +427,7 @@ function renderSql(card, item, badge){
   `;
 
   const input = document.getElementById('sql-input');
+  if(typeof SqlHL !== 'undefined') SqlHL.attach(input);
   const runBtn = document.getElementById('sql-run');
   const checkBtn = document.getElementById('sql-check');
   const statusEl = document.getElementById('sql-status');
@@ -512,7 +521,7 @@ function renderSql(card, item, badge){
       </div>
       <div class="feedback" style="background:#eef1f6; color:var(--ink);">
         <strong>One correct way to write it</strong>
-        <pre class="model-answer">${nl2br(item.solution)}</pre>
+        ${answerBlock(item.solution, item)}
         ${item.explanation ? `<div style="margin-top:8px;">${escapeHtml(item.explanation)}</div>` : ''}
       </div>
       <div class="sql-note">Your score for this question is recorded. Keep editing and hit
@@ -588,19 +597,19 @@ function renderResults(){
         </div>
       `).join('');
       bodyHtml = `
-        <pre class="model-answer">${nl2br(a.detail.correctAnswer)}</pre>
+        ${answerBlock(a.detail.correctAnswer, q)}
         <div class="rubric-review">${rows}</div>
       `;
     } else if(a.detail && a.detail.sqlGraded){
       bodyHtml = `
         <div class="review-sub">What you wrote</div>
-        <pre class="model-answer your-sql">${nl2br(a.detail.yourAnswer || '(nothing)')}</pre>
+        ${answerBlock(a.detail.yourAnswer || '(nothing)', q, 'your-sql')}
         ${a.detail.verdict && !a.correct ? `<div class="review-answer">${escapeHtml(a.detail.verdict)}</div>` : ''}
         <div class="review-sub">One correct way to write it</div>
-        <pre class="model-answer">${nl2br(a.detail.correctAnswer)}</pre>
+        ${answerBlock(a.detail.correctAnswer, q)}
       `;
     } else if(a.detail && a.detail.selfGraded){
-      bodyHtml = `<pre class="model-answer">${nl2br(a.detail.correctAnswer)}</pre>`;
+      bodyHtml = answerBlock(a.detail.correctAnswer, q);
     } else if(a.detail){
       bodyHtml = `
         <div class="review-answer">Your answer: ${escapeHtml(a.detail.yourAnswer)}</div>

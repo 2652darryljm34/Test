@@ -850,3 +850,91 @@ footer.site{
 .tool-row{ background: #eef4f1; }
 .tool-row:hover{ background: #e2ede7; }
 .tool-badge{ background: #2f8f5b; }
+
+/* ===========================================================================
+   SQL syntax highlighting
+   =========================================================================== */
+
+:root{
+  --tok-keyword: #2d5aa8;
+  --tok-func:    #7a3ea8;
+  --tok-string:  #1f6f45;
+  --tok-number:  #a8442a;
+  --tok-comment: #6b7286;
+  --tok-op:      #565f78;
+  --tok-ident:   var(--ink);
+}
+
+.tok-keyword{ color: var(--tok-keyword); font-weight: 600; }
+.tok-func{ color: var(--tok-func); }
+.tok-string{ color: var(--tok-string); }
+.tok-number{ color: var(--tok-number); }
+.tok-comment{ color: var(--tok-comment); font-style: italic; }
+.tok-op{ color: var(--tok-op); }
+.tok-ident{ color: var(--tok-ident); }
+.tok-ident-quoted{ color: var(--tok-ident); }
+
+/* Read-only highlighted block */
+pre.sql-hl{ white-space: pre-wrap; }
+pre.sql-hl code{ font: inherit; background: none; padding: 0; }
+
+/* ---------- Live editor overlay ----------
+   The <pre> and the <textarea> stack in the same box and must agree on every
+   metric that affects where a glyph lands: font, size, line-height, padding,
+   border width, wrapping and tab size. Change one, change both. */
+
+.sql-editor{
+  position: relative;
+  width: 100%;
+}
+
+.sql-editor > .sql-input-live,
+.sql-editor > .sql-editor-hl{
+  margin: 0;
+  font-family: 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  letter-spacing: normal;
+  padding: 12px 14px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-break: normal;
+  tab-size: 2;
+}
+
+.sql-editor > .sql-editor-hl{
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--card);
+  border-color: var(--line);
+  color: var(--tok-ident);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* The textarea stays in flow, so it sets the height the overlay stretches to —
+   and its resize handle keeps working. Its own glyphs are invisible; only the
+   caret and the selection show through to the highlighted copy beneath. */
+.sql-editor > .sql-input-live{
+  position: relative;
+  display: block;
+  width: 100%;
+  z-index: 1;
+  background: transparent;
+  color: transparent;
+  caret-color: var(--ink);
+  resize: vertical;
+}
+.sql-editor > .sql-input-live::selection{ background: #cfe0f6; color: transparent; }
+.sql-editor > .sql-input-live:focus{
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+.sql-editor:focus-within > .sql-editor-hl{ border-color: var(--accent); }
+
+/* Highlighted code blocks inside a study guide */
+.guide-code.sql-hl{ white-space: pre-wrap; }

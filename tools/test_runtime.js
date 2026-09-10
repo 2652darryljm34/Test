@@ -197,6 +197,66 @@ async function loadHarborDB() {
   t.exec('DELETE FROM region WHERE region_id=99');
   eq('DELETE', t.rowCount('region'), 4);
 
+  console.log('\nsyntax highlighting');
+  const SqlHL = require(path.join(ROOT, 'assets', 'sqlhl.js'));
+  const hl = SqlHL.highlight.bind(SqlHL);
+  const strip = s => s.replace(/<[^>]*>/g, '');
+
+  ok('keywords are tagged', /tok-keyword">SELECT</.test(hl('SELECT 1')));
+  ok('keywords are case-insensitive', /tok-keyword">select</.test(hl('select 1')));
+  ok('identifiers are not keywords', /tok-ident">gadget_title</.test(hl('SELECT gadget_title')));
+  ok('strings are tagged', /tok-string">&#39;Gas&#39;</.test(hl("WHERE power_source = 'Gas'")));
+  ok('numbers are tagged', /tok-number">2\.00</.test(hl('SET fee = 2.00')));
+  ok('line comments are tagged', /tok-comment">-- note</.test(hl('-- note\nSELECT 1')));
+  ok('block comments are tagged', /tok-comment">\/\* x \*\//.test(hl('/* x */ SELECT 1')));
+  ok('function calls are tagged', /tok-func">count</.test(hl('SELECT count(*)')));
+
+  // LEFT is a keyword in a join and a function in a call; "(" decides.
+  ok('LEFT JOIN reads as a keyword', /tok-keyword">LEFT</.test(hl('FROM a LEFT JOIN b')));
+  ok('left( reads as a function', /tok-func">left</.test(hl('SELECT left(name, 3)')));
+
+  // The editor overlay renders typed text through innerHTML.
+  const nasty = `SELECT '<img src=x onerror=alert(1)>' AS "a&b" -- <script>`;
+  const out = hl(nasty);
+  ok('no raw < survives', !/<(?!\/?span)/.test(out), out.slice(0, 120));
+  ok('angle brackets are escaped', out.includes('&lt;img'));
+  ok('ampersands are escaped', out.includes('a&amp;b'));
+  ok('text round-trips unchanged', strip(out)
+    .replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"').replace(/&#39;/g, "'")
+    .replace(/&amp;/g, '&') === nasty);
+
+  // An unterminated string must not swallow the rest or drop characters.
+  // Half-typed SQL is the normal state of an editor, so it must not break.
+  ok('unterminated string is survivable',
+    strip(hl("SELECT 'oops")).replace(/&#39;/g, "'").endsWith("'oops"));
+  ok('empty input is fine', hl('') === '');
+
+  let roundTrips = true;
+  for (const q of ['SELECT * FROM gadget;', "UPDATE g SET f = f + 2.00 WHERE p = 'Gas';",
+                   'SELECT a.x, b.y\nFROM a\nINNER JOIN b USING (id)\nORDER BY 1 DESC;']) {
+    const back = strip(hl(q)).replace(/&#39;/g, "'").replace(/&amp;/g, '&');
+    if (back !== q) { roundTrips = false; console.log('  round-trip lost: ' + JSON.stringify(q)); }
+  }
+  ok('highlighting never loses characters', roundTrips);
+
+  ok('block() wraps in a pre/code', /^<pre class="model-answer sql-hl"><code>/.test(SqlHL.block('SELECT 1')));
+
+  // Every SQL string that ships must survive the tokenizer intact.
+  const guide = JSON.parse(
+    fs.readFileSync(path.join(ROOT, 'data', 'itd256-midterm-guide.json'), 'utf8'));
+  let marked = 0, guideOk = true;
+  guide.sections.forEach(s => s.blocks.forEach(b => {
+    if (b.type === 'code' && b.lang === 'sql') {
+      marked++;
+      const back = strip(hl(b.text)).replace(/&#39;/g, "'").replace(/&amp;/g, '&')
+        .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');
+      if (back !== b.text) { guideOk = false; console.log('  guide block altered: ' + b.text.slice(0, 40)); }
+    }
+  }));
+  ok('guide SQL blocks are marked (' + marked + ')', marked > 0);
+  ok('guide SQL blocks round-trip', guideOk);
+
   console.log('\nplayground warm-ups');
   const src = fs.readFileSync(path.join(ROOT, 'assets', 'sql.js'), 'utf8');
   const m = /const RECIPES = (\[[\s\S]*?\n  \]);/.exec(src);
