@@ -5,8 +5,11 @@
       "type": "fill_blank",
       "category": "Fill in the Blank",
       "question": "A key is one or more attributes that ______ other attributes.",
-      "answers": ["determine"],
-      "explanation": "Keys determine other attributes. That single word is what connects keys to normalization."
+      "answers": [
+        "determine"
+      ],
+      "explanation": "Keys determine other attributes. That single word is what connects keys to normalization.",
+      "core": true
     },
     {
       "type": "mc",
@@ -26,12 +29,30 @@
       "category": "Matching",
       "question": "Match each type of key to its definition.",
       "pairs": [
-        { "left": "Primary key", "right": "The attribute or combination that uniquely identifies a row" },
-        { "left": "Composite key", "right": "A key composed of more than one attribute" },
-        { "left": "Superkey", "right": "Any key that can uniquely identify a row" },
-        { "left": "Candidate key", "right": "A minimal superkey — nothing can be removed from it" },
-        { "left": "Foreign key", "right": "The primary key of one table placed in another to create a common attribute" },
-        { "left": "Secondary key", "right": "A key used strictly for data retrieval purposes" }
+        {
+          "left": "Primary key",
+          "right": "The attribute or combination that uniquely identifies a row"
+        },
+        {
+          "left": "Composite key",
+          "right": "A key composed of more than one attribute"
+        },
+        {
+          "left": "Superkey",
+          "right": "Any key that can uniquely identify a row"
+        },
+        {
+          "left": "Candidate key",
+          "right": "A minimal superkey — nothing can be removed from it"
+        },
+        {
+          "left": "Foreign key",
+          "right": "The primary key of one table placed in another to create a common attribute"
+        },
+        {
+          "left": "Secondary key",
+          "right": "A key used strictly for data retrieval purposes"
+        }
       ],
       "explanation": "Note the relationship: every candidate key is a superkey, but a superkey is only a candidate key if it's minimal."
     },
@@ -39,7 +60,9 @@
       "type": "fill_blank",
       "category": "Fill in the Blank",
       "question": "A candidate key is a ______ superkey — one from which no attribute can be removed and still identify a row.",
-      "answers": ["minimal"],
+      "answers": [
+        "minimal"
+      ],
       "explanation": "Minimal. Add an extra column to a candidate key and you still have a superkey, but no longer a candidate key."
     },
     {
@@ -59,7 +82,9 @@
       "type": "fill_blank",
       "category": "Fill in the Blank",
       "question": "An attribute that is part of a key is called a ______ attribute.",
-      "answers": ["key"],
+      "answers": [
+        "key"
+      ],
       "explanation": "A key attribute. Attributes that are not part of any candidate key are called nonprime (or non-key) attributes."
     },
     {
@@ -67,11 +92,21 @@
       "category": "Matching",
       "question": "Match each kind of primary key to its description.",
       "pairs": [
-        { "left": "Natural key", "right": "A real-world identifier already familiar to end users" },
-        { "left": "Surrogate key", "right": "A made-up, artificial value such as an auto-number" },
-        { "left": "Composite primary key", "right": "A primary key built from more than one attribute" }
+        {
+          "left": "Natural key",
+          "right": "A real-world identifier already familiar to end users"
+        },
+        {
+          "left": "Surrogate key",
+          "right": "A made-up, artificial value such as an auto-number"
+        },
+        {
+          "left": "Composite primary key",
+          "right": "A primary key built from more than one attribute"
+        }
       ],
-      "explanation": "A natural key is part of the day-to-day business vocabulary; a surrogate key exists only to be a key."
+      "explanation": "A natural key is part of the day-to-day business vocabulary; a surrogate key exists only to be a key.",
+      "core": true
     },
     {
       "type": "mc",
@@ -90,7 +125,12 @@
       "type": "mc",
       "category": "Multiple Choice",
       "question": "A tool library identifies each borrower by an auto-numbered patron_id rather than by their email address. patron_id is a:",
-      "options": ["Natural key", "Surrogate key", "Secondary key", "Foreign key"],
+      "options": [
+        "Natural key",
+        "Surrogate key",
+        "Secondary key",
+        "Foreign key"
+      ],
       "correct": 1,
       "explanation": "It's made up by the system rather than drawn from the real world, so it's a surrogate key."
     },
@@ -99,13 +139,16 @@
       "category": "True / False",
       "question": "Every table row must have a primary key.",
       "correct": true,
-      "explanation": "Each table row must have a primary key. That is entity integrity."
+      "explanation": "Each table row must have a primary key. That is entity integrity.",
+      "core": true
     },
     {
       "type": "fill_blank",
       "category": "Fill in the Blank",
       "question": "The condition in which each row in a table has its own unique identity is called ______ integrity.",
-      "answers": ["entity"],
+      "answers": [
+        "entity"
+      ],
       "explanation": "Entity integrity: all primary key values are unique, and no part of a primary key may be null."
     },
     {
@@ -113,10 +156,17 @@
       "category": "Matching",
       "question": "Match each integrity rule to its requirement.",
       "pairs": [
-        { "left": "Entity integrity", "right": "All primary key entries are unique, and no part of a primary key may be null" },
-        { "left": "Referential integrity", "right": "A foreign key is either null, or matches a primary key value in the related table" }
+        {
+          "left": "Entity integrity",
+          "right": "All primary key entries are unique, and no part of a primary key may be null"
+        },
+        {
+          "left": "Referential integrity",
+          "right": "A foreign key is either null, or matches a primary key value in the related table"
+        }
       ],
-      "explanation": "Entity integrity governs the primary key of a row; referential integrity governs the foreign key pointing at another row."
+      "explanation": "Entity integrity governs the primary key of a row; referential integrity governs the foreign key pointing at another row.",
+      "core": true
     },
     {
       "type": "mc",
@@ -168,8 +218,11 @@
       "type": "fill_blank",
       "category": "Fill in the Blank",
       "question": "The absence of any data value in a column is called a ______.",
-      "answers": ["null"],
-      "explanation": "A null. It can mean an unknown value, a known but missing value, or an inapplicable condition."
+      "answers": [
+        "null"
+      ],
+      "explanation": "A null. It can mean an unknown value, a known but missing value, or an inapplicable condition.",
+      "core": true
     },
     {
       "type": "mc",
@@ -189,18 +242,36 @@
       "category": "Matching",
       "question": "Match each catalogue-style term to what it actually describes.",
       "pairs": [
-        { "left": "Data dictionary", "right": "A description of all tables in the database, created by the user and designer" },
-        { "left": "System catalog", "right": "A system data dictionary describing all objects in the database" },
-        { "left": "Database schema", "right": "The complete logical view — the full description of the database" },
-        { "left": "Relational schema", "right": "The description of one individual table" }
+        {
+          "left": "Data dictionary",
+          "right": "A description of all tables in the database, created by the user and designer"
+        },
+        {
+          "left": "System catalog",
+          "right": "A system data dictionary describing all objects in the database"
+        },
+        {
+          "left": "Database schema",
+          "right": "The complete logical view — the full description of the database"
+        },
+        {
+          "left": "Relational schema",
+          "right": "The description of one individual table"
+        }
       ],
-      "explanation": "Note the distinction: the database schema covers everything; a relational schema is per-table."
+      "explanation": "Note the distinction: the database schema covers everything; a relational schema is per-table.",
+      "core": true
     },
     {
       "type": "mc",
       "category": "Multiple Choice",
       "question": "Which relationship type is the norm for relational databases?",
-      "options": ["One-to-one (1:1)", "One-to-many (1:M)", "Many-to-many (M:N)", "Many-to-one only"],
+      "options": [
+        "One-to-one (1:1)",
+        "One-to-many (1:M)",
+        "Many-to-many (M:N)",
+        "Many-to-one only"
+      ],
       "correct": 1,
       "explanation": "1:M is the most common type in relational databases."
     },
@@ -215,16 +286,26 @@
         "By storing a comma-separated list of key values in one column"
       ],
       "correct": 1,
-      "explanation": "A new connecting entity — a bridge/composite/associative entity — sits between them in two 1:M relationships."
+      "explanation": "A new connecting entity — a bridge/composite/associative entity — sits between them in two 1:M relationships.",
+      "core": true
     },
     {
       "type": "matching",
       "category": "Matching",
       "question": "The bridge table in an M:N relationship goes by several names. Match each term to its meaning.",
       "pairs": [
-        { "left": "Composite entity", "right": "The connecting table created to resolve an M:N relationship" },
-        { "left": "Bridge table", "right": "Another name for that same connecting table" },
-        { "left": "Associative entity", "right": "A third name for it, emphasising that it records an association" }
+        {
+          "left": "Composite entity",
+          "right": "The connecting table created to resolve an M:N relationship"
+        },
+        {
+          "left": "Bridge table",
+          "right": "Another name for that same connecting table"
+        },
+        {
+          "left": "Associative entity",
+          "right": "A third name for it, emphasising that it records an association"
+        }
       ],
       "explanation": "Composite, bridge and associative all name the same thing. It includes the primary keys of the tables being linked, as foreign keys."
     },
@@ -239,7 +320,8 @@
         "Nothing — it is a view, not a table"
       ],
       "correct": 1,
-      "explanation": "It includes the primary keys of the tables to be linked, as foreign keys — and together those usually form its composite primary key."
+      "explanation": "It includes the primary keys of the tables to be linked, as foreign keys — and together those usually form its composite primary key.",
+      "core": true
     },
     {
       "type": "mc",
@@ -252,7 +334,8 @@
         "Because the DBMS forbids more than two foreign keys per table"
       ],
       "correct": 1,
-      "explanation": "Assigning one employee to projects 1, 2 and 3 would mean writing \"1,2,3\" into proj_id. That breaks atomicity, so a third table is required."
+      "explanation": "Assigning one employee to projects 1, 2 and 3 would mean writing \"1,2,3\" into proj_id. That breaks atomicity, so a third table is required.",
+      "core": true
     },
     {
       "type": "mc",
@@ -265,7 +348,8 @@
         "Surrogate keys generated by the DBMS"
       ],
       "correct": 1,
-      "explanation": "Each is a foreign key on its own; together they form the composite primary key of the bridge table."
+      "explanation": "Each is a foreign key on its own; together they form the composite primary key of the bridge table.",
+      "core": true
     },
     {
       "type": "mc",
@@ -291,7 +375,8 @@
         "In neither — the join works without one"
       ],
       "correct": 0,
-      "explanation": "Many departments per division means the many side is DEPARTMENT, so division_id goes there. Putting department_id in DIVISION would only allow one department per division."
+      "explanation": "Many departments per division means the many side is DEPARTMENT, so division_id goes there. Putting department_id in DIVISION would only allow one department per division.",
+      "core": true
     },
     {
       "type": "tf",
@@ -304,7 +389,12 @@
       "type": "mc",
       "category": "Multiple Choice",
       "question": "What is the basic building block of a relational database?",
-      "options": ["The index", "The table", "The query", "The view"],
+      "options": [
+        "The index",
+        "The table",
+        "The query",
+        "The view"
+      ],
       "correct": 1,
       "explanation": "Tables are the basic building blocks, and keys are central to using them."
     },
@@ -312,7 +402,9 @@
       "type": "fill_blank",
       "category": "Fill in the Blank",
       "question": "A key that is used strictly for data retrieval purposes — not to enforce uniqueness or relationships — is called a ______ key.",
-      "answers": ["secondary"],
+      "answers": [
+        "secondary"
+      ],
       "explanation": "A secondary key exists to make retrieval convenient, e.g. looking customers up by surname."
     },
     {
@@ -366,7 +458,8 @@
       "category": "True / False",
       "question": "In entity relationship modeling, an M:N relationship is valid at the conceptual level.",
       "correct": true,
-      "explanation": "Valid conceptually — but for the logical model and the actual ERD you need a bridge table."
+      "explanation": "Valid conceptually — but for the logical model and the actual ERD you need a bridge table.",
+      "core": true
     },
     {
       "type": "mc",
@@ -385,7 +478,10 @@
       "type": "fill_blank",
       "category": "Fill in the Blank",
       "question": "______ describes the relationship classification — 1:1, 1:M or M:N — on an ERD.",
-      "answers": ["cardinality", "connectivity"],
+      "answers": [
+        "cardinality",
+        "connectivity"
+      ],
       "explanation": "Connectivity and cardinality are used together for this: connectivity labels the type, cardinality expresses the numbers."
     },
     {

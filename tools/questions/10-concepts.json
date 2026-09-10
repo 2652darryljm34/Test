@@ -6,30 +6,61 @@
       "category": "Terminology",
       "question": "Match each basic file-system term to its definition.",
       "pairs": [
-        { "left": "Data", "right": "Raw facts, with little meaning until organized" },
-        { "left": "Field", "right": "A character or group of characters with a specific meaning" },
-        { "left": "Record", "right": "A logically connected set of fields describing one person, place or thing" },
-        { "left": "File", "right": "A collection of related records, in a non-DBMS system" },
-        { "left": "Table", "right": "A collection of related records, inside a DBMS" }
+        {
+          "left": "Data",
+          "right": "Raw facts, with little meaning until organized"
+        },
+        {
+          "left": "Field",
+          "right": "A character or group of characters with a specific meaning"
+        },
+        {
+          "left": "Record",
+          "right": "A logically connected set of fields describing one person, place or thing"
+        },
+        {
+          "left": "File",
+          "right": "A collection of related records, in a non-DBMS system"
+        },
+        {
+          "left": "Table",
+          "right": "A collection of related records, inside a DBMS"
+        }
       ],
-      "explanation": "File and Table have the same definition — the name changes depending on whether you're in a file-based system or a DBMS."
+      "explanation": "File and Table have the same definition — the name changes depending on whether you're in a file-based system or a DBMS.",
+      "core": true
     },
     {
       "type": "matching",
       "category": "Terminology",
       "question": "Each file-system term has a database equivalent. Match them.",
       "pairs": [
-        { "left": "Field", "right": "Attribute" },
-        { "left": "Record", "right": "Entity instance" },
-        { "left": "Table", "right": "Entity" }
+        {
+          "left": "Field",
+          "right": "Attribute"
+        },
+        {
+          "left": "Record",
+          "right": "Entity instance"
+        },
+        {
+          "left": "Table",
+          "right": "Entity"
+        }
       ],
-      "explanation": "Field = attribute, record = entity instance, table = entity. These pairs come up constantly once you start drawing ERDs."
+      "explanation": "Field = attribute, record = entity instance, table = entity. These pairs come up constantly once you start drawing ERDs.",
+      "core": true
     },
     {
       "type": "mc",
       "category": "Multiple Choice",
       "question": "\"Raw facts, such as a telephone number or a birth date, that have little meaning unless organized in some logical manner\" is the definition of:",
-      "options": ["Information", "Data", "A record", "Metadata"],
+      "options": [
+        "Information",
+        "Data",
+        "A record",
+        "Metadata"
+      ],
       "correct": 1,
       "explanation": "That's data. Information is what you get after data is processed and given context."
     },
@@ -37,14 +68,22 @@
       "type": "fill_blank",
       "category": "Fill in the Blank",
       "question": "A character or group of characters, alpha or numeric, that has a specific meaning is called a ______.",
-      "answers": ["field", "attribute"],
+      "answers": [
+        "field",
+        "attribute"
+      ],
       "explanation": "A field — known as an attribute once you're talking in database terms."
     },
     {
       "type": "mc",
       "category": "Multiple Choice",
       "question": "In a DBMS, a collection of related records is called a table. In a file-based system, the same collection is called a:",
-      "options": ["File", "Folder", "Schema", "Tuple"],
+      "options": [
+        "File",
+        "Folder",
+        "Schema",
+        "Tuple"
+      ],
       "correct": 0,
       "explanation": "Same definition, different name: file outside a DBMS, table inside one."
     },
@@ -53,17 +92,29 @@
       "category": "Matching",
       "question": "Databases can be classified by the degree of structure in their data. Match each level to its description.",
       "pairs": [
-        { "left": "Unstructured", "right": "Data exists in its original, raw state" },
-        { "left": "Structured", "right": "Data results from formatting, applied to suit a type of processing" },
-        { "left": "Semistructured", "right": "Data that has been partially processed — XML, for instance" }
+        {
+          "left": "Unstructured",
+          "right": "Data exists in its original, raw state"
+        },
+        {
+          "left": "Structured",
+          "right": "Data results from formatting, applied to suit a type of processing"
+        },
+        {
+          "left": "Semistructured",
+          "right": "Data that has been partially processed — XML, for instance"
+        }
       ],
-      "explanation": "XML is the standard example of semistructured data: it represents data elements in a textual format without imposing a full relational structure."
+      "explanation": "XML is the standard example of semistructured data: it represents data elements in a textual format without imposing a full relational structure.",
+      "core": true
     },
     {
       "type": "fill_blank",
       "category": "Fill in the Blank",
       "question": "XML — the usual example of semistructured data — stands for Extensible ______ Language.",
-      "answers": ["markup"],
+      "answers": [
+        "markup"
+      ],
       "explanation": "Extensible Markup Language. It represents data elements in a textual format."
     },
     {
@@ -71,9 +122,18 @@
       "category": "Matching",
       "question": "Databases can also be classified by location. Match each type to its description.",
       "pairs": [
-        { "left": "Centralized", "right": "Data is located at a single site" },
-        { "left": "Distributed", "right": "Data is spread across several different sites" },
-        { "left": "Cloud", "right": "Created and maintained with cloud services that provide defined performance measures" }
+        {
+          "left": "Centralized",
+          "right": "Data is located at a single site"
+        },
+        {
+          "left": "Distributed",
+          "right": "Data is spread across several different sites"
+        },
+        {
+          "left": "Cloud",
+          "right": "Created and maintained with cloud services that provide defined performance measures"
+        }
       ],
       "explanation": "Location-based classification: one site, many sites, or a cloud provider's infrastructure."
     },
@@ -81,7 +141,12 @@
       "type": "mc",
       "category": "Multiple Choice",
       "question": "A database that stores historical data and business metrics used exclusively for tactical or strategic decision making is a(n):",
-      "options": ["Transactional database", "Analytical database", "Centralized database", "Distributed database"],
+      "options": [
+        "Transactional database",
+        "Analytical database",
+        "Centralized database",
+        "Distributed database"
+      ],
       "correct": 1,
       "explanation": "Analytical databases support decision making. Transactional (operational) databases support day-to-day operations."
     },
@@ -90,9 +155,18 @@
       "category": "Matching",
       "question": "Match each decision-support term to what it actually is.",
       "pairs": [
-        { "left": "Data warehouse", "right": "Stores data in a format optimized for decision support" },
-        { "left": "OLAP", "right": "Tools that retrieve, process and model data from a data warehouse" },
-        { "left": "Business intelligence", "right": "Capturing and processing business data to generate information supporting decisions" }
+        {
+          "left": "Data warehouse",
+          "right": "Stores data in a format optimized for decision support"
+        },
+        {
+          "left": "OLAP",
+          "right": "Tools that retrieve, process and model data from a data warehouse"
+        },
+        {
+          "left": "Business intelligence",
+          "right": "Capturing and processing business data to generate information supporting decisions"
+        }
       ],
       "explanation": "OLAP stands for online analytical processing — the tooling layer that sits over the warehouse."
     },
@@ -100,7 +174,9 @@
       "type": "fill_blank",
       "category": "Fill in the Blank",
       "question": "OLAP stands for online ______ processing.",
-      "answers": ["analytical"],
+      "answers": [
+        "analytical"
+      ],
       "explanation": "Online analytical processing — the tools used to retrieve, process and model data from a data warehouse."
     },
     {
@@ -128,10 +204,22 @@
       "category": "Matching",
       "question": "Match each dependence/independence term to its meaning.",
       "pairs": [
-        { "left": "Structural dependence", "right": "Access to a file depends on its own structure, so programs must change when the structure does" },
-        { "left": "Structural independence", "right": "The file structure can change without affecting the application's ability to access the data" },
-        { "left": "Data dependence", "right": "Data access changes when data storage characteristics change" },
-        { "left": "Data independence", "right": "Storage characteristics can change without affecting the program's ability to access data" }
+        {
+          "left": "Structural dependence",
+          "right": "Access to a file depends on its own structure, so programs must change when the structure does"
+        },
+        {
+          "left": "Structural independence",
+          "right": "The file structure can change without affecting the application's ability to access the data"
+        },
+        {
+          "left": "Data dependence",
+          "right": "Data access changes when data storage characteristics change"
+        },
+        {
+          "left": "Data independence",
+          "right": "Storage characteristics can change without affecting the program's ability to access data"
+        }
       ],
       "explanation": "Structural is about the shape of the file; data is about how it's physically stored. In both cases, independence is the goal."
     },
@@ -146,7 +234,8 @@
         "The compression algorithm applied to the file"
       ],
       "correct": 1,
-      "explanation": "Logical = the representation to the application or user. Physical = actual storage on hardware, which should be hidden completely and of no concern to the user."
+      "explanation": "Logical = the representation to the application or user. Physical = actual storage on hardware, which should be hidden completely and of no concern to the user.",
+      "core": true
     },
     {
       "type": "tf",
@@ -172,14 +261,22 @@
       "type": "fill_blank",
       "category": "Fill in the Blank",
       "question": "Unnecessarily storing the same data at different places is called data ______.",
-      "answers": ["redundancy"],
-      "explanation": "Data redundancy. It creates \"islands of information\" and raises the odds of different versions of the same data existing at once."
+      "answers": [
+        "redundancy"
+      ],
+      "explanation": "Data redundancy. It creates \"islands of information\" and raises the odds of different versions of the same data existing at once.",
+      "core": true
     },
     {
       "type": "mc",
       "category": "Multiple Choice",
       "question": "Scattered, duplicated data locations are described with the phrase:",
-      "options": ["Data silos", "Islands of information", "Shadow tables", "Orphan records"],
+      "options": [
+        "Data silos",
+        "Islands of information",
+        "Shadow tables",
+        "Orphan records"
+      ],
       "correct": 1,
       "explanation": "Islands of information — the same data kept in several disconnected places."
     },
@@ -187,7 +284,12 @@
       "type": "mc",
       "category": "Multiple Choice",
       "question": "Which is NOT listed as a possible result of uncontrolled data redundancy?",
-      "options": ["Poor data security", "Data inconsistency", "Data-entry errors", "Improved query performance"],
+      "options": [
+        "Poor data security",
+        "Data inconsistency",
+        "Data-entry errors",
+        "Improved query performance"
+      ],
       "correct": 3,
       "explanation": "Poor security, inconsistency, data-entry errors, integrity problems and anomalies are the listed consequences. Performance is not among them."
     },
@@ -195,7 +297,9 @@
       "type": "fill_blank",
       "category": "Fill in the Blank",
       "question": "Anomalies develop when not all of the required changes in redundant data are made ______.",
-      "answers": ["successfully"],
+      "answers": [
+        "successfully"
+      ],
       "explanation": "If redundant copies are only partly updated, the data disagrees with itself — that's an anomaly."
     },
     {
@@ -203,17 +307,32 @@
       "category": "Matching",
       "question": "Match each anomaly to what goes wrong.",
       "pairs": [
-        { "left": "Update anomaly", "right": "Changed data ends up inconsistent or incomplete" },
-        { "left": "Insertion anomaly", "right": "New data cannot be recorded completely" },
-        { "left": "Deletion anomaly", "right": "Removing one fact partially removes another" }
+        {
+          "left": "Update anomaly",
+          "right": "Changed data ends up inconsistent or incomplete"
+        },
+        {
+          "left": "Insertion anomaly",
+          "right": "New data cannot be recorded completely"
+        },
+        {
+          "left": "Deletion anomaly",
+          "right": "Removing one fact partially removes another"
+        }
       ],
-      "explanation": "These three are the reason normalization exists — they all come from putting facts about different things in the same table."
+      "explanation": "These three are the reason normalization exists — they all come from putting facts about different things in the same table.",
+      "core": true
     },
     {
       "type": "mc",
       "category": "Multiple Choice",
       "question": "A community centre keeps instructor phone numbers in every row of its CLASS_SESSION table. An instructor changes number, but only some rows get edited. Which anomaly is this?",
-      "options": ["Insertion anomaly", "Update anomaly", "Deletion anomaly", "Referential anomaly"],
+      "options": [
+        "Insertion anomaly",
+        "Update anomaly",
+        "Deletion anomaly",
+        "Referential anomaly"
+      ],
       "correct": 1,
       "explanation": "An update anomaly: redundant copies were only partly changed, so the table now holds two different numbers for one instructor."
     },
@@ -221,7 +340,12 @@
       "type": "mc",
       "category": "Multiple Choice",
       "question": "The same centre cannot record a newly hired instructor until that instructor is assigned to a class, because instructor details live only in CLASS_SESSION. Which anomaly is this?",
-      "options": ["Insertion anomaly", "Update anomaly", "Deletion anomaly", "Transitive anomaly"],
+      "options": [
+        "Insertion anomaly",
+        "Update anomaly",
+        "Deletion anomaly",
+        "Transitive anomaly"
+      ],
       "correct": 0,
       "explanation": "An insertion anomaly: you can't add one fact without also having an unrelated one."
     },
@@ -229,7 +353,12 @@
       "type": "mc",
       "category": "Multiple Choice",
       "question": "Deleting the last class an instructor taught also erases that instructor's phone number entirely. Which anomaly is this?",
-      "options": ["Insertion anomaly", "Update anomaly", "Deletion anomaly", "Partial anomaly"],
+      "options": [
+        "Insertion anomaly",
+        "Update anomaly",
+        "Deletion anomaly",
+        "Partial anomaly"
+      ],
       "correct": 2,
       "explanation": "A deletion anomaly: removing one fact takes an unrelated fact down with it."
     },
@@ -238,11 +367,26 @@
       "category": "Matching",
       "question": "A database system is an organization of five components. Match each to its role.",
       "pairs": [
-        { "left": "Hardware", "right": "The physical devices the system runs on" },
-        { "left": "Software", "right": "The operating system, the DBMS, and application programs" },
-        { "left": "People", "right": "Administrators, designers, programmers and end users" },
-        { "left": "Procedures", "right": "The rules and instructions governing how the system is used" },
-        { "left": "Data", "right": "The raw facts stored in the database itself" }
+        {
+          "left": "Hardware",
+          "right": "The physical devices the system runs on"
+        },
+        {
+          "left": "Software",
+          "right": "The operating system, the DBMS, and application programs"
+        },
+        {
+          "left": "People",
+          "right": "Administrators, designers, programmers and end users"
+        },
+        {
+          "left": "Procedures",
+          "right": "The rules and instructions governing how the system is used"
+        },
+        {
+          "left": "Data",
+          "right": "The raw facts stored in the database itself"
+        }
       ],
       "explanation": "Hardware, software, people, procedures and data — all five together make up the database system environment."
     },
@@ -250,20 +394,41 @@
       "type": "mc",
       "category": "Multiple Choice",
       "question": "Which DBMS function stores the definitions of data elements and their relationships?",
-      "options": ["Data storage management", "Data dictionary management", "Security management", "Data transformation and presentation"],
+      "options": [
+        "Data storage management",
+        "Data dictionary management",
+        "Security management",
+        "Data transformation and presentation"
+      ],
       "correct": 1,
-      "explanation": "Data dictionary management. The data dictionary stores definitions of data elements and their relationships."
+      "explanation": "Data dictionary management. The data dictionary stores definitions of data elements and their relationships.",
+      "core": true
     },
     {
       "type": "matching",
       "category": "Matching",
       "question": "Match each DBMS function to what it does.",
       "pairs": [
-        { "left": "Security management", "right": "Enforces user security and data privacy" },
-        { "left": "Multiuser access control", "right": "Lets many users work concurrently without compromising integrity" },
-        { "left": "Backup and recovery management", "right": "Enables recovery of the database after a failure" },
-        { "left": "Data integrity management", "right": "Minimizes redundancy and maximizes consistency" },
-        { "left": "Performance tuning", "right": "Part of storage management; ensures efficient performance" }
+        {
+          "left": "Security management",
+          "right": "Enforces user security and data privacy"
+        },
+        {
+          "left": "Multiuser access control",
+          "right": "Lets many users work concurrently without compromising integrity"
+        },
+        {
+          "left": "Backup and recovery management",
+          "right": "Enables recovery of the database after a failure"
+        },
+        {
+          "left": "Data integrity management",
+          "right": "Minimizes redundancy and maximizes consistency"
+        },
+        {
+          "left": "Performance tuning",
+          "right": "Part of storage management; ensures efficient performance"
+        }
       ],
       "explanation": "These are the standard DBMS functions. Notice that integrity management is defined in terms of redundancy and consistency."
     },
@@ -271,7 +436,12 @@
       "type": "mc",
       "category": "Multiple Choice",
       "question": "Which DBMS function makes it possible for many users to work in the database at once without corrupting it?",
-      "options": ["Data transformation and presentation", "Multiuser access control", "Backup and recovery management", "Data dictionary management"],
+      "options": [
+        "Data transformation and presentation",
+        "Multiuser access control",
+        "Backup and recovery management",
+        "Data dictionary management"
+      ],
       "correct": 1,
       "explanation": "Multiuser access control uses algorithms to ensure concurrent access without compromising integrity."
     },
@@ -292,8 +462,11 @@
       "type": "fill_blank",
       "category": "Fill in the Blank",
       "question": "SQL stands for ______ Query Language.",
-      "answers": ["structured"],
-      "explanation": "Structured Query Language — the de facto query language and data access standard, supported by nearly all DBMS vendors with slight variations."
+      "answers": [
+        "structured"
+      ],
+      "explanation": "Structured Query Language — the de facto query language and data access standard, supported by nearly all DBMS vendors with slight variations.",
+      "core": true
     },
     {
       "type": "tf",
@@ -306,7 +479,9 @@
       "type": "fill_blank",
       "category": "Fill in the Blank",
       "question": "A simple representation of complex real-world data structures, useful for supporting a specific problem domain, is called a data ______.",
-      "answers": ["model"],
+      "answers": [
+        "model"
+      ],
       "explanation": "A data model. Data modeling is the act of creating one for a determined problem domain."
     },
     {
@@ -314,12 +489,25 @@
       "category": "Matching",
       "question": "Match each of the four basic building blocks of a data model to its definition.",
       "pairs": [
-        { "left": "Entity", "right": "A person, place, thing or event about which data is collected" },
-        { "left": "Attribute", "right": "A characteristic of an entity" },
-        { "left": "Relationship", "right": "An association among entities" },
-        { "left": "Constraint", "right": "A restriction placed on data to ensure integrity" }
+        {
+          "left": "Entity",
+          "right": "A person, place, thing or event about which data is collected"
+        },
+        {
+          "left": "Attribute",
+          "right": "A characteristic of an entity"
+        },
+        {
+          "left": "Relationship",
+          "right": "An association among entities"
+        },
+        {
+          "left": "Constraint",
+          "right": "A restriction placed on data to ensure integrity"
+        }
       ],
-      "explanation": "Entity, attribute, relationship, constraint — memorize these four; every ERD question is built out of them."
+      "explanation": "Entity, attribute, relationship, constraint — memorize these four; every ERD question is built out of them.",
+      "core": true
     },
     {
       "type": "mc",
@@ -332,14 +520,16 @@
         "constraints; attributes"
       ],
       "correct": 1,
-      "explanation": "Nouns translate into entities, verbs translate into relationships among entities."
+      "explanation": "Nouns translate into entities, verbs translate into relationships among entities.",
+      "core": true
     },
     {
       "type": "tf",
       "category": "True / False",
       "question": "Relationships are always bidirectional — you have to read them from both ends.",
       "correct": true,
-      "explanation": "Because relationships run both ways, you ask two questions: how many B relate to one A, and how many A relate to one B."
+      "explanation": "Because relationships run both ways, you ask two questions: how many B relate to one A, and how many A relate to one B.",
+      "core": true
     },
     {
       "type": "mc",
@@ -359,9 +549,18 @@
       "category": "Matching",
       "question": "Match each relationship type to the two notations used for it.",
       "pairs": [
-        { "left": "One-to-many", "right": "1:M or 1..*" },
-        { "left": "Many-to-many", "right": "M:N or *..*" },
-        { "left": "One-to-one", "right": "1:1 or 1..1" }
+        {
+          "left": "One-to-many",
+          "right": "1:M or 1..*"
+        },
+        {
+          "left": "Many-to-many",
+          "right": "M:N or *..*"
+        },
+        {
+          "left": "One-to-one",
+          "right": "1:1 or 1..1"
+        }
       ],
       "explanation": "The colon form and the dotted UML-style form mean the same thing."
     },
@@ -382,18 +581,33 @@
       "type": "mc",
       "category": "Multiple Choice",
       "question": "The relational model is based on the relation, which is another name for:",
-      "options": ["A foreign key", "A table (or entity)", "A query result only", "An index"],
+      "options": [
+        "A foreign key",
+        "A table (or entity)",
+        "A query result only",
+        "An index"
+      ],
       "correct": 1,
-      "explanation": "A relation is a table or entity — a matrix of intersecting tuples (rows) and attributes (columns)."
+      "explanation": "A relation is a table or entity — a matrix of intersecting tuples (rows) and attributes (columns).",
+      "core": true
     },
     {
       "type": "matching",
       "category": "Matching",
       "question": "Match each formal relational term to its everyday equivalent.",
       "pairs": [
-        { "left": "Relation", "right": "Table" },
-        { "left": "Tuple", "right": "Row" },
-        { "left": "Attribute", "right": "Column" }
+        {
+          "left": "Relation",
+          "right": "Table"
+        },
+        {
+          "left": "Tuple",
+          "right": "Row"
+        },
+        {
+          "left": "Attribute",
+          "right": "Column"
+        }
       ],
       "explanation": "Relation/tuple/attribute is the formal vocabulary; table/row/column is what you'll actually say out loud."
     },
@@ -408,20 +622,25 @@
         "It converts the database into a file system"
       ],
       "correct": 1,
-      "explanation": "An RDBMS performs the basic functions of earlier DBMS types while making the relational model easier to understand and implement, hiding its complexities."
+      "explanation": "An RDBMS performs the basic functions of earlier DBMS types while making the relational model easier to understand and implement, hiding its complexities.",
+      "core": true
     },
     {
       "type": "fill_blank",
       "category": "Fill in the Blank",
       "question": "An entity ______, also called an entity occurrence, corresponds to a row in a relational table.",
-      "answers": ["instance"],
+      "answers": [
+        "instance"
+      ],
       "explanation": "Entity instance (or entity occurrence) = one row."
     },
     {
       "type": "fill_blank",
       "category": "Fill in the Blank",
       "question": "______ is the term used to label relationship types on an ERD (1:1, 1:M, M:N).",
-      "answers": ["connectivity"],
+      "answers": [
+        "connectivity"
+      ],
       "explanation": "Connectivity labels the relationship type. Cardinality expresses the specific numbers involved."
     },
     {
@@ -429,9 +648,18 @@
       "category": "Matching",
       "question": "Match each object-oriented term to its relational-model analogue.",
       "pairs": [
-        { "left": "Object", "right": "Record" },
-        { "left": "Class", "right": "Entity or table" },
-        { "left": "Attribute", "right": "A property of an object" }
+        {
+          "left": "Object",
+          "right": "Record"
+        },
+        {
+          "left": "Class",
+          "right": "Entity or table"
+        },
+        {
+          "left": "Attribute",
+          "right": "A property of an object"
+        }
       ],
       "explanation": "An object is analogous to a record; a class is analogous to an entity/table — a class is a template from which individual objects are created."
     },
@@ -479,7 +707,8 @@
         "They are two names for the same diagram"
       ],
       "correct": 0,
-      "explanation": "Logical describes the structure as the user sees it; physical describes the actual implementation. The same distinction as logical vs physical format under data independence."
+      "explanation": "Logical describes the structure as the user sees it; physical describes the actual implementation. The same distinction as logical vs physical format under data independence.",
+      "core": true
     },
     {
       "type": "mc",
@@ -505,7 +734,12 @@
       "type": "mc",
       "category": "Multiple Choice",
       "question": "Which job title covers the design and implementation of conceptual, logical AND physical database environments?",
-      "options": ["Database Analyst", "Database Architect", "Database Developer", "Data Scientist"],
+      "options": [
+        "Database Analyst",
+        "Database Architect",
+        "Database Developer",
+        "Data Scientist"
+      ],
       "correct": 1,
       "explanation": "The Database Architect covers all three levels of the environment."
     }

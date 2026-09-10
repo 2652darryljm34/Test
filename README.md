@@ -11,7 +11,7 @@ A static site for sharing self-study quizzes with classmates via GitHub Pages. N
 | `review.html` | The study guide screen. Same pattern: `review.html?file=data/itd256-midterm-guide.json` |
 | `sql.html` | The SQL playground — a scratchpad over the practice database |
 | `classes.json` | The registry of classes, guides, tools and quizzes. **The one file you edit to reorganize content.** |
-| `data/*.json` | One file per quiz or guide |
+| `data/*.json` | One file per quiz or guide. **Generated** for the ITD 256 quizzes — edit `tools/questions/` instead |
 | `data/harborview.sql` | The practice database (schema + seed). Generated — see `tools/build_db.py` |
 | `assets/` | Shared CSS/JS |
 | `tools/` | Content sources and checkers. Never fetched by the site; only used when authoring |
@@ -115,13 +115,40 @@ Everything the tokenizer emits is HTML-escaped: the editor overlay renders text 
 
 ## Editing the ITD 256 question pool
 
-At 233 questions, one file was unmanageable, so the sections live in `tools/questions/` and are stitched together in filename order:
+The pool lives in `tools/questions/`, one file per topic, stitched together in filename order:
 
 ```bash
-python3 tools/build_quiz.py       # tools/questions/*.json -> data/itd256-midterm-review.json
+python3 tools/mark_core.py        # decide which questions are in the main quiz
+python3 tools/build_quiz.py       # tools/questions/*.json -> data/*.json
 ```
 
-Edit the section files, not `data/itd256-midterm-review.json` — it is overwritten. The build validates as it goes and **refuses to write** on any of these:
+Edit the section files, not the files in `data/` — those are overwritten.
+
+### Core vs. extra
+
+The pool holds 233 questions, which is far more than a study session wants in one sitting. Questions marked `"core": true` make up the main quiz; the rest ship as a separate optional "Extra Practice" quiz, so nothing is thrown away and neither list has to be re-derived.
+
+The core set is sized to **mirror the exam's own question counts, doubled**. From the exam outline: Part 1 is ~15–20 theory questions plus 3–5 SQL queries, Part 2 is a partially-completed ERD (~10 slots), Part 3 is dependency sets (~6 items) — about 39, so the review holds 78.
+
+| Section | Core | Pool |
+|---|---:|---:|
+| Database Concepts, File Systems & Data Models | 14 | 52 |
+| The Relational Model, Keys & Integrity | 12 | 42 |
+| SQL (10 theory + 8 live) | 18 | 62 |
+| ERD & Crow's Foot Notation | 21 | 38 |
+| Normalization & Dependency Sets | 13 | 39 |
+| **Total** | **78** | **233** |
+
+Which questions are core is decided by two signals from the source material rather than by taste:
+
+- **Highlighted terms.** The lecture deck highlights ~100 runs of text; that is the professor's own marker of what is testable. Everything highlighted is represented, and several core questions restate a highlighted line verbatim. Topics the deck leaves un-highlighted — OLAP and data warehousing, career roles, superkey/candidate key, BCNF and 4NF, GROUP BY and HAVING, outer joins, COMMIT/ROLLBACK — are still in the pool, but they moved to extra practice.
+- **Worked examples** from the assignment PDFs, the ERD practice document, the many-to-many review page and the foreign-key diagram. All eight live SQL questions re-skin the eight assignment queries; the ERD section carries the "rovers"/floaters optional-participation rule, the 1:1 "manages" rule, the COURSE/CLASS pair and the youth-league TEAM/PLAYER/PARENT rules.
+
+To re-balance, edit the keep-list in `tools/mark_core.py` and re-run both scripts. `tools/rank_questions.py` prints every section ranked against those two signals, with a `*` beside what is currently core, so the keep-list can be checked rather than trusted.
+
+### Validation
+
+The build validates as it goes and **refuses to write** on any of these:
 
 - an `mc` whose `correct` index is out of range, or with duplicate options
 - a `matching` with duplicate right-hand values (which makes a pair ungradeable)
@@ -137,6 +164,7 @@ Other classes can keep using a single hand-written file; nothing requires this l
 ```bash
 python3 tools/check_sql.py            # run every shipped SQL solution against the database
 python3 tools/check_sql.py --explore  # print the schema and row counts
+python3 tools/rank_questions.py       # rank the pool against the deck's highlighting
 node tools/test_runtime.js            # exercise assets/db.js against the real sql.js build
 ```
 

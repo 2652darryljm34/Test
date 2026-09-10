@@ -14,6 +14,13 @@ import re
 import sqlite3
 import sys
 
+# Windows consoles default to cp1252, which cannot print the em dashes and
+# arrows that appear in the question text. Never let that crash a report.
+try:
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+except (AttributeError, ValueError):
+    pass
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, "..")
 

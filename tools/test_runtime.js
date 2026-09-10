@@ -277,10 +277,16 @@ async function loadHarborDB() {
   }
 
   console.log('\nshipped quiz questions, graded through the real code path');
-  const quiz = JSON.parse(
-    fs.readFileSync(path.join(ROOT, 'data', 'itd256-midterm-review.json'), 'utf8'));
+  const quizFiles = ['itd256-midterm-review.json', 'itd256-midterm-extra.json'];
   const sqlQs = [];
-  quiz.sections.forEach(s => s.questions.forEach(q => { if (q.type === 'sql') sqlQs.push(q); }));
+  let quiz = null;
+  quizFiles.forEach(f => {
+    const p = path.join(ROOT, 'data', f);
+    if (!fs.existsSync(p)) return;
+    const doc = JSON.parse(fs.readFileSync(p, 'utf8'));
+    quiz = quiz || doc;
+    doc.sections.forEach(s => s.questions.forEach(q => { if (q.type === 'sql') sqlQs.push(q); }));
+  });
   eq('sql questions found', sqlQs.length > 0, true);
 
   const graded = await HarborDB.create(quiz.dbFile);

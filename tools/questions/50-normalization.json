@@ -5,14 +5,22 @@
       "type": "fill_blank",
       "category": "Normalization",
       "question": "______ is the process of evaluating and correcting table structures to minimize data redundancies.",
-      "answers": ["normalization"],
-      "explanation": "Normalization. Reducing redundancy is what reduces the update, insertion and deletion anomalies."
+      "answers": [
+        "normalization"
+      ],
+      "explanation": "Normalization. Reducing redundancy is what reduces the update, insertion and deletion anomalies.",
+      "core": true
     },
     {
       "type": "mc",
       "category": "Normalization",
       "question": "Normalization assigns attributes to tables based on:",
-      "options": ["Alphabetical order", "Determination", "How often they are queried", "Their data type"],
+      "options": [
+        "Alphabetical order",
+        "Determination",
+        "How often they are queried",
+        "Their data type"
+      ],
       "correct": 1,
       "explanation": "Determination — that is, functional dependence. Attributes travel to the table whose key determines them."
     },
@@ -21,13 +29,29 @@
       "category": "Normalization",
       "question": "Match each normal form to its defining characteristic.",
       "pairs": [
-        { "left": "First normal form (1NF)", "right": "Table format, no repeating groups, and the primary key is identified" },
-        { "left": "Second normal form (2NF)", "right": "In 1NF and no partial dependencies" },
-        { "left": "Third normal form (3NF)", "right": "In 2NF and no transitive dependencies" },
-        { "left": "Boyce-Codd normal form (BCNF)", "right": "Every determinant is a candidate key" },
-        { "left": "Fourth normal form (4NF)", "right": "In 3NF and no independent multivalued dependencies" }
+        {
+          "left": "First normal form (1NF)",
+          "right": "Table format, no repeating groups, and the primary key is identified"
+        },
+        {
+          "left": "Second normal form (2NF)",
+          "right": "In 1NF and no partial dependencies"
+        },
+        {
+          "left": "Third normal form (3NF)",
+          "right": "In 2NF and no transitive dependencies"
+        },
+        {
+          "left": "Boyce-Codd normal form (BCNF)",
+          "right": "Every determinant is a candidate key"
+        },
+        {
+          "left": "Fourth normal form (4NF)",
+          "right": "In 3NF and no independent multivalued dependencies"
+        }
       ],
-      "explanation": "Each form builds on the one before it. Memorizing \"1NF, then kill partial, then kill transitive\" gets you through most of a normalization problem."
+      "explanation": "Each form builds on the one before it. Memorizing \"1NF, then kill partial, then kill transitive\" gets you through most of a normalization problem.",
+      "core": true
     },
     {
       "type": "mc",
@@ -47,7 +71,8 @@
       "category": "True / False",
       "question": "All valid relational tables satisfy the 1NF requirements.",
       "correct": true,
-      "explanation": "If a table isn't in 1NF, it isn't really a relational table."
+      "explanation": "If a table isn't in 1NF, it isn't really a relational table.",
+      "core": true
     },
     {
       "type": "tf",
@@ -67,31 +92,49 @@
       "type": "fill_blank",
       "category": "Fill in the Blank",
       "question": "Going from 1NF to 2NF removes ______ dependencies.",
-      "answers": ["partial"],
-      "explanation": "Partial dependencies — where a non-key attribute depends on only part of a composite primary key."
+      "answers": [
+        "partial"
+      ],
+      "explanation": "Partial dependencies — where a non-key attribute depends on only part of a composite primary key.",
+      "core": true
     },
     {
       "type": "fill_blank",
       "category": "Fill in the Blank",
       "question": "Going from 2NF to 3NF removes ______ dependencies.",
-      "answers": ["transitive"],
-      "explanation": "Transitive dependencies — where a non-key attribute depends on another non-key attribute."
+      "answers": [
+        "transitive"
+      ],
+      "explanation": "Transitive dependencies — where a non-key attribute depends on another non-key attribute.",
+      "core": true
     },
     {
       "type": "mc",
       "category": "Normalization",
       "question": "\"Attribute B is fully functionally dependent on attribute A if each value of A determines one and only one value of B.\" This defines:",
-      "options": ["Referential integrity", "Functional dependence", "Entity integrity", "A repeating group"],
+      "options": [
+        "Referential integrity",
+        "Functional dependence",
+        "Entity integrity",
+        "A repeating group"
+      ],
       "correct": 1,
-      "explanation": "Functional dependence. Written PROJ_NUM → PROJ_NAME and read \"PROJ_NUM functionally determines PROJ_NAME\"."
+      "explanation": "Functional dependence. Written PROJ_NUM → PROJ_NAME and read \"PROJ_NUM functionally determines PROJ_NAME\".",
+      "core": true
     },
     {
       "type": "matching",
       "category": "Dependency Analysis",
       "question": "In the dependency BOOKING_REF → BOOKING_DATE, match each attribute to its role.",
       "pairs": [
-        { "left": "BOOKING_REF", "right": "The determinant attribute" },
-        { "left": "BOOKING_DATE", "right": "The dependent attribute" }
+        {
+          "left": "BOOKING_REF",
+          "right": "The determinant attribute"
+        },
+        {
+          "left": "BOOKING_DATE",
+          "right": "The dependent attribute"
+        }
       ],
       "explanation": "The determinant is on the left of the arrow and does the determining; the dependent is on the right."
     },
@@ -125,7 +168,9 @@
       "type": "fill_blank",
       "category": "Fill in the Blank",
       "question": "A functional dependence in which the determinant is only PART of the primary key is called a ______ dependency.",
-      "answers": ["partial"],
+      "answers": [
+        "partial"
+      ],
       "explanation": "A partial dependency. It can only arise when the primary key is composite — a single-column key has no proper parts."
     },
     {
@@ -133,13 +178,16 @@
       "category": "True / False",
       "question": "A table whose primary key is a single attribute can still contain a partial dependency.",
       "correct": false,
-      "explanation": "A partial dependency needs a determinant that is part of the key. With a one-column key there is no part to depend on, so any 1NF table with a simple key is automatically in 2NF."
+      "explanation": "A partial dependency needs a determinant that is part of the key. With a one-column key there is no part to depend on, so any 1NF table with a simple key is automatically in 2NF.",
+      "core": true
     },
     {
       "type": "fill_blank",
       "category": "Fill in the Blank",
       "question": "A dependency in which an attribute depends on another NON-key attribute is called a ______ dependency.",
-      "answers": ["transitive"],
+      "answers": [
+        "transitive"
+      ],
       "explanation": "A transitive dependency. It occurs only when functional dependence exists among nonprime attributes."
     },
     {
@@ -237,7 +285,12 @@
       "type": "mc",
       "category": "Normalization",
       "question": "In SEMINAR_ROSTER (PK = seminar_code + attendee_id), which attribute is fully functionally dependent on the whole key?",
-      "options": ["seminar_title", "attendee_name", "room_capacity", "grade"],
+      "options": [
+        "seminar_title",
+        "attendee_name",
+        "room_capacity",
+        "grade"
+      ],
       "correct": 3,
       "explanation": "A grade belongs to one attendee in one seminar, so it needs both halves. Everything else depends on just one part, or on a nonprime attribute."
     },
@@ -271,7 +324,9 @@
       "type": "fill_blank",
       "category": "Fill in the Blank",
       "question": "______ deliberately produces a lower normal form, increasing performance at the cost of greater data redundancy.",
-      "answers": ["denormalization"],
+      "answers": [
+        "denormalization"
+      ],
       "explanation": "Denormalization. It is a considered trade-off, not an accident."
     },
     {
@@ -292,13 +347,19 @@
       "category": "True / False",
       "question": "More tables require more I/O operations and processing logic to join them.",
       "correct": true,
-      "explanation": "Which is why it also says normalization is important, but only part of the design process."
+      "explanation": "Which is why it also says normalization is important, but only part of the design process.",
+      "core": true
     },
     {
       "type": "mc",
       "category": "Normalization",
       "question": "A table is in 3NF but one of its determinants is not a candidate key. Which normal form does it fail?",
-      "options": ["1NF", "2NF", "BCNF", "It fails none"],
+      "options": [
+        "1NF",
+        "2NF",
+        "BCNF",
+        "It fails none"
+      ],
       "correct": 2,
       "explanation": "BCNF requires every determinant to be a candidate key. It is a special case of 3NF."
     },
@@ -307,10 +368,22 @@
       "category": "Normalization",
       "question": "Match each problem to the normal form that fixes it.",
       "pairs": [
-        { "left": "A cell holding several values at once", "right": "1NF" },
-        { "left": "An attribute determined by half of a composite key", "right": "2NF" },
-        { "left": "An attribute determined by another non-key attribute", "right": "3NF" },
-        { "left": "A determinant that is not a candidate key", "right": "BCNF" }
+        {
+          "left": "A cell holding several values at once",
+          "right": "1NF"
+        },
+        {
+          "left": "An attribute determined by half of a composite key",
+          "right": "2NF"
+        },
+        {
+          "left": "An attribute determined by another non-key attribute",
+          "right": "3NF"
+        },
+        {
+          "left": "A determinant that is not a candidate key",
+          "right": "BCNF"
+        }
       ],
       "explanation": "Reading a dependency diagram left to right, these are the four faults you're hunting for, in the order you fix them."
     },
@@ -332,7 +405,8 @@
         "Listed dish_code → dish_name, dish_style, dish_price as a partial dependency",
         "Identified client_no → client_name, client_city as the transitive dependency"
       ],
-      "explanation": "Work in this order every time: what needs the whole key, what needs only part of it, and what hangs off a non-key attribute. That ordering is the dependency set."
+      "explanation": "Work in this order every time: what needs the whole key, what needs only part of it, and what hangs off a non-key attribute. That ordering is the dependency set.",
+      "core": true
     },
     {
       "type": "short_answer",
@@ -346,7 +420,8 @@
         "Marked the composite key columns as foreign keys as well as the primary key",
         "Noted that this is still only 2NF because a transitive dependency remains"
       ],
-      "explanation": "The mechanical rule: each partial dependency's determinant becomes a new table's primary key, and everything it determined goes with it."
+      "explanation": "The mechanical rule: each partial dependency's determinant becomes a new table's primary key, and everything it determined goes with it.",
+      "core": true
     },
     {
       "type": "short_answer",
@@ -360,7 +435,8 @@
         "Left DISH and BOOKING_LINE unchanged from 2NF",
         "Marked primary and foreign keys throughout"
       ],
-      "explanation": "\"The key, the whole key, and nothing but the key\" is a compact test: nothing but the key catches transitive dependencies, and the whole key catches partial ones."
+      "explanation": "\"The key, the whole key, and nothing but the key\" is a compact test: nothing but the key catches transitive dependencies, and the whole key catches partial ones.",
+      "core": true
     },
     {
       "type": "short_answer",
@@ -373,7 +449,8 @@
         "Listed attendee_id → attendee_name, attendee_email",
         "Identified room_code → room_capacity as the transitive dependency"
       ],
-      "explanation": "Two partial dependencies, one from each half of the composite key, plus one transitive dependency hanging off a nonprime attribute — the same shape as the catering example."
+      "explanation": "Two partial dependencies, one from each half of the composite key, plus one transitive dependency hanging off a nonprime attribute — the same shape as the catering example.",
+      "core": true
     },
     {
       "type": "short_answer",
@@ -387,7 +464,8 @@
         "Kept grade in a linking table keyed on (seminar_code, attendee_id)",
         "Marked both linking columns as foreign keys"
       ],
-      "explanation": "Worth noticing: normalizing an M:N-shaped table produces exactly the bridge entity you would have drawn on the ERD. The two techniques agree."
+      "explanation": "Worth noticing: normalizing an M:N-shaped table produces exactly the bridge entity you would have drawn on the ERD. The two techniques agree.",
+      "core": true
     },
     {
       "type": "short_answer",

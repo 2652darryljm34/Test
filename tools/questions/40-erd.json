@@ -6,14 +6,33 @@
       "category": "ERD Notation",
       "question": "Crow's Foot notation marks each end of a relationship line with one of six connectors, built from a circle, a bar, and a crow's foot.\n\nA = crow's foot only\nB = bar + crow's foot\nC = circle + crow's foot\nD = single bar\nE = double bar\nF = circle + bar\n\nMatch each connector to what it means.",
       "pairs": [
-        { "left": "A — crow's foot only", "right": "Many" },
-        { "left": "B — bar + crow's foot", "right": "One or many (mandatory, many)" },
-        { "left": "C — circle + crow's foot", "right": "Zero or many (optional, many)" },
-        { "left": "D — single bar", "right": "One" },
-        { "left": "E — double bar", "right": "One and only one (mandatory, exactly one)" },
-        { "left": "F — circle + bar", "right": "Zero or one (optional, at most one)" }
+        {
+          "left": "A — crow's foot only",
+          "right": "Many"
+        },
+        {
+          "left": "B — bar + crow's foot",
+          "right": "One or many (mandatory, many)"
+        },
+        {
+          "left": "C — circle + crow's foot",
+          "right": "Zero or many (optional, many)"
+        },
+        {
+          "left": "D — single bar",
+          "right": "One"
+        },
+        {
+          "left": "E — double bar",
+          "right": "One and only one (mandatory, exactly one)"
+        },
+        {
+          "left": "F — circle + bar",
+          "right": "Zero or one (optional, at most one)"
+        }
       ],
-      "explanation": "Read each connector as two symbols: the outer one is the minimum, the inner one is the maximum. A circle means zero (optional), a bar means one, and a crow's foot means many."
+      "explanation": "Read each connector as two symbols: the outer one is the minimum, the inner one is the maximum. A circle means zero (optional), a bar means one, and a crow's foot means many.",
+      "core": true
     },
     {
       "type": "mc",
@@ -26,13 +45,19 @@
         "That the relationship is recursive"
       ],
       "correct": 0,
-      "explanation": "Circle = zero = optional participation. A bar = one, and a crow's foot = many."
+      "explanation": "Circle = zero = optional participation. A bar = one, and a crow's foot = many.",
+      "core": true
     },
     {
       "type": "mc",
       "category": "ERD Notation",
       "question": "In Crow's Foot notation, what does the crow's foot itself indicate?",
-      "options": ["Optional participation", "Many", "Exactly one", "A composite key"],
+      "options": [
+        "Optional participation",
+        "Many",
+        "Exactly one",
+        "A composite key"
+      ],
       "correct": 1,
       "explanation": "The crow's foot is the \"many\" symbol. Whatever sits beside it — a bar or a circle — sets the minimum."
     },
@@ -40,23 +65,35 @@
       "type": "fill_blank",
       "category": "ERD Notation",
       "question": "A relationship in which an entity does not have to participate — the minimum cardinality is zero — is called ______ participation.",
-      "answers": ["optional"],
-      "explanation": "Optional participation, drawn with a circle. Mandatory participation requires at least one related row, and is drawn with a bar."
+      "answers": [
+        "optional"
+      ],
+      "explanation": "Optional participation, drawn with a circle. Mandatory participation requires at least one related row, and is drawn with a bar.",
+      "core": true
     },
     {
       "type": "mc",
       "category": "ERD Notation",
       "question": "On a completed ERD, an attribute name shown in bold and underlined at the top of the entity box represents the:",
-      "options": ["Foreign key", "Primary key", "A descriptive non-key attribute", "Secondary key"],
+      "options": [
+        "Foreign key",
+        "Primary key",
+        "A descriptive non-key attribute",
+        "Secondary key"
+      ],
       "correct": 1,
-      "explanation": "Primary key attributes are listed first and marked bold and underlined, above the dividing line in the entity box."
+      "explanation": "Primary key attributes are listed first and marked bold and underlined, above the dividing line in the entity box.",
+      "core": true
     },
     {
       "type": "fill_blank",
       "category": "ERD Notation",
       "question": "On a completed ERD, an attribute name shown in italics below the dividing line typically represents a ______ key.",
-      "answers": ["foreign"],
-      "explanation": "Foreign key attributes are italicized, distinguishing them from the primary key and from plain descriptive attributes."
+      "answers": [
+        "foreign"
+      ],
+      "explanation": "Foreign key attributes are italicized, distinguishing them from the primary key and from plain descriptive attributes.",
+      "core": true
     },
     {
       "type": "mc",
@@ -69,7 +106,8 @@
         "The cardinality"
       ],
       "correct": 1,
-      "explanation": "The narrow left-hand cells hold the key markers: PK beside the primary key row, FK beside the foreign key row. The entity name sits in the header above the box."
+      "explanation": "The narrow left-hand cells hold the key markers: PK beside the primary key row, FK beside the foreign key row. The entity name sits in the header above the box.",
+      "core": true
     },
     {
       "type": "mc",
@@ -82,7 +120,8 @@
         "The table's row count"
       ],
       "correct": 0,
-      "explanation": "P3 is the marker cell for the italicized attribute beside it, so it holds FK."
+      "explanation": "P3 is the marker cell for the italicized attribute beside it, so it holds FK.",
+      "core": true
     },
     {
       "type": "mc",
@@ -101,7 +140,12 @@
       "type": "mc",
       "category": "ERD",
       "question": "Business rule: \"A PATRON can place many HOLDS, but each HOLD is placed by exactly one PATRON.\" What is the cardinality between PATRON and HOLD?",
-      "options": ["1:1", "1:M", "M:N", "0:1"],
+      "options": [
+        "1:1",
+        "1:M",
+        "M:N",
+        "0:1"
+      ],
       "correct": 1,
       "explanation": "One patron relates to many holds, each hold to one patron — a textbook 1:M."
     },
@@ -116,7 +160,8 @@
         "B — one or many"
       ],
       "correct": 0,
-      "explanation": "Each crate must be at exactly one depot: mandatory, and no more than one. That's the double bar, E."
+      "explanation": "Each crate must be at exactly one depot: mandatory, and no more than one. That's the double bar, E.",
+      "core": true
     },
     {
       "type": "mc",
@@ -129,7 +174,8 @@
         "C — zero or many"
       ],
       "correct": 2,
-      "explanation": "\"Must store at least one\" makes it mandatory, and \"can store many\" makes the maximum many — bar plus crow's foot, connector B."
+      "explanation": "\"Must store at least one\" makes it mandatory, and \"can store many\" makes the maximum many — bar plus crow's foot, connector B.",
+      "core": true
     },
     {
       "type": "mc",
@@ -155,7 +201,8 @@
         "B — one or many"
       ],
       "correct": 0,
-      "explanation": "A floater has no workshop, so the minimum is zero (circle); an assigned technician has just one, so the maximum is one (bar). Circle + bar is connector F."
+      "explanation": "A floater has no workshop, so the minimum is zero (circle); an assigned technician has just one, so the maximum is one (bar). Circle + bar is connector F.",
+      "core": true
     },
     {
       "type": "tf",
@@ -175,13 +222,17 @@
         "Foreign keys aren't needed for 1:M relationships"
       ],
       "correct": 1,
-      "explanation": "The foreign key always goes on the many side, referencing the primary key on the one side."
+      "explanation": "The foreign key always goes on the many side, referencing the primary key on the one side.",
+      "core": true
     },
     {
       "type": "fill_blank",
       "category": "ERD",
       "question": "Business rule: \"One MENTOR guides many APPRENTICEs, but an APPRENTICE is guided by only one MENTOR.\" The foreign key mentor_id would be placed in the ______ table.",
-      "answers": ["apprentice", "apprentices"],
+      "answers": [
+        "apprentice",
+        "apprentices"
+      ],
       "explanation": "APPRENTICE is on the many side, so it holds mentor_id as its foreign key."
     },
     {
@@ -208,14 +259,18 @@
         "Merge VOLUNTEER and SHIFT into one table"
       ],
       "correct": 2,
-      "explanation": "M:N relationships need a bridge (associative) entity containing both related primary keys as foreign keys."
+      "explanation": "M:N relationships need a bridge (associative) entity containing both related primary keys as foreign keys.",
+      "core": true
     },
     {
       "type": "fill_blank",
       "category": "ERD",
       "question": "In the VOLUNTEER/SHIFT example, the bridge entity (say, SIGNUP) would most likely use a ______ primary key made up of volunteer_id and shift_id together.",
-      "answers": ["composite"],
-      "explanation": "A bridge entity's primary key is typically a composite key formed from the two foreign keys it holds."
+      "answers": [
+        "composite"
+      ],
+      "explanation": "A bridge entity's primary key is typically a composite key formed from the two foreign keys it holds.",
+      "core": true
     },
     {
       "type": "mc",
@@ -247,9 +302,15 @@
       "type": "mc",
       "category": "ERD",
       "question": "Business rules: \"One of the STEWARDs manages each BRANCH, and each BRANCH is managed by only one STEWARD.\" What kind of relationship is this?",
-      "options": ["1:1", "1:M", "M:N", "Recursive M:N"],
+      "options": [
+        "1:1",
+        "1:M",
+        "M:N",
+        "Recursive M:N"
+      ],
       "correct": 0,
-      "explanation": "One manager per branch and one branch per manager makes it 1:1. Note this is separate from the 1:M relationship recording which branch each steward works at."
+      "explanation": "One manager per branch and one branch per manager makes it 1:1. Note this is separate from the 1:M relationship recording which branch each steward works at.",
+      "core": true
     },
     {
       "type": "tf",
@@ -262,7 +323,12 @@
       "type": "mc",
       "category": "ERD",
       "question": "A relationship in which an entity is related to other instances of ITSELF — a steward who supervises other stewards — is called:",
-      "options": ["A recursive (unary) relationship", "A composite relationship", "A ternary relationship", "A weak relationship"],
+      "options": [
+        "A recursive (unary) relationship",
+        "A composite relationship",
+        "A ternary relationship",
+        "A weak relationship"
+      ],
       "correct": 0,
       "explanation": "A recursive or unary relationship. In SQL you read it with a self-join, giving the table two aliases."
     },
@@ -277,7 +343,8 @@
         "It cannot be implemented"
       ],
       "correct": 1,
-      "explanation": "supervisor_id sits in STEWARD and references steward_id in the same table. The top of the hierarchy has a null there."
+      "explanation": "supervisor_id sits in STEWARD and references steward_id in the same table. The top of the hierarchy has a null there.",
+      "core": true
     },
     {
       "type": "mc",
@@ -303,7 +370,8 @@
         "F — zero or one"
       ],
       "correct": 0,
-      "explanation": "\"May or may not have a PLAYER\" makes the minimum zero, and \"may have many\" makes the maximum many — circle plus crow's foot, C."
+      "explanation": "\"May or may not have a PLAYER\" makes the minimum zero, and \"may have many\" makes the maximum many — circle plus crow's foot, C.",
+      "core": true
     },
     {
       "type": "mc",
@@ -316,7 +384,8 @@
         "A — many"
       ],
       "correct": 1,
-      "explanation": "\"A PLAYER must have a TEAM\" and \"has only one TEAM\": mandatory and exactly one, so the double bar, E."
+      "explanation": "\"A PLAYER must have a TEAM\" and \"has only one TEAM\": mandatory and exactly one, so the double bar, E.",
+      "core": true
     },
     {
       "type": "mc",
@@ -329,7 +398,8 @@
         "Nothing — it is already 1:M"
       ],
       "correct": 2,
-      "explanation": "Many on both sides is M:N, so it needs a bridge entity holding player_id and parent_id."
+      "explanation": "Many on both sides is M:N, so it needs a bridge entity holding player_id and parent_id.",
+      "core": true
     },
     {
       "type": "mc",
@@ -349,18 +419,33 @@
       "category": "ERD",
       "question": "Match each business-rule phrase to the cardinality pair it establishes at that end of the line.",
       "pairs": [
-        { "left": "\"must have exactly one\"", "right": "(1,1) — mandatory one" },
-        { "left": "\"must have at least one, and may have many\"", "right": "(1,many) — mandatory many" },
-        { "left": "\"may or may not have one or more\"", "right": "(0,many) — optional many" },
-        { "left": "\"may or may not have one\"", "right": "(0,1) — optional one" }
+        {
+          "left": "\"must have exactly one\"",
+          "right": "(1,1) — mandatory one"
+        },
+        {
+          "left": "\"must have at least one, and may have many\"",
+          "right": "(1,many) — mandatory many"
+        },
+        {
+          "left": "\"may or may not have one or more\"",
+          "right": "(0,many) — optional many"
+        },
+        {
+          "left": "\"may or may not have one\"",
+          "right": "(0,1) — optional one"
+        }
       ],
-      "explanation": "Every connector is a (minimum, maximum) pair. Find the two numbers in the sentence and the symbol follows."
+      "explanation": "Every connector is a (minimum, maximum) pair. Find the two numbers in the sentence and the symbol follows.",
+      "core": true
     },
     {
       "type": "fill_blank",
       "category": "ERD",
       "question": "In Crow's Foot notation, the two symbols at one end of a relationship line express the minimum and ______ cardinality for that end.",
-      "answers": ["maximum"],
+      "answers": [
+        "maximum"
+      ],
       "explanation": "Minimum then maximum, reading from the outside in."
     },
     {
@@ -374,7 +459,8 @@
         "The two tables share a single primary key"
       ],
       "correct": 0,
-      "explanation": "CLASS is the many side, so it keeps its own primary key and carries course_id as a foreign key."
+      "explanation": "CLASS is the many side, so it keeps its own primary key and carries course_id as a foreign key.",
+      "core": true
     },
     {
       "type": "mc",
@@ -407,7 +493,8 @@
         "Noted that depot_id must allow nulls because of the relief drivers",
         "Gave the bridge a composite primary key of the two foreign keys"
       ],
-      "explanation": "Two habits carry most ERD questions: put the foreign key on the many side, and reach for a bridge table the moment you read \"many … many\"."
+      "explanation": "Two habits carry most ERD questions: put the foreign key on the many side, and reach for a bridge table the moment you read \"many … many\".",
+      "core": true
     },
     {
       "type": "short_answer",

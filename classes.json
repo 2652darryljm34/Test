@@ -24,8 +24,14 @@
         {
           "id": "midterm-review",
           "title": "Midterm Review",
-          "description": "233 questions across concepts, keys and integrity, SQL, ERD notation and normalization — with SQL graded by actually running it.",
+          "description": "78 questions — the exam's own question count, doubled — weighted toward the terms highlighted in the lecture deck and the worked examples from the assignments.",
           "file": "data/itd256-midterm-review.json"
+        },
+        {
+          "id": "midterm-extra",
+          "title": "Extra Practice",
+          "description": "155 more questions on the same topics, for when you want more reps than the main review gives you.",
+          "file": "data/itd256-midterm-extra.json"
         }
       ]
     }
