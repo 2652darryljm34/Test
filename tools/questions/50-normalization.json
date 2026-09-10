@@ -1,5 +1,5 @@
 {
-  "name": "Part 3 · Normalization & Dependency Sets",
+  "name": "Normalization & Dependency Sets",
   "questions": [
     {
       "type": "fill_blank",
@@ -19,7 +19,7 @@
     {
       "type": "matching",
       "category": "Normalization",
-      "question": "Match each normal form to its defining characteristic (Table 6.2).",
+      "question": "Match each normal form to its defining characteristic.",
       "pairs": [
         { "left": "First normal form (1NF)", "right": "Table format, no repeating groups, and the primary key is identified" },
         { "left": "Second normal form (2NF)", "right": "In 1NF and no partial dependencies" },
@@ -27,7 +27,7 @@
         { "left": "Boyce-Codd normal form (BCNF)", "right": "Every determinant is a candidate key" },
         { "left": "Fourth normal form (4NF)", "right": "In 3NF and no independent multivalued dependencies" }
       ],
-      "explanation": "Each form builds on the one before it. Memorizing \"1NF, then kill partial, then kill transitive\" gets you through most of Part 3."
+      "explanation": "Each form builds on the one before it. Memorizing \"1NF, then kill partial, then kill transitive\" gets you through most of a normalization problem."
     },
     {
       "type": "mc",
@@ -47,7 +47,7 @@
       "category": "True / False",
       "question": "All valid relational tables satisfy the 1NF requirements.",
       "correct": true,
-      "explanation": "The lecture states this outright. If it isn't in 1NF, it isn't really a relational table."
+      "explanation": "If a table isn't in 1NF, it isn't really a relational table."
     },
     {
       "type": "tf",
@@ -145,7 +145,7 @@
     {
       "type": "mc",
       "category": "Normalization",
-      "question": "The lecture notes that transitive dependencies are harder to spot than partial ones. Why?",
+      "question": "Transitive dependencies are harder to spot than partial ones. Why?",
       "options": [
         "They involve the primary key, which is often hidden",
         "They occur among nonprime attributes, so neither side of the dependency is part of the key",
@@ -290,7 +290,7 @@
     {
       "type": "tf",
       "category": "True / False",
-      "question": "The lecture warns that more tables require more I/O operations and processing logic to join them.",
+      "question": "More tables require more I/O operations and processing logic to join them.",
       "correct": true,
       "explanation": "Which is why it also says normalization is important, but only part of the design process."
     },
@@ -300,7 +300,7 @@
       "question": "A table is in 3NF but one of its determinants is not a candidate key. Which normal form does it fail?",
       "options": ["1NF", "2NF", "BCNF", "It fails none"],
       "correct": 2,
-      "explanation": "BCNF requires every determinant to be a candidate key. The lecture describes it as a special case of 3NF."
+      "explanation": "BCNF requires every determinant to be a candidate key. It is a special case of 3NF."
     },
     {
       "type": "matching",
@@ -319,7 +319,7 @@
       "category": "True / False",
       "question": "Normalization is the whole of database design.",
       "correct": false,
-      "explanation": "The summary is careful here: normalization is important, but only part of the design process."
+      "explanation": "Normalization is important, but only part of the design process."
     },
     {
       "type": "short_answer",
@@ -401,7 +401,7 @@
         "Named a concrete anomaly caused by each",
         "Said both are fixed by splitting the determinant into its own table with a foreign key left behind"
       ],
-      "explanation": "If you can state the fix in one sentence — new table keyed on the determinant, foreign key left behind — you can normalize anything the exam puts in front of you."
+      "explanation": "If you can state the fix in one sentence — new table keyed on the determinant, foreign key left behind — you can normalize anything you're given."
     },
     {
       "type": "short_answer",
@@ -414,7 +414,7 @@
         "Concluded that such a table is automatically in 2NF",
         "Warned that the 3NF check still matters, because transitive dependencies are unaffected"
       ],
-      "explanation": "Worth internalizing before the exam: composite key means look for partial dependencies; any key at all means look for transitive ones."
+      "explanation": "Worth internalizing: composite key means look for partial dependencies; any key at all means look for transitive ones."
     }
   ]
 }

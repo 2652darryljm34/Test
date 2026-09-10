@@ -8,7 +8,7 @@
         {
           "id": "midterm-guide",
           "title": "Midterm Study Guide",
-          "description": "Reference notes for every topic the midterm tests: concepts and data models, the relational model and keys, SQL, ERD completion, and normalization.",
+          "description": "Reference notes on database concepts, the relational model and keys, SQL, ERD and Crow's Foot notation, and normalization.",
           "file": "data/itd256-midterm-guide.json"
         }
       ],
@@ -24,7 +24,7 @@
         {
           "id": "midterm-review",
           "title": "Midterm Review",
-          "description": "233 questions across all three exam parts, including SQL that is graded by actually running it.",
+          "description": "233 questions across concepts, keys and integrity, SQL, ERD notation and normalization — with SQL graded by actually running it.",
           "file": "data/itd256-midterm-review.json"
         }
       ]

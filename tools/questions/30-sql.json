@@ -1,5 +1,5 @@
 {
-  "name": "Part 1 · SQL",
+  "name": "SQL",
   "questions": [
     {
       "type": "matching",
@@ -11,12 +11,12 @@
         { "left": "TCL", "right": "Transaction control — COMMIT and ROLLBACK" },
         { "left": "DCL", "right": "Data control — grants and revokes access rights" }
       ],
-      "explanation": "The summary slide stresses that SQL has essentially two sets of commands — DDL and DML — with TCL and DCL alongside them."
+      "explanation": "SQL has essentially two sets of commands — DDL and DML — with TCL and DCL alongside them."
     },
     {
       "type": "mc",
       "category": "Multiple Choice",
-      "question": "The lecture calls SQL a nonprocedural language with a basic command vocabulary of:",
+      "question": "SQL is a nonprocedural language with a basic command vocabulary of:",
       "options": ["Fewer than 100 words", "About 500 words", "About 1,000 words", "It has no fixed vocabulary"],
       "correct": 0,
       "explanation": "Under 100 words — one reason SQL is described as relatively easy to learn."
@@ -46,7 +46,7 @@
         { "left": "DEFAULT", "right": "Supplies a value when none is given" },
         { "left": "CHECK", "right": "Validates the data placed in the attribute" }
       ],
-      "explanation": "These are the constraint options listed under CREATE TABLE in Table 7.2."
+      "explanation": "These are the constraint options available on CREATE TABLE."
     },
     {
       "type": "mc",
@@ -127,7 +127,7 @@
     {
       "type": "matching",
       "category": "Matching",
-      "question": "Match each comparison operator to its meaning (Table 7.6).",
+      "question": "Match each comparison operator to its meaning.",
       "pairs": [
         { "left": "=", "right": "Equal to" },
         { "left": "<", "right": "Less than" },
@@ -146,7 +146,7 @@
         { "left": "LIKE", "right": "Whether text matches a pattern" },
         { "left": "IS NULL", "right": "Whether a value is absent altogether" }
       ],
-      "explanation": "These four are the special operators highlighted in the lecture. Note that a null is never found by = — it needs IS NULL."
+      "explanation": "These four are the special operators. Note that a null is never found by = — it needs IS NULL."
     },
     {
       "type": "mc",
@@ -171,7 +171,7 @@
     {
       "type": "mc",
       "category": "Multiple Choice",
-      "question": "The lecture calls old-style joins — writing `WHERE table1.pk = table2.fk` instead of a JOIN clause — \"generally not recommended\" because they:",
+      "question": "Old-style joins — writing `WHERE table1.pk = table2.fk` instead of a JOIN clause — are generally not recommended because they:",
       "options": [
         "Return the wrong answer",
         "Make complex queries harder to maintain and are susceptible to undetected errors",
@@ -237,7 +237,7 @@
     {
       "type": "mc",
       "category": "Multiple Choice",
-      "question": "The lecture's example of a recursive join is \"Sabrina (9) reports to Sarah (1)\". What makes this recursive?",
+      "question": "A query reports that \"Sabrina (9) reports to Sarah (1)\", drawing both people from a single EMPLOYEE table. What makes this a recursive join?",
       "options": [
         "It joins three tables at once",
         "It joins a table to itself, because both people live in the same table",
@@ -278,7 +278,7 @@
       "category": "True / False",
       "question": "An aggregate query takes a collection of rows and reduces it to a single row.",
       "correct": true,
-      "explanation": "That is the lecture's definition. Add GROUP BY and you get one row per group instead."
+      "explanation": "That is the definition of an aggregate query. Add GROUP BY and you get one row per group instead."
     },
     {
       "type": "matching",
@@ -290,7 +290,7 @@
         { "left": "Update", "right": "UPDATE — modifies existing rows" },
         { "left": "Delete", "right": "DELETE — gets rid of rows" }
       ],
-      "explanation": "The lecture's warning is worth memorizing: always use WHERE with UPDATE to specify which rows, and with DELETE to limit the damage."
+      "explanation": "Worth memorizing: always use WHERE with UPDATE to specify which rows, and with DELETE to limit the damage."
     },
     {
       "type": "mc",
@@ -303,7 +303,7 @@
         "A new row is added"
       ],
       "correct": 2,
-      "explanation": "Every row. This is exactly why the lecture says to always use WHERE with UPDATE and DELETE."
+      "explanation": "Every row. This is exactly why you always use WHERE with UPDATE and DELETE."
     },
     {
       "type": "mc",
@@ -336,7 +336,7 @@
     {
       "type": "mc",
       "category": "Multiple Choice",
-      "question": "Which list contains only basic ANSI data types named in the lecture?",
+      "question": "Which list contains only basic ANSI data types?",
       "options": [
         "NUMBER, NUMERIC, INTEGER, CHAR, VARCHAR, DATE",
         "STRING, FLOAT64, TIMESTAMP, BLOB, ENUM",
@@ -351,7 +351,7 @@
       "category": "True / False",
       "question": "Because dates are stored as a number of days, it is possible to do date arithmetic inside a query.",
       "correct": true,
-      "explanation": "Yes — though the lecture warns that comparison operators on dates are often more software-specific than other SQL procedures."
+      "explanation": "Yes — though comparison operators on dates are often more software-specific than other SQL procedures."
     },
     {
       "type": "mc",
@@ -628,7 +628,7 @@
       "hint": "UPDATE tablename SET column = expression WHERE …; The new value can be built from the old one.",
       "solution": "UPDATE gadget\nSET daily_fee = daily_fee + 2.00\nWHERE power_source = 'Gas';",
       "verify": "SELECT gadget_id, power_source, daily_fee FROM gadget ORDER BY gadget_id",
-      "explanation": "SET daily_fee = daily_fee + 2.00 reads the old value and writes the new one. Leaving off the WHERE would raise the price of all 45 gadgets — the mistake the lecture warns about."
+      "explanation": "SET daily_fee = daily_fee + 2.00 reads the old value and writes the new one. Leaving off the WHERE would raise the price of all 45 gadgets — the classic mistake with UPDATE."
     },
     {
       "type": "sql",

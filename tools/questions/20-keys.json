@@ -1,17 +1,17 @@
 {
-  "name": "Part 1 · The Relational Model, Keys & Integrity",
+  "name": "The Relational Model, Keys & Integrity",
   "questions": [
     {
       "type": "fill_blank",
       "category": "Fill in the Blank",
       "question": "A key is one or more attributes that ______ other attributes.",
       "answers": ["determine"],
-      "explanation": "Keys determine other attributes. That single word is the bridge between the keys chapter and the whole of normalization."
+      "explanation": "Keys determine other attributes. That single word is what connects keys to normalization."
     },
     {
       "type": "mc",
       "category": "Multiple Choice",
-      "question": "What two jobs does the lecture say keys do?",
+      "question": "What two jobs do keys do?",
       "options": [
         "Speed up sorting, and compress storage",
         "Ensure each row is uniquely identifiable, and establish relationships among tables",
@@ -76,7 +76,7 @@
     {
       "type": "mc",
       "category": "Multiple Choice",
-      "question": "Which is NOT one of the lecture's reasons to use a surrogate primary key?",
+      "question": "Which is NOT a reason to use a surrogate primary key?",
       "options": [
         "There is no natural key suitable as a primary key",
         "The natural primary key would be a composite key with multiple data types",
@@ -99,7 +99,7 @@
       "category": "True / False",
       "question": "Every table row must have a primary key.",
       "correct": true,
-      "explanation": "The relational-model summary states it flatly: each table row must have a primary key. That is entity integrity."
+      "explanation": "Each table row must have a primary key. That is entity integrity."
     },
     {
       "type": "fill_blank",
@@ -111,7 +111,7 @@
     {
       "type": "matching",
       "category": "Matching",
-      "question": "Match each integrity rule to its requirement (Table 3.4).",
+      "question": "Match each integrity rule to its requirement.",
       "pairs": [
         { "left": "Entity integrity", "right": "All primary key entries are unique, and no part of a primary key may be null" },
         { "left": "Referential integrity", "right": "A foreign key is either null, or matches a primary key value in the related table" }
@@ -134,7 +134,7 @@
     {
       "type": "mc",
       "category": "Multiple Choice",
-      "question": "The lecture's example of referential integrity is that a customer might not yet have an assigned sales representative — but it is impossible to have an INVALID one. What does the null represent there?",
+      "question": "A standard example of referential integrity: a customer might not yet have an assigned sales representative — but it is impossible to have an INVALID one. What does the null represent there?",
       "options": [
         "A data-entry error that must be corrected",
         "An optional relationship that has not been filled in yet",
@@ -174,7 +174,7 @@
     {
       "type": "mc",
       "category": "Multiple Choice",
-      "question": "Which is NOT one of the three things the lecture says a null can mean?",
+      "question": "Which is NOT one of the three things a null can mean?",
       "options": [
         "An unknown attribute value",
         "A known but missing attribute value",
@@ -194,12 +194,12 @@
         { "left": "Database schema", "right": "The complete logical view — the full description of the database" },
         { "left": "Relational schema", "right": "The description of one individual table" }
       ],
-      "explanation": "Note the distinction the lecture draws: the database schema covers everything; a relational schema is per-table."
+      "explanation": "Note the distinction: the database schema covers everything; a relational schema is per-table."
     },
     {
       "type": "mc",
       "category": "Multiple Choice",
-      "question": "Which relationship type does the lecture call the norm for relational databases?",
+      "question": "Which relationship type is the norm for relational databases?",
       "options": ["One-to-one (1:1)", "One-to-many (1:M)", "Many-to-many (M:N)", "Many-to-one only"],
       "correct": 1,
       "explanation": "1:M is the most common type in relational databases."
@@ -220,7 +220,7 @@
     {
       "type": "matching",
       "category": "Matching",
-      "question": "The bridge table in an M:N relationship goes by several names in the lecture. Match each term to its meaning.",
+      "question": "The bridge table in an M:N relationship goes by several names. Match each term to its meaning.",
       "pairs": [
         { "left": "Composite entity", "right": "The connecting table created to resolve an M:N relationship" },
         { "left": "Bridge table", "right": "Another name for that same connecting table" },
@@ -244,7 +244,7 @@
     {
       "type": "mc",
       "category": "Multiple Choice",
-      "question": "The lecture's Employee/Project example shows that you CANNOT represent M:N by putting a foreign key in the two main tables. Why not?",
+      "question": "An EMPLOYEE/PROJECT design shows that you CANNOT represent M:N by putting a foreign key in the two main tables. Why not?",
       "options": [
         "Because foreign keys are not allowed in more than one table",
         "Because you would have to stuff more than one key value into a single foreign key field, violating the atomic attribute rule",
@@ -257,7 +257,7 @@
     {
       "type": "mc",
       "category": "Multiple Choice",
-      "question": "In the lecture's Assignment bridge table holding emp_id and proj_id, those two columns are:",
+      "question": "In an ASSIGNMENT bridge table holding emp_id and proj_id, those two columns are:",
       "options": [
         "Two independent primary keys",
         "Foreign keys that together form a composite primary key",
@@ -283,7 +283,7 @@
     {
       "type": "mc",
       "category": "Multiple Choice",
-      "question": "One DIVISION operates many DEPARTMENTs; each DEPARTMENT is operated by one DIVISION. Following the rule in the lecture's worked example, the foreign key belongs:",
+      "question": "One DIVISION operates many DEPARTMENTs; each DEPARTMENT is operated by one DIVISION. The foreign key belongs:",
       "options": [
         "division_id in DEPARTMENT",
         "department_id in DIVISION",
@@ -298,12 +298,12 @@
       "category": "True / False",
       "question": "Although relational tables are independent of one another, they can be linked through common attributes — that is, foreign keys.",
       "correct": true,
-      "explanation": "Straight from the relational model summary: independent tables, linked by common attributes."
+      "explanation": "Independent tables, linked by common attributes — that is the whole idea of the relational model."
     },
     {
       "type": "mc",
       "category": "Multiple Choice",
-      "question": "The relational-model summary names the basic building block of a relational database. It is:",
+      "question": "What is the basic building block of a relational database?",
       "options": ["The index", "The table", "The query", "The view"],
       "correct": 1,
       "explanation": "Tables are the basic building blocks, and keys are central to using them."
@@ -351,7 +351,7 @@
     {
       "type": "mc",
       "category": "Multiple Choice",
-      "question": "The lecture notes the most common cause of duplicate column names across two joined tables. It is:",
+      "question": "What is the most common cause of duplicate column names across two joined tables?",
       "options": [
         "Poor naming by the designer",
         "The existence of a foreign key",
@@ -386,14 +386,14 @@
       "category": "Fill in the Blank",
       "question": "______ describes the relationship classification — 1:1, 1:M or M:N — on an ERD.",
       "answers": ["cardinality", "connectivity"],
-      "explanation": "The lecture uses connectivity and cardinality together for this: connectivity labels the type, cardinality expresses the numbers."
+      "explanation": "Connectivity and cardinality are used together for this: connectivity labels the type, cardinality expresses the numbers."
     },
     {
       "type": "tf",
       "category": "True / False",
       "question": "Database designers, however effective, are often forced to make design compromises.",
       "correct": true,
-      "explanation": "The ERM summary says so directly — a reminder that the textbook answer and the practical answer sometimes differ."
+      "explanation": "The clean textbook answer and the practical answer sometimes differ; real designs involve trade-offs."
     },
     {
       "type": "mc",

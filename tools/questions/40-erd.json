@@ -1,10 +1,10 @@
 {
-  "name": "Part 2 · ERD Completion",
+  "name": "ERD & Crow's Foot Notation",
   "questions": [
     {
       "type": "matching",
       "category": "ERD Notation",
-      "question": "The exam's ERDs use a Connector Options legend: six line endings built from a circle, a bar, and a crow's foot.\n\nA = crow's foot only\nB = bar + crow's foot\nC = circle + crow's foot\nD = single bar\nE = double bar\nF = circle + bar\n\nMatch each connector to what it means.",
+      "question": "Crow's Foot notation marks each end of a relationship line with one of six connectors, built from a circle, a bar, and a crow's foot.\n\nA = crow's foot only\nB = bar + crow's foot\nC = circle + crow's foot\nD = single bar\nE = double bar\nF = circle + bar\n\nMatch each connector to what it means.",
       "pairs": [
         { "left": "A — crow's foot only", "right": "Many" },
         { "left": "B — bar + crow's foot", "right": "One or many (mandatory, many)" },
@@ -18,7 +18,7 @@
     {
       "type": "mc",
       "category": "ERD Notation",
-      "question": "In the Connector Options legend, what does a circle on a relationship line always add?",
+      "question": "In Crow's Foot notation, what does a circle on a relationship line always add?",
       "options": [
         "That the participation is optional — the minimum is zero",
         "That the relationship is many",
@@ -31,7 +31,7 @@
     {
       "type": "mc",
       "category": "ERD Notation",
-      "question": "In the Connector Options legend, what does the crow's foot itself indicate?",
+      "question": "In Crow's Foot notation, what does the crow's foot itself indicate?",
       "options": ["Optional participation", "Many", "Exactly one", "A composite key"],
       "correct": 1,
       "explanation": "The crow's foot is the \"many\" symbol. Whatever sits beside it — a bar or a circle — sets the minimum."
@@ -46,7 +46,7 @@
     {
       "type": "mc",
       "category": "ERD Notation",
-      "question": "On the exam's completed ERDs, an attribute name shown in bold and underlined at the top of the entity box represents the:",
+      "question": "On a completed ERD, an attribute name shown in bold and underlined at the top of the entity box represents the:",
       "options": ["Foreign key", "Primary key", "A descriptive non-key attribute", "Secondary key"],
       "correct": 1,
       "explanation": "Primary key attributes are listed first and marked bold and underlined, above the dividing line in the entity box."
@@ -54,14 +54,14 @@
     {
       "type": "fill_blank",
       "category": "ERD Notation",
-      "question": "On the exam's completed ERDs, an attribute name shown in italics below the dividing line typically represents a ______ key.",
+      "question": "On a completed ERD, an attribute name shown in italics below the dividing line typically represents a ______ key.",
       "answers": ["foreign"],
       "explanation": "Foreign key attributes are italicized, distinguishing them from the primary key and from plain descriptive attributes."
     },
     {
       "type": "mc",
       "category": "ERD Notation",
-      "question": "An exam ERD shows an entity box laid out like this:\n\n    row 1:  P1 | **P2**   (bold, underlined)\n    row 2:  P3 | *P4*     (italic)\n    row 3:  P5 (one or more fields)\n\nWhat belongs in slot P1?",
+      "question": "An ERD shows an entity box laid out like this:\n\n    row 1:  P1 | **P2**   (bold, underlined)\n    row 2:  P3 | *P4*     (italic)\n    row 3:  P5 (one or more fields)\n\nWhat belongs in slot P1?",
       "options": [
         "The entity's name",
         "The marker PK, labelling the row beside it as the primary key",
@@ -392,7 +392,7 @@
     {
       "type": "tf",
       "category": "ERD",
-      "question": "When a business rule mentions no attributes at all, an exam ERD still needs the primary and foreign key fields.",
+      "question": "When a business rule mentions no attributes at all, the ERD still needs the primary and foreign key fields.",
       "correct": true,
       "explanation": "The keys are what carry the relationships, so they belong on the diagram even when the rules describe no other fields."
     },

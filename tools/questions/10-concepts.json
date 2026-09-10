@@ -1,10 +1,10 @@
 {
-  "name": "Part 1 · Concepts, File Systems & Data Models",
+  "name": "Database Concepts, File Systems & Data Models",
   "questions": [
     {
       "type": "matching",
       "category": "Terminology",
-      "question": "Match each basic file-system term to its definition (Table 1.2).",
+      "question": "Match each basic file-system term to its definition.",
       "pairs": [
         { "left": "Data", "right": "Raw facts, with little meaning until organized" },
         { "left": "Field", "right": "A character or group of characters with a specific meaning" },
@@ -17,7 +17,7 @@
     {
       "type": "matching",
       "category": "Terminology",
-      "question": "The lecture gives each file term a database equivalent (\"also known as\"). Match them.",
+      "question": "Each file-system term has a database equivalent. Match them.",
       "pairs": [
         { "left": "Field", "right": "Attribute" },
         { "left": "Record", "right": "Entity instance" },
@@ -57,12 +57,12 @@
         { "left": "Structured", "right": "Data results from formatting, applied to suit a type of processing" },
         { "left": "Semistructured", "right": "Data that has been partially processed — XML, for instance" }
       ],
-      "explanation": "XML is the lecture's example of semistructured data: it represents data elements in a textual format without imposing a full relational structure."
+      "explanation": "XML is the standard example of semistructured data: it represents data elements in a textual format without imposing a full relational structure."
     },
     {
       "type": "fill_blank",
       "category": "Fill in the Blank",
-      "question": "XML — the lecture's example of semistructured data — stands for Extensible ______ Language.",
+      "question": "XML — the usual example of semistructured data — stands for Extensible ______ Language.",
       "answers": ["markup"],
       "explanation": "Extensible Markup Language. It represents data elements in a textual format."
     },
@@ -106,14 +106,14 @@
     {
       "type": "tf",
       "category": "True / False",
-      "question": "Modern end-user productivity tools such as Microsoft Excel are described in the lecture as a kind of \"file system redux\" — they reintroduce file-system problems.",
+      "question": "Modern end-user productivity tools such as Microsoft Excel are a kind of \"file system redux\" — they reintroduce file-system problems.",
       "correct": true,
-      "explanation": "The lecture calls spreadsheets a file system redux: convenient, but they bring back redundancy and inconsistency."
+      "explanation": "Spreadsheets are a file system redux: convenient, but they bring back redundancy and inconsistency."
     },
     {
       "type": "mc",
       "category": "Multiple Choice",
-      "question": "Which of these is NOT one of the problems the lecture attributes to file systems?",
+      "question": "Which of these is NOT a problem of file systems?",
       "options": [
         "Lengthy development times",
         "Difficulty getting quick answers to ad hoc queries",
@@ -153,7 +153,7 @@
       "category": "True / False",
       "question": "The physical format — how data is actually stored on hardware — should be hidden completely from the end user.",
       "correct": true,
-      "explanation": "The slide is explicit: physical storage should be hidden completely and of no concern to the user."
+      "explanation": "Physical storage should be hidden completely and of no concern to the user."
     },
     {
       "type": "mc",
@@ -166,7 +166,7 @@
         "More data redundancy by design"
       ],
       "correct": 1,
-      "explanation": "The summary slide lists exactly these three advantages: more data independence, more robust organization, better control of data access."
+      "explanation": "The three advantages are exactly these: more data independence, more robust organization, better control of data access."
     },
     {
       "type": "fill_blank",
@@ -178,7 +178,7 @@
     {
       "type": "mc",
       "category": "Multiple Choice",
-      "question": "The lecture describes scattered, duplicated data locations with the phrase:",
+      "question": "Scattered, duplicated data locations are described with the phrase:",
       "options": ["Data silos", "Islands of information", "Shadow tables", "Orphan records"],
       "correct": 1,
       "explanation": "Islands of information — the same data kept in several disconnected places."
@@ -265,7 +265,7 @@
         { "left": "Data integrity management", "right": "Minimizes redundancy and maximizes consistency" },
         { "left": "Performance tuning", "right": "Part of storage management; ensures efficient performance" }
       ],
-      "explanation": "These are the standard DBMS functions from the lecture. Notice that integrity management is described in terms of redundancy and consistency."
+      "explanation": "These are the standard DBMS functions. Notice that integrity management is defined in terms of redundancy and consistency."
     },
     {
       "type": "mc",
@@ -339,12 +339,12 @@
       "category": "True / False",
       "question": "Relationships are always bidirectional — you have to read them from both ends.",
       "correct": true,
-      "explanation": "The lecture states this explicitly, which is why you ask two questions: how many B relate to one A, and how many A relate to one B."
+      "explanation": "Because relationships run both ways, you ask two questions: how many B relate to one A, and how many A relate to one B."
     },
     {
       "type": "mc",
       "category": "Multiple Choice",
-      "question": "To determine the type of a relationship between entities A and B, the lecture says to ask:",
+      "question": "To determine the type of a relationship between entities A and B, you ask:",
       "options": [
         "Only how many instances of B relate to one instance of A",
         "How many instances of B relate to one A, AND how many instances of A relate to one B",
@@ -357,7 +357,7 @@
     {
       "type": "matching",
       "category": "Matching",
-      "question": "Match each relationship type to both notations used in the lecture.",
+      "question": "Match each relationship type to the two notations used for it.",
       "pairs": [
         { "left": "One-to-many", "right": "1:M or 1..*" },
         { "left": "Many-to-many", "right": "M:N or *..*" },
@@ -368,7 +368,7 @@
     {
       "type": "mc",
       "category": "Multiple Choice",
-      "question": "Which naming convention does the lecture recommend for entity names?",
+      "question": "Which naming convention is recommended for entity names?",
       "options": [
         "Short codes that only the DBA needs to understand",
         "Descriptive of the business environment, using terminology familiar to users",
@@ -381,7 +381,7 @@
     {
       "type": "mc",
       "category": "Multiple Choice",
-      "question": "The relational model is based on the relation, which the lecture equates with:",
+      "question": "The relational model is based on the relation, which is another name for:",
       "options": ["A foreign key", "A table (or entity)", "A query result only", "An index"],
       "correct": 1,
       "explanation": "A relation is a table or entity — a matrix of intersecting tuples (rows) and attributes (columns)."
@@ -427,13 +427,13 @@
     {
       "type": "matching",
       "category": "Matching",
-      "question": "Match each object-oriented term to its relational-model analogue, as the lecture pairs them.",
+      "question": "Match each object-oriented term to its relational-model analogue.",
       "pairs": [
         { "left": "Object", "right": "Record" },
         { "left": "Class", "right": "Entity or table" },
         { "left": "Attribute", "right": "A property of an object" }
       ],
-      "explanation": "An object is analogous to a record; a class is analogous to an entity/table — the lecture calls a class a template from which individual objects are created."
+      "explanation": "An object is analogous to a record; a class is analogous to an entity/table — a class is a template from which individual objects are created."
     },
     {
       "type": "mc",
@@ -464,9 +464,9 @@
     {
       "type": "tf",
       "category": "True / False",
-      "question": "In the object-oriented class hierarchy described in the lecture, each class may have many parent classes.",
+      "question": "In an object-oriented class hierarchy, each class may have many parent classes.",
       "correct": false,
-      "explanation": "The lecture describes it as an upside-down tree in which each class has only one parent."
+      "explanation": "The hierarchy resembles an upside-down tree in which each class has only one parent."
     },
     {
       "type": "mc",
@@ -484,7 +484,7 @@
     {
       "type": "mc",
       "category": "Multiple Choice",
-      "question": "Ordered from more abstract to less abstract, the lecture's levels of data modeling run:",
+      "question": "Ordered from more abstract to less abstract, the levels of data modeling run:",
       "options": [
         "DDL SQL → Crow's Foot → Chen",
         "Chen notation → Crow's Foot notation → DDL SQL",
@@ -504,7 +504,7 @@
     {
       "type": "mc",
       "category": "Multiple Choice",
-      "question": "Which job title does the lecture describe as designing and implementing conceptual, logical AND physical database environments?",
+      "question": "Which job title covers the design and implementation of conceptual, logical AND physical database environments?",
       "options": ["Database Analyst", "Database Architect", "Database Developer", "Data Scientist"],
       "correct": 1,
       "explanation": "The Database Architect covers all three levels of the environment."
